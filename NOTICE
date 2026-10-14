@@ -1,0 +1,39 @@
+# NOTICE — daily-market-pulse
+
+Copyright (c) 2026 seaquake97 (老北京的热干面 / Laobei Beijing Hot Dry Noodles)
+
+本仓库内容采用 **CC BY-NC-SA 4.0**（署名-非商业性使用-相同方式共享4.0）发布，
+许可证全文见 [LICENSE](LICENSE)。
+
+## 中文条款摘要 / Plain-language summary
+
+- **署名 (BY)** — 必须保留作者署名「老北京的热干面 / Laobei Beijing Hot Dry Noodles」及指向本仓库的链接。
+- **非商业性使用 (NC)** — 不得用于商业目的；商业使用需另行获得授权。
+- **相同方式共享 (SA)** — 若基于本作品进行改编，须以相同许可协议发布衍生作品。
+- 任何异常或附加限制均不得施加于本作品。
+
+You are free to share and adapt this work, provided you give appropriate credit,
+do not use it commercially, and distribute derivatives under the same license.
+
+## 关于内容数据 / About the data
+
+本仓库发布的全部市场数据、信号评分与决策结论均已脱敏处理，不包含任何个人持仓信息、
+成本价、账户标识或交易记录。数据来源为公开行情接口，仅供研究方法演示与个人投资方法论
+记录之用。
+
+All market data, signal scores and decision conclusions published here are
+desensitized. They contain no personal holdings, cost basis, account identifiers
+or transaction records. Data originates from public market data feeds and is
+published for research methodology demonstration only.
+
+## 投资风险提示 / Investment risk warning
+
+本仓库内容仅为个人投资方法论记录，**不构成投资建议**。市场有风险，决策需独立判断。
+
+This repository contains personal investment methodology notes only and does
+not constitute investment advice. Markets carry risk; decisions must be made
+independently.
+
+## 配套仓库 / Companion repository
+
+工具与引擎：[daily-decision-engine](https://github.com/seaquake97/daily-decision-engine) (MIT)
