@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-13",
+  "title_zh": "A股持仓每日投研诊断与网格交易操作指南（2026-10-13 周二 午后补跑全景研判）",
+  "title_en": "Daily Market Research · 2026-10-13",
+  "summary_zh": "Σ 评级【信号矛盾】（+0.000），覆盖 5 项任务产出，数据时点 盘中时点。",
+  "summary_en": "Sigma rating [Signal Conflict] (+0.000), covering 5 task outputs, data stage Intraday.",
+  "rating": "信号矛盾",
+  "sigma": 0.0,
+  "data_stage": "intraday",
+  "tasks": [
+    "基金盘面分析",
+    "股票助手",
+    "基金操作指引",
+    "股票复盘",
+    "每日总复盘"
+  ],
+  "generated_at": "2026-10-14T21:31:52"
+}

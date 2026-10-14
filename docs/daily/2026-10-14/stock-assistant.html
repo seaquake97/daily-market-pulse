@@ -72,7 +72,15 @@
 
   <section>
     <h2>六信号明细（代码计算，原样引用）</h2>
-    <table><tr><th>信号</th><th>【组合运作细节按合规要求不公开】</th><th>分值</th><th>依据</th></tr><tr><td>S1 量能</td><td>【组合运作细节按合规要求不公开】</td><td class="sig up">+0.187</td><td>沪指量比 1.15（相对过去5日同时段）；两市+北交所 8,608 亿</td></tr><tr><td>S2 宽度</td><td>【组合运作细节按合规要求不公开】</td><td class="sig down">-0.411</td><td>上涨占比 33.1%（1,788/5,397）；涨停 45 - 跌停 5；宽度项 -0.93</td></tr><tr><td>S3 动量</td><td>【组合运作细节按合规要求不公开】</td><td class="sig down">-0.347</td><td>价格/MA5 -0.32%、价格/MA20 -2.02%、20日涨跌 -3.54%</td></tr><tr><td>S4 分化</td><td>【组合运作细节按合规要求不公开】</td><td class="sig down">-0.400</td><td>成长均值 -1.11%（创业板 -1.15%/科创50 -1.07%）vs 沪深300 -0.31%，价差 -0.80pct</td></tr><tr><td>S5 资金</td><td>【组合运作细节按合规要求不公开】</td><td class="sig up">+0.109</td><td>主力净流入TOP1 元件 +23.76 亿 - 净流出TOP1 通信设备 -18.30 亿 = 净差 +5.46 亿</td></tr><tr><td>S6 估值</td><td>【组合运作细节按合规要求不公开】</td><td class="sig up">+1.000</td><td>沪深300 PE 13.19（<15 中性线）；60日涨跌 -11.14%（超跌加分项拉满）</td></tr></table>
+    <table>
+      <tr><th>信号</th><th>权重</th><th>分值</th><th>依据</th></tr>
+      <tr><td>S1 量能</td><td>0.20</td><td class="sig up">+0.187</td><td>沪指量比 1.15（相对过去5日同时段）；两市+北交所 8,608 亿</td></tr>
+      <tr><td>S2 宽度</td><td>0.20</td><td class="sig down">-0.411</td><td>上涨占比 33.1%（1,788/5,397）；涨停 45 - 跌停 5；宽度项 -0.93</td></tr>
+      <tr><td>S3 动量</td><td>0.15</td><td class="sig down">-0.347</td><td>价格/MA5 -0.32%、价格/MA20 -2.02%、20日涨跌 -3.54%</td></tr>
+      <tr><td>S4 分化</td><td>0.15</td><td class="sig down">-0.400</td><td>成长均值 -1.11%（创业板 -1.15%/科创50 -1.07%）vs 沪深300 -0.31%，价差 -0.80pct</td></tr>
+      <tr><td>S5 资金</td><td>0.15</td><td class="sig up">+0.109</td><td>主力净流入TOP1 元件 +23.76 亿 - 净流出TOP1 通信设备 -18.30 亿 = 净差 +5.46 亿</td></tr>
+      <tr><td>S6 估值</td><td>0.15</td><td class="sig up">+1.000</td><td>沪深300 PE 13.19（<15 中性线）；60日涨跌 -11.14%（超跌加分项拉满）</td></tr>
+    </table>
   </section>
 
   <section>
@@ -99,7 +107,18 @@
 
   <section>
     <h2>持仓层：网格动作卡 / 观察卡</h2>
-    <table><tr><th>标的</th><th>现价</th><th>今日</th><th>【组合运作细节按合规要求不公开】</th><th>卡型</th></tr><tr><td>甘肃能源</td><td>7.07</td><td class="up">+1.14%</td><td>【组合运作细节按合规要求不公开】</td><td><span class="tag watch">观察卡</span></td></tr><tr><td>电力ETF广发</td><td>1.060</td><td class="up">+1.53%</td><td>【组合运作细节按合规要求不公开】</td><td><span class="tag watch">观察卡</span></td></tr><tr><td>粤高速A</td><td>13.74</td><td class="up">+2.54%</td><td>【组合运作细节按合规要求不公开】</td><td><span class="tag watch">观察卡</span></td></tr><tr><td>华能蒙电</td><td>5.37</td><td class="up">+5.29%</td><td>【组合运作细节按合规要求不公开】</td><td><span class="tag watch">观察卡</span></td></tr><tr><td>平高电气</td><td>20.30</td><td class="down">-1.55%</td><td>【组合运作细节按合规要求不公开】</td><td><span class="tag watch">观察卡</span></td></tr><tr><td>江苏银行</td><td>12.46</td><td class="up">+0.48%</td><td>【组合运作细节按合规要求不公开】</td><td><span class="tag watch">观察卡</span></td></tr><tr><td>中国广核</td><td>4.55</td><td class="up">+2.71%</td><td>【组合运作细节按合规要求不公开】</td><td><span class="tag watch">观察卡</span></td></tr><tr><td>金ETF广发</td><td>8.897</td><td class="down">-0.70%</td><td>【组合运作细节按合规要求不公开】</td><td><span class="tag watch">观察卡</span></td></tr><tr><td>卫星ETF富国</td><td>—</td><td>—</td><td>【组合运作细节按合规要求不公开】</td><td><span class="tag gap">缺口卡</span></td></tr></table>
+    <table>
+      <tr><th>标的</th><th>现价</th><th>今日</th><th>网格状态</th><th>卡型</th></tr>
+      <tr><td>甘肃能源</td><td>7.07</td><td class="up">+1.14%</td><td>高于基准 7.05 仅 +0.3%；距高抛线 7.25 还有 <b>+2.5%</b>，量比 1.70 放量上攻</td><td><span class="tag watch">观察卡</span></td></tr>
+      <tr><td>电力ETF广发</td><td>1.060</td><td class="up">+1.53%</td><td>距卖线 1.065 仅 <b>+0.5%</b>（一步之遥）；距买线 1.020-1.025 有 +3.4%</td><td><span class="tag watch">观察卡</span></td></tr>
+      <tr><td>粤高速A</td><td>13.74</td><td class="up">+2.54%</td><td>高于基准 13.40 达 +2.5%；距加仓线 13.15-13.20 有 <b>+4.2%</b>，量比 1.64</td><td><span class="tag watch">观察卡</span></td></tr>
+      <tr><td>华能蒙电</td><td>5.37</td><td class="up">+5.29%</td><td>大涨后高于基准 5.15 达 +4.3%；距下一买线 4.90 有 +9.6%；1000 股已是最小底仓，停卖</td><td><span class="tag watch">观察卡</span></td></tr>
+      <tr><td>平高电气</td><td>20.30</td><td class="down">-1.55%</td><td>今日唯一下跌持仓，量比 0.66 缩量；低于基准 20.40 -0.5%；距高抛线 21.00 有 +3.4%</td><td><span class="tag watch">观察卡</span></td></tr>
+      <tr><td>江苏银行</td><td>12.46</td><td class="up">+0.48%</td><td>非网格，100 股底仓长线收息（股息率 4.53%）</td><td><span class="tag watch">观察卡</span></td></tr>
+      <tr><td>中国广核</td><td>4.55</td><td class="up">+2.71%</td><td>非网格，100 股底仓；距 4.20 回补观察位有 +8.3%</td><td><span class="tag watch">观察卡</span></td></tr>
+      <tr><td>金ETF广发</td><td>8.897</td><td class="down">-0.70%</td><td>非网格，500 份全天候对冲</td><td><span class="tag watch">观察卡</span></td></tr>
+      <tr><td>卫星ETF富国</td><td>—</td><td>—</td><td><b>MCP 无行情数据</b>（数据缺口，禁止代理冒充）</td><td><span class="tag gap">缺口卡</span></td></tr>
+    </table>
     <div class="gap-note">⚠️ <b>今日无触发动作卡</b>：距任一触发线最近的是电力ETF（+0.5%），未触及即不动——按信号矛盾档纪律，暂停主动买入。</div>
   </section>
 

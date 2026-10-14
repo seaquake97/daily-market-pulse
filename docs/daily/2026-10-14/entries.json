@@ -1,0 +1,67 @@
+[
+  {
+    "slug": "stock-assistant",
+    "name": "股票助手",
+    "time": "09:28",
+    "run_time": "12:39",
+    "title": "股票助手 · 2026-10-14（周三）盘中研判",
+    "summary": "估值深度支撑：沪深300 PE 13.19，60 日回撤 -11.14%，S6 满格 +1.000——历史上该区域对应中期底部特征",
+    "html": "stock-assistant.html",
+    "md": "stock-assistant.md",
+    "rating": "防守",
+    "sigma": -0.339,
+    "stage": "intraday"
+  },
+  {
+    "slug": "fund-market",
+    "name": "基金盘面",
+    "time": "11:00",
+    "run_time": "11:16",
+    "title": "基金每日盘面分析与加权预估报告（11:00午盘版）",
+    "summary": "上证指数：3,807.50 点（+0.17%）",
+    "html": "fund-market.html",
+    "md": "fund-market.md",
+    "rating": "防守",
+    "sigma": -0.339,
+    "stage": "intraday"
+  },
+  {
+    "slug": "fund-guide",
+    "name": "基金操作指引",
+    "time": "14:30",
+    "run_time": "14:30",
+    "title": "基金每日操作指引（14:30）— daily-decision-engine v1.3（评级驱动·分层指令·零套话版）",
+    "summary": "根据 daily-decision-engine 核心算法计算，今日六维确定性信号综合评分：",
+    "html": null,
+    "md": "fund-guide.md",
+    "rating": "防守",
+    "sigma": -0.339,
+    "stage": "intraday"
+  },
+  {
+    "slug": "stock-review",
+    "name": "股票复盘",
+    "time": "15:05",
+    "run_time": "15:05",
+    "title": "2026-10-14 股票每日复盘研判报告（圆桌多视角与决策卡）",
+    "summary": "上证指数：3767.23（-0.88%，跌破3800关口）",
+    "html": null,
+    "md": "stock-review.md",
+    "rating": "防守",
+    "sigma": -0.339,
+    "stage": "close"
+  },
+  {
+    "slug": "daily-review",
+    "name": "每日总复盘",
+    "time": "15:30",
+    "run_time": "15:30",
+    "title": "基金股票每日复盘 - 2026年10月14日",
+    "summary": "当日全部研判的汇总归档与观点结算",
+    "html": "daily-review.html",
+    "md": null,
+    "rating": "防守",
+    "sigma": -0.339,
+    "stage": "close"
+  }
+]

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>基金每日盘面分析与加权预估报告 · [已脱敏]:00午盘版</title>
+    <title>基金每日盘面分析与加权预估报告 · 11:00午盘版</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,7 +11,7 @@
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Plus Jakarta Sans", sans-serif;
-            background: linear-gradient(180deg, #f8fafc ***%, #f1f5f9 ***%);
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
             color: #0f172a;
             min-height: 100vh;
         }
@@ -71,7 +71,7 @@
                     <span>·</span>
                     <span>🎯 养基宝透视架构</span>
                     <span>·</span>
-                    <span>👤 投资者：***</span>
+                    <span>👤 投资者：海震</span>
                 </p>
             </div>
 
@@ -80,7 +80,7 @@
                     🍜
                 </div>
                 <div>
-                    <div class="text-xs text-slate-400">【组合运作细节按合规要求不公开】</div>
+                    <div class="text-xs text-slate-400">账户持仓诊断状态</div>
                     <div class="text-sm font-bold text-amber-300">Σ 信号矛盾 · 暂停主动买入待验证</div>
                 </div>
             </div>
@@ -93,23 +93,36 @@
         <div class="glass-card p-4 sm:p-5 relative overflow-hidden">
             <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">今日预估加权涨跌</div>
             <div class="text-2xl sm:text-3xl font-extrabold font-mono-nums text-emerald-600 mt-1.5">
-                ***%
+                -0.57%
             </div>
-            <div class="flex items-center justify-between text-xs text-slate-500 mt-2 pt-2 border-t border-slate-100"><span>【组合运作细节按合规要求不公开】</span><span class="font-bold font-mono-nums text-emerald-600"></span></div>
+            <div class="flex items-center justify-between text-xs text-slate-500 mt-2 pt-2 border-t border-slate-100">
+                <span>预估变动额</span>
+                <span class="font-bold font-mono-nums text-emerald-600">-¥360.94</span>
+            </div>
         </div>
 
         <!-- 当前持仓总资产 -->
         <div class="glass-card p-4 sm:p-5 relative overflow-hidden">
             <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">当前持仓总资产</div>
-            <div class="text-2xl sm:text-3xl font-extrabold font-mono-nums text-slate-900 mt-1.5">【组合运作细节按合规要求不公开】</div>
-            <div class="flex items-center justify-between text-xs text-slate-500 mt-2 pt-2 border-t border-slate-100"><span>【组合运作细节按合规要求不公开】</span><span class="font-bold font-mono-nums text-slate-700"></span></div>
+            <div class="text-2xl sm:text-3xl font-extrabold font-mono-nums text-slate-900 mt-1.5">
+                ¥63,322.65
+            </div>
+            <div class="flex items-center justify-between text-xs text-slate-500 mt-2 pt-2 border-t border-slate-100">
+                <span>纯基金资产</span>
+                <span class="font-bold font-mono-nums text-slate-700">¥59,415.24</span>
+            </div>
         </div>
 
         <!-- 累计持有收益 -->
         <div class="glass-card p-4 sm:p-5 relative overflow-hidden">
             <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">纯基金累计持有收益</div>
-            <div class="text-2xl sm:text-3xl font-extrabold font-mono-nums text-emerald-600 mt-1.5">【组合运作细节按合规要求不公开】</div>
-            <div class="flex items-center justify-between text-xs text-slate-500 mt-2 pt-2 border-t border-slate-100"><span>【组合运作细节按合规要求不公开】</span><span class="font-semibold text-emerald-600"></span></div>
+            <div class="text-2xl sm:text-3xl font-extrabold font-mono-nums text-emerald-600 mt-1.5">
+                -¥2,412.05
+            </div>
+            <div class="flex items-center justify-between text-xs text-slate-500 mt-2 pt-2 border-t border-slate-100">
+                <span>防守/在途</span>
+                <span class="font-semibold text-emerald-600">浮亏 -4.06% (在途¥632)</span>
+            </div>
         </div>
 
         <!-- 算力穿透暴露 -->
@@ -119,9 +132,12 @@
                 <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-200">高暴露</span>
             </div>
             <div class="text-2xl sm:text-3xl font-extrabold font-mono-nums text-red-600 mt-1.5">
-                ***%
+                34.74%
             </div>
-            <div class="flex items-center justify-between text-xs text-slate-500 mt-2 pt-2 border-t border-slate-100"><span>【组合运作细节按合规要求不公开】</span><span class="font-bold font-mono-nums text-slate-800"></span></div>
+            <div class="flex items-center justify-between text-xs text-slate-500 mt-2 pt-2 border-t border-slate-100">
+                <span>CPO+AI穿透额</span>
+                <span class="font-bold font-mono-nums text-slate-800">¥20,645.16</span>
+            </div>
         </div>
     </div>
 
@@ -140,7 +156,7 @@
                 <!-- 涨跌分布进度条 -->
                 <div class="mb-4 bg-slate-50 p-3.5 rounded-xl border border-slate-100">
                     <div class="flex justify-between text-xs font-bold mb-1.5">
-                        <span class="text-red-600">上涨 2033 只 (***%)</span>
+                        <span class="text-red-600">上涨 2033 只 (38.6%)</span>
                         <span class="text-slate-400">平盘 196 只</span>
                         <span class="text-emerald-600">下跌 3044 只 (57.7%)</span>
                     </div>
@@ -253,10 +269,10 @@
                     <span class="w-2.5 h-5 bg-red-500 rounded-sm"></span>
                     <h2 class="text-lg font-bold text-slate-900 tracking-tight">基金持仓穿透与板块集中度诊断</h2>
                 </div>
-                <p class="text-xs text-slate-500 mt-1">【组合运作细节按合规要求不公开】</p>
+                <p class="text-xs text-slate-500 mt-1">穿透全部 11 只基金底层前十大重仓股票，根据实际持仓市值动态加权归集（养基宝透视调性）</p>
             </div>
             <div class="flex items-center gap-2">
-                <span class="tag-pill bg-red-100 text-red-800 border border-red-200">算力硬件暴露 ***%</span>
+                <span class="tag-pill bg-red-100 text-red-800 border border-red-200">算力硬件暴露 34.74%</span>
                 <span class="tag-pill bg-slate-100 text-slate-700 border border-slate-200">6 大穿透板块</span>
             </div>
         </div>
@@ -266,9 +282,9 @@
             <div class="lg:col-span-5 flex flex-col items-center justify-center p-4 bg-slate-50/60 rounded-2xl border border-slate-100">
                 <div style="position: relative; width: 230px; height: 230px;">
                     <canvas id="sectorPenetrationChart"></canvas>
-                    <div style="position: absolute; top: ***%; left: ***%; transform: translate(***%, ***%); text-align: center; pointer-events: none;">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; pointer-events: none;">
                         <div style="font-size: 11px; color: #64748b; font-weight: 500;">纯基金资产</div>
-                        <div style="font-size: 16px; font-weight: 800; color: #0f172a; font-family: 'JetBrains Mono';">【组合运作细节按合规要求不公开】</div>
+                        <div style="font-size: 16px; font-weight: 800; color: #0f172a; font-family: 'JetBrains Mono';">¥59,415</div>
                     </div>
                 </div>
                 <div class="text-[11px] text-slate-400 mt-3">穿透底层 11 只基金资产分布</div>
@@ -278,44 +294,80 @@
             <div class="lg:col-span-7 space-y-3.5">
                 
                 <div>
-                    <div class="flex justify-between text-xs font-semibold mb-1"><span class="flex items-center gap-2 text-slate-800"><span class="w-2.5 h-2.5 rounded-full" style="background-color: #EF4444"></span>【组合运作细节按合规要求不公开】</span><span class="font-mono-nums text-slate-900 font-bold"><span class="text-slate-400 font-normal"></span></span></div>
+                    <div class="flex justify-between text-xs font-semibold mb-1">
+                        <span class="flex items-center gap-2 text-slate-800">
+                            <span class="w-2.5 h-2.5 rounded-full" style="background-color: #EF4444"></span>
+                            CPO (光模块/算力硬件)
+                        </span>
+                        <span class="font-mono-nums text-slate-900 font-bold">¥16,287.66 <span class="text-slate-400 font-normal">(27.41%)</span></span>
+                    </div>
                     <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
-                        <div class="h-full rounded-full" style="width: ***%; background-color: #EF4444"></div>
+                        <div class="h-full rounded-full" style="width: 27.41%; background-color: #EF4444"></div>
                     </div>
                 </div>
                 
                 <div>
-                    <div class="flex justify-between text-xs font-semibold mb-1"><span class="flex items-center gap-2 text-slate-800"><span class="w-2.5 h-2.5 rounded-full" style="background-color: #F59E0B"></span>【组合运作细节按合规要求不公开】</span><span class="font-mono-nums text-slate-900 font-bold"><span class="text-slate-400 font-normal"></span></span></div>
+                    <div class="flex justify-between text-xs font-semibold mb-1">
+                        <span class="flex items-center gap-2 text-slate-800">
+                            <span class="w-2.5 h-2.5 rounded-full" style="background-color: #F59E0B"></span>
+                            人工智能 (创业板AI)
+                        </span>
+                        <span class="font-mono-nums text-slate-900 font-bold">¥4,357.50 <span class="text-slate-400 font-normal">(7.33%)</span></span>
+                    </div>
                     <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
-                        <div class="h-full rounded-full" style="width: ***%; background-color: #F59E0B"></div>
+                        <div class="h-full rounded-full" style="width: 7.33%; background-color: #F59E0B"></div>
                     </div>
                 </div>
                 
                 <div>
-                    <div class="flex justify-between text-xs font-semibold mb-1"><span class="flex items-center gap-2 text-slate-800"><span class="w-2.5 h-2.5 rounded-full" style="background-color: #3B82F6"></span>【组合运作细节按合规要求不公开】</span><span class="font-mono-nums text-slate-900 font-bold"><span class="text-slate-400 font-normal"></span></span></div>
+                    <div class="flex justify-between text-xs font-semibold mb-1">
+                        <span class="flex items-center gap-2 text-slate-800">
+                            <span class="w-2.5 h-2.5 rounded-full" style="background-color: #3B82F6"></span>
+                            标普500 (美股宏观)
+                        </span>
+                        <span class="font-mono-nums text-slate-900 font-bold">¥5,562.90 <span class="text-slate-400 font-normal">(9.36%)</span></span>
+                    </div>
                     <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
-                        <div class="h-full rounded-full" style="width: ***%; background-color: #3B82F6"></div>
+                        <div class="h-full rounded-full" style="width: 9.36%; background-color: #3B82F6"></div>
                     </div>
                 </div>
                 
                 <div>
-                    <div class="flex justify-between text-xs font-semibold mb-1"><span class="flex items-center gap-2 text-slate-800"><span class="w-2.5 h-2.5 rounded-full" style="background-color: #10B981"></span>【组合运作细节按合规要求不公开】</span><span class="font-mono-nums text-slate-900 font-bold"><span class="text-slate-400 font-normal"></span></span></div>
+                    <div class="flex justify-between text-xs font-semibold mb-1">
+                        <span class="flex items-center gap-2 text-slate-800">
+                            <span class="w-2.5 h-2.5 rounded-full" style="background-color: #10B981"></span>
+                            红利低波 (A股防守)
+                        </span>
+                        <span class="font-mono-nums text-slate-900 font-bold">¥4,000.16 <span class="text-slate-400 font-normal">(6.73%)</span></span>
+                    </div>
                     <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
-                        <div class="h-full rounded-full" style="width: ***%; background-color: #10B981"></div>
+                        <div class="h-full rounded-full" style="width: 6.73%; background-color: #10B981"></div>
                     </div>
                 </div>
                 
                 <div>
-                    <div class="flex justify-between text-xs font-semibold mb-1"><span class="flex items-center gap-2 text-slate-800"><span class="w-2.5 h-2.5 rounded-full" style="background-color: #8B5CF6"></span>【组合运作细节按合规要求不公开】</span><span class="font-mono-nums text-slate-900 font-bold"><span class="text-slate-400 font-normal"></span></span></div>
+                    <div class="flex justify-between text-xs font-semibold mb-1">
+                        <span class="flex items-center gap-2 text-slate-800">
+                            <span class="w-2.5 h-2.5 rounded-full" style="background-color: #8B5CF6"></span>
+                            纳斯达克100 (美科技)
+                        </span>
+                        <span class="font-mono-nums text-slate-900 font-bold">¥3,176.83 <span class="text-slate-400 font-normal">(5.35%)</span></span>
+                    </div>
                     <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
-                        <div class="h-full rounded-full" style="width: ***%; background-color: #8B5CF6"></div>
+                        <div class="h-full rounded-full" style="width: 5.35%; background-color: #8B5CF6"></div>
                     </div>
                 </div>
                 
                 <div>
-                    <div class="flex justify-between text-xs font-semibold mb-1"><span class="flex items-center gap-2 text-slate-800"><span class="w-2.5 h-2.5 rounded-full" style="background-color: #64748B"></span>【组合运作细节按合规要求不公开】</span><span class="font-mono-nums text-slate-900 font-bold"><span class="text-slate-400 font-normal"></span></span></div>
+                    <div class="flex justify-between text-xs font-semibold mb-1">
+                        <span class="flex items-center gap-2 text-slate-800">
+                            <span class="w-2.5 h-2.5 rounded-full" style="background-color: #64748B"></span>
+                            其它 (港股/消费/资源/欧股等)
+                        </span>
+                        <span class="font-mono-nums text-slate-900 font-bold">¥29,937.60 <span class="text-slate-400 font-normal">(50.39%)</span></span>
+                    </div>
                     <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
-                        <div class="h-full rounded-full" style="width: ***%; background-color: #64748B"></div>
+                        <div class="h-full rounded-full" style="width: 50.39%; background-color: #64748B"></div>
                     </div>
                 </div>
                 
@@ -324,152 +376,301 @@
 
         <!-- 组合穿透十大重仓股票明细表 -->
         <div class="mt-8 pt-6 border-t border-slate-100">
-            <div class="flex items-center justify-between mb-3"><h3 class="text-sm font-bold text-slate-900 flex items-center gap-2"><span>【组合运作细节按合规要求不公开】</span></h3>
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                    <span>🏆</span> 组合穿透十大重仓股票（个股层级实时行情与市值贡献）
+                </h3>
                 <span class="text-xs text-slate-400 font-mono-nums">新浪行情实时双重校验</span>
             </div>
 
             <div class="overflow-x-auto rounded-xl border border-slate-200">
-                <table class="w-full text-xs text-left"><tr>
+                <table class="w-full text-xs text-left">
+                    <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200 uppercase tracking-wider">
+                        <tr>
                             <th class="p-3 text-center w-12">排名</th>
-                            <th class="p-3">重仓股票名称与代码</th><th class="p-3 text-right">【组合运作细节按合规要求不公开】</th>
+                            <th class="p-3">重仓股票名称与代码</th>
+                            <th class="p-3 text-right">穿透持仓金额</th>
                             <th class="p-3 text-right">占纯基金比重</th>
                             <th class="p-3 text-right">今日实时涨跌</th>
-                        </tr><tr class="hover:bg-slate-50/80 transition-colors">
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 font-mono-nums">
+                        
+                        <tr class="hover:bg-slate-50/80 transition-colors">
                             <td class="p-3 text-center font-bold text-amber-500">1</td>
                             <td class="p-3 font-semibold text-slate-900">
                                 新易盛 
                                 <span class="text-slate-400 font-normal text-[11px] ml-1">(300502)</span>
-                            </td><td class="p-3 text-right font-medium text-slate-700">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-bold text-slate-900">【组合运作细节按合规要求不公开】</td>
+                            </td>
+                            <td class="p-3 text-right font-medium text-slate-700">¥1,754.89</td>
+                            <td class="p-3 text-right font-bold text-slate-900">2.95%</td>
                             <td class="p-3 text-right"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-200">-3.36%</span></td>
-                        </tr><tr class="hover:bg-slate-50/80 transition-colors">
+                        </tr>
+                        
+                        <tr class="hover:bg-slate-50/80 transition-colors">
                             <td class="p-3 text-center font-bold text-amber-500">2</td>
                             <td class="p-3 font-semibold text-slate-900">
                                 中际旭创 
                                 <span class="text-slate-400 font-normal text-[11px] ml-1">(300308)</span>
-                            </td><td class="p-3 text-right font-medium text-slate-700">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-bold text-slate-900">【组合运作细节按合规要求不公开】</td>
+                            </td>
+                            <td class="p-3 text-right font-medium text-slate-700">¥1,754.89</td>
+                            <td class="p-3 text-right font-bold text-slate-900">2.95%</td>
                             <td class="p-3 text-right"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-200">-2.73%</span></td>
-                        </tr><tr class="hover:bg-slate-50/80 transition-colors">
+                        </tr>
+                        
+                        <tr class="hover:bg-slate-50/80 transition-colors">
                             <td class="p-3 text-center font-bold text-amber-500">3</td>
                             <td class="p-3 font-semibold text-slate-900">
                                 源杰科技 
                                 <span class="text-slate-400 font-normal text-[11px] ml-1">(688498)</span>
-                            </td><td class="p-3 text-right font-medium text-slate-700">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-bold text-slate-900">【组合运作细节按合规要求不公开】</td>
+                            </td>
+                            <td class="p-3 text-right font-medium text-slate-700">¥1,403.64</td>
+                            <td class="p-3 text-right font-bold text-slate-900">2.36%</td>
                             <td class="p-3 text-right"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-200">-0.83%</span></td>
-                        </tr><tr class="hover:bg-slate-50/80 transition-colors">
+                        </tr>
+                        
+                        <tr class="hover:bg-slate-50/80 transition-colors">
                             <td class="p-3 text-center font-bold text-slate-400">4</td>
                             <td class="p-3 font-semibold text-slate-900">
                                 沪电股份 
                                 <span class="text-slate-400 font-normal text-[11px] ml-1">(002463)</span>
-                            </td><td class="p-3 text-right font-medium text-slate-700">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-bold text-slate-900">【组合运作细节按合规要求不公开】</td>
+                            </td>
+                            <td class="p-3 text-right font-medium text-slate-700">¥1,301.32</td>
+                            <td class="p-3 text-right font-bold text-slate-900">2.19%</td>
                             <td class="p-3 text-right"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-200">-0.19%</span></td>
-                        </tr><tr class="hover:bg-slate-50/80 transition-colors">
+                        </tr>
+                        
+                        <tr class="hover:bg-slate-50/80 transition-colors">
                             <td class="p-3 text-center font-bold text-slate-400">5</td>
                             <td class="p-3 font-semibold text-slate-900">
                                 天孚通信 
                                 <span class="text-slate-400 font-normal text-[11px] ml-1">(300394)</span>
-                            </td><td class="p-3 text-right font-medium text-slate-700">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-bold text-slate-900">【组合运作细节按合规要求不公开】</td>
+                            </td>
+                            <td class="p-3 text-right font-medium text-slate-700">¥1,166.26</td>
+                            <td class="p-3 text-right font-bold text-slate-900">1.96%</td>
                             <td class="p-3 text-right"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-200">-4.40%</span></td>
-                        </tr><tr class="hover:bg-slate-50/80 transition-colors">
+                        </tr>
+                        
+                        <tr class="hover:bg-slate-50/80 transition-colors">
                             <td class="p-3 text-center font-bold text-slate-400">6</td>
                             <td class="p-3 font-semibold text-slate-900">
                                 工业富联 
                                 <span class="text-slate-400 font-normal text-[11px] ml-1">(601138)</span>
-                            </td><td class="p-3 text-right font-medium text-slate-700">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-bold text-slate-900">【组合运作细节按合规要求不公开】</td>
+                            </td>
+                            <td class="p-3 text-right font-medium text-slate-700">¥994.61</td>
+                            <td class="p-3 text-right font-bold text-slate-900">1.67%</td>
                             <td class="p-3 text-right"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-200">-2.98%</span></td>
-                        </tr><tr class="hover:bg-slate-50/80 transition-colors">
+                        </tr>
+                        
+                        <tr class="hover:bg-slate-50/80 transition-colors">
                             <td class="p-3 text-center font-bold text-slate-400">7</td>
                             <td class="p-3 font-semibold text-slate-900">
                                 NVDA105 
                                 <span class="text-slate-400 font-normal text-[11px] ml-1">(NVDA105)</span>
-                            </td><td class="p-3 text-right font-medium text-slate-700">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-bold text-slate-900">【组合运作细节按合规要求不公开】</td>
+                            </td>
+                            <td class="p-3 text-right font-medium text-slate-700">¥980.20</td>
+                            <td class="p-3 text-right font-bold text-slate-900">1.65%</td>
                             <td class="p-3 text-right"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 border border-slate-200">0.00%</span></td>
-                        </tr><tr class="hover:bg-slate-50/80 transition-colors">
+                        </tr>
+                        
+                        <tr class="hover:bg-slate-50/80 transition-colors">
                             <td class="p-3 text-center font-bold text-slate-400">8</td>
                             <td class="p-3 font-semibold text-slate-900">
                                 GOOGL105 
                                 <span class="text-slate-400 font-normal text-[11px] ml-1">(GOOGL105)</span>
-                            </td><td class="p-3 text-right font-medium text-slate-700">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-bold text-slate-900">【组合运作细节按合规要求不公开】</td>
+                            </td>
+                            <td class="p-3 text-right font-medium text-slate-700">¥980.20</td>
+                            <td class="p-3 text-right font-bold text-slate-900">1.65%</td>
                             <td class="p-3 text-right"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 border border-slate-200">0.00%</span></td>
-                        </tr><tr class="hover:bg-slate-50/80 transition-colors">
+                        </tr>
+                        
+                        <tr class="hover:bg-slate-50/80 transition-colors">
                             <td class="p-3 text-center font-bold text-slate-400">9</td>
                             <td class="p-3 font-semibold text-slate-900">
                                 MU105 
                                 <span class="text-slate-400 font-normal text-[11px] ml-1">(MU105)</span>
-                            </td><td class="p-3 text-right font-medium text-slate-700">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-bold text-slate-900">【组合运作细节按合规要求不公开】</td>
+                            </td>
+                            <td class="p-3 text-right font-medium text-slate-700">¥980.20</td>
+                            <td class="p-3 text-right font-bold text-slate-900">1.65%</td>
                             <td class="p-3 text-right"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 border border-slate-200">0.00%</span></td>
-                        </tr><tr class="hover:bg-slate-50/80 transition-colors">
+                        </tr>
+                        
+                        <tr class="hover:bg-slate-50/80 transition-colors">
                             <td class="p-3 text-center font-bold text-slate-400">10</td>
                             <td class="p-3 font-semibold text-slate-900">
                                 AMZN105 
                                 <span class="text-slate-400 font-normal text-[11px] ml-1">(AMZN105)</span>
-                            </td><td class="p-3 text-right font-medium text-slate-700">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-bold text-slate-900">【组合运作细节按合规要求不公开】</td>
+                            </td>
+                            <td class="p-3 text-right font-medium text-slate-700">¥980.20</td>
+                            <td class="p-3 text-right font-bold text-slate-900">1.65%</td>
                             <td class="p-3 text-right"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 border border-slate-200">0.00%</span></td>
-                        </tr></table>
+                        </tr>
+                        
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
 
     <!-- 11 只基金持仓估值明细表 -->
     <section class="glass-card p-5 sm:p-7">
-        <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100"><h2 class="text-base font-bold text-slate-900 flex items-center gap-2"><span class="w-2.5 h-5 bg-indigo-500 rounded-sm"></span>【组合运作细节按合规要求不公开】</h2>
-            <span class="text-xs text-slate-500">双重校验加权涨幅：<strong class="font-mono-nums text-emerald-600">***%</strong></span>
+        <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+            <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                <span class="w-2.5 h-5 bg-indigo-500 rounded-sm"></span> 组合各标的预估表现明细（11只标的全景）
+            </h2>
+            <span class="text-xs text-slate-500">双重校验加权涨幅：<strong class="font-mono-nums text-emerald-600">-0.57%</strong></span>
         </div>
 
         <div class="overflow-x-auto rounded-xl border border-slate-200">
-            <table class="w-full text-xs text-left"><tr>
+            <table class="w-full text-xs text-left">
+                <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200 uppercase tracking-wider">
+                    <tr>
                         <th class="p-3 w-16">代码</th>
-                        <th class="p-3">标的名称</th><th class="p-3 text-right">【组合运作细节按合规要求不公开】</th>
-                        <th class="p-3 text-right">累计持有收益</th><th class="p-3 text-right">【组合运作细节按合规要求不公开】</th><th class="p-3 text-right">【组合运作细节按合规要求不公开】</th><th class="p-3 text-right">【组合运作细节按合规要求不公开】</th>
+                        <th class="p-3">标的名称</th>
+                        <th class="p-3 text-right">持仓金额</th>
+                        <th class="p-3 text-right">累计持有收益</th>
+                        <th class="p-3 text-right">总权重</th>
+                        <th class="p-3 text-right">今日预估</th>
+                        <th class="p-3 text-right">定投在途</th>
                         <th class="p-3">盘面/类型</th>
-                    </tr><tr class="hover:bg-slate-50/80 transition-colors">
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    
+                    <tr class="hover:bg-slate-50/80 transition-colors">
                         <td class="p-3 font-mono-nums font-semibold text-slate-500">000979</td>
-                        <td class="p-3 font-bold text-slate-900">景顺长城沪港深精选股票A</td><td class="p-3 text-right font-mono-nums font-semibold text-slate-800">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums font-bold text-emerald-600">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums font-medium text-slate-600">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums text-amber-600 font-medium">【组合运作细节按合规要求不公开】</td>
+                        <td class="p-3 font-bold text-slate-900">景顺长城沪港深精选股票A</td>
+                        <td class="p-3 text-right font-mono-nums font-semibold text-slate-800">¥15,080.21</td>
+                        <td class="p-3 text-right font-mono-nums font-bold text-emerald-600">-¥1,599.79</td>
+                        <td class="p-3 text-right font-mono-nums font-medium text-slate-600">23.81%</td>
+                        <td class="p-3 text-right font-mono-nums"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-200">-1.59%</span></td>
+                        <td class="p-3 text-right font-mono-nums text-amber-600 font-medium">¥192</td>
                         <td class="p-3 text-slate-500 text-[11px]"><span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-600 mr-1">股票型</span>窄幅震荡</td>
-                    </tr><tr class="hover:bg-slate-50/80 transition-colors">
+                    </tr>
+                    
+                    <tr class="hover:bg-slate-50/80 transition-colors">
                         <td class="p-3 font-mono-nums font-semibold text-slate-500">010350</td>
-                        <td class="p-3 font-bold text-slate-900">景顺长城品质长青混合A</td><td class="p-3 text-right font-mono-nums font-semibold text-slate-800">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums font-bold text-emerald-600">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums font-medium text-slate-600">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums text-amber-600 font-medium">【组合运作细节按合规要求不公开】</td>
+                        <td class="p-3 font-bold text-slate-900">景顺长城品质长青混合A</td>
+                        <td class="p-3 text-right font-mono-nums font-semibold text-slate-800">¥8,313.80</td>
+                        <td class="p-3 text-right font-mono-nums font-bold text-emerald-600">-¥1,306.20</td>
+                        <td class="p-3 text-right font-mono-nums font-medium text-slate-600">13.13%</td>
+                        <td class="p-3 text-right font-mono-nums"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-200">-0.23%</span></td>
+                        <td class="p-3 text-right font-mono-nums text-amber-600 font-medium">¥64</td>
                         <td class="p-3 text-slate-500 text-[11px]"><span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-600 mr-1">混合型</span>窄幅震荡</td>
-                    </tr><tr class="hover:bg-slate-50/80 transition-colors">
+                    </tr>
+                    
+                    <tr class="hover:bg-slate-50/80 transition-colors">
                         <td class="p-3 font-mono-nums font-semibold text-slate-500">001668</td>
-                        <td class="p-3 font-bold text-slate-900">汇添富全球移动互联混合(QDII)人民币A</td><td class="p-3 text-right font-mono-nums font-semibold text-slate-800">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums font-bold text-red-600">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums font-medium text-slate-600">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums text-amber-600 font-medium">【组合运作细节按合规要求不公开】</td>
+                        <td class="p-3 font-bold text-slate-900">汇添富全球移动互联混合(QDII)人民币A</td>
+                        <td class="p-3 text-right font-mono-nums font-semibold text-slate-800">¥7,596.86</td>
+                        <td class="p-3 text-right font-mono-nums font-bold text-red-600">+¥1,046.86</td>
+                        <td class="p-3 text-right font-mono-nums font-medium text-slate-600">12.00%</td>
+                        <td class="p-3 text-right font-mono-nums"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-200">-0.05%</span></td>
+                        <td class="p-3 text-right font-mono-nums text-amber-600 font-medium">¥300</td>
                         <td class="p-3 text-slate-500 text-[11px]"><span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-600 mr-1">QDII</span>窄幅震荡</td>
-                    </tr><tr class="hover:bg-slate-50/80 transition-colors">
+                    </tr>
+                    
+                    <tr class="hover:bg-slate-50/80 transition-colors">
                         <td class="p-3 font-mono-nums font-semibold text-slate-500">017641</td>
-                        <td class="p-3 font-bold text-slate-900">摩根标普500指数(QDII)人民币A</td><td class="p-3 text-right font-mono-nums font-semibold text-slate-800">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums font-bold text-red-600">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums font-medium text-slate-600">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums text-amber-600 font-medium">【组合运作细节按合规要求不公开】</td>
+                        <td class="p-3 font-bold text-slate-900">摩根标普500指数(QDII)人民币A</td>
+                        <td class="p-3 text-right font-mono-nums font-semibold text-slate-800">¥5,562.90</td>
+                        <td class="p-3 text-right font-mono-nums font-bold text-red-600">+¥432.90</td>
+                        <td class="p-3 text-right font-mono-nums font-medium text-slate-600">8.79%</td>
+                        <td class="p-3 text-right font-mono-nums"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-200">-0.09%</span></td>
+                        <td class="p-3 text-right font-mono-nums text-amber-600 font-medium">¥20</td>
                         <td class="p-3 text-slate-500 text-[11px]"><span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-600 mr-1">QDII</span>窄幅震荡</td>
-                    </tr><tr class="hover:bg-slate-50/80 transition-colors">
+                    </tr>
+                    
+                    <tr class="hover:bg-slate-50/80 transition-colors">
                         <td class="p-3 font-mono-nums font-semibold text-slate-500">016560</td>
-                        <td class="p-3 font-bold text-slate-900">华安国际龙头(DAX)ETF联接A</td><td class="p-3 text-right font-mono-nums font-semibold text-slate-800">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums font-bold text-emerald-600">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums font-medium text-slate-600">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums text-amber-600 font-medium">【组合运作细节按合规要求不公开】</td>
+                        <td class="p-3 font-bold text-slate-900">华安国际龙头(DAX)ETF联接A</td>
+                        <td class="p-3 text-right font-mono-nums font-semibold text-slate-800">¥5,111.86</td>
+                        <td class="p-3 text-right font-mono-nums font-bold text-emerald-600">-¥218.14</td>
+                        <td class="p-3 text-right font-mono-nums font-medium text-slate-600">8.07%</td>
+                        <td class="p-3 text-right font-mono-nums"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-200">-1.09%</span></td>
+                        <td class="p-3 text-right font-mono-nums text-amber-600 font-medium">-</td>
                         <td class="p-3 text-slate-500 text-[11px]"><span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-600 mr-1">QDII</span>窄幅震荡</td>
-                    </tr><tr class="hover:bg-slate-50/80 transition-colors">
+                    </tr>
+                    
+                    <tr class="hover:bg-slate-50/80 transition-colors">
                         <td class="p-3 font-mono-nums font-semibold text-slate-500">021513</td>
-                        <td class="p-3 font-bold text-slate-900">富国港股通红利精选混合A</td><td class="p-3 text-right font-mono-nums font-semibold text-slate-800">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums font-bold text-emerald-600">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums font-medium text-slate-600">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums text-amber-600 font-medium">【组合运作细节按合规要求不公开】</td>
+                        <td class="p-3 font-bold text-slate-900">富国港股通红利精选混合A</td>
+                        <td class="p-3 text-right font-mono-nums font-semibold text-slate-800">¥4,718.40</td>
+                        <td class="p-3 text-right font-mono-nums font-bold text-emerald-600">-¥293.60</td>
+                        <td class="p-3 text-right font-mono-nums font-medium text-slate-600">7.45%</td>
+                        <td class="p-3 text-right font-mono-nums"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-200">-0.76%</span></td>
+                        <td class="p-3 text-right font-mono-nums text-amber-600 font-medium">¥36</td>
                         <td class="p-3 text-slate-500 text-[11px]"><span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-600 mr-1">混合型</span>窄幅震荡</td>
-                    </tr><tr class="hover:bg-slate-50/80 transition-colors">
+                    </tr>
+                    
+                    <tr class="hover:bg-slate-50/80 transition-colors">
                         <td class="p-3 font-mono-nums font-semibold text-slate-500">024663</td>
-                        <td class="p-3 font-bold text-slate-900">富国创业板人工智能ETF发起式联接C</td><td class="p-3 text-right font-mono-nums font-semibold text-slate-800">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums font-bold text-emerald-600">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums font-medium text-slate-600">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums text-amber-600 font-medium">【组合运作细节按合规要求不公开】</td>
+                        <td class="p-3 font-bold text-slate-900">富国创业板人工智能ETF发起式联接C</td>
+                        <td class="p-3 text-right font-mono-nums font-semibold text-slate-800">¥4,357.50</td>
+                        <td class="p-3 text-right font-mono-nums font-bold text-emerald-600">-¥812.50</td>
+                        <td class="p-3 text-right font-mono-nums font-medium text-slate-600">6.88%</td>
+                        <td class="p-3 text-right font-mono-nums"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-200">-0.02%</span></td>
+                        <td class="p-3 text-right font-mono-nums text-amber-600 font-medium">-</td>
                         <td class="p-3 text-slate-500 text-[11px]"><span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-600 mr-1">指数型</span>窄幅震荡</td>
-                    </tr><tr class="hover:bg-slate-50/80 transition-colors">
+                    </tr>
+                    
+                    <tr class="hover:bg-slate-50/80 transition-colors">
                         <td class="p-3 font-mono-nums font-semibold text-slate-500">007466</td>
-                        <td class="p-3 font-bold text-slate-900">华泰柏瑞中证红利低波ETF联接C</td><td class="p-3 text-right font-mono-nums font-semibold text-slate-800">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums font-bold text-red-600">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums font-medium text-slate-600">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums text-amber-600 font-medium">【组合运作细节按合规要求不公开】</td>
+                        <td class="p-3 font-bold text-slate-900">华泰柏瑞中证红利低波ETF联接C</td>
+                        <td class="p-3 text-right font-mono-nums font-semibold text-slate-800">¥4,000.16</td>
+                        <td class="p-3 text-right font-mono-nums font-bold text-red-600">+¥36.86</td>
+                        <td class="p-3 text-right font-mono-nums font-medium text-slate-600">6.32%</td>
+                        <td class="p-3 text-right font-mono-nums"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-red-50 text-red-600 border border-red-200">+0.82%</span></td>
+                        <td class="p-3 text-right font-mono-nums text-amber-600 font-medium">-</td>
                         <td class="p-3 text-slate-500 text-[11px]"><span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-600 mr-1">指数型</span>逆势走强</td>
-                    </tr><tr class="hover:bg-slate-50/80 transition-colors">
+                    </tr>
+                    
+                    <tr class="hover:bg-slate-50/80 transition-colors">
                         <td class="p-3 font-mono-nums font-semibold text-slate-500">019173</td>
-                        <td class="p-3 font-bold text-slate-900">摩根纳斯达克100指数(QDII)人民币C</td><td class="p-3 text-right font-mono-nums font-semibold text-slate-800">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums font-bold text-red-600">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums font-medium text-slate-600">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums text-amber-600 font-medium">【组合运作细节按合规要求不公开】</td>
+                        <td class="p-3 font-bold text-slate-900">摩根纳斯达克100指数(QDII)人民币C</td>
+                        <td class="p-3 text-right font-mono-nums font-semibold text-slate-800">¥3,176.83</td>
+                        <td class="p-3 text-right font-mono-nums font-bold text-red-600">+¥246.83</td>
+                        <td class="p-3 text-right font-mono-nums font-medium text-slate-600">5.02%</td>
+                        <td class="p-3 text-right font-mono-nums"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-red-50 text-red-600 border border-red-200">+0.02%</span></td>
+                        <td class="p-3 text-right font-mono-nums text-amber-600 font-medium">¥20</td>
                         <td class="p-3 text-slate-500 text-[11px]"><span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-600 mr-1">QDII</span>微幅飘红</td>
-                    </tr><tr class="hover:bg-slate-50/80 transition-colors">
+                    </tr>
+                    
+                    <tr class="hover:bg-slate-50/80 transition-colors">
                         <td class="p-3 font-mono-nums font-semibold text-slate-500">022364</td>
-                        <td class="p-3 font-bold text-slate-900">永赢科技智选混合发起A</td><td class="p-3 text-right font-mono-nums font-semibold text-slate-800">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums font-bold text-red-600">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums font-medium text-slate-600">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums text-amber-600 font-medium">【组合运作细节按合规要求不公开】</td>
+                        <td class="p-3 font-bold text-slate-900">永赢科技智选混合发起A</td>
+                        <td class="p-3 text-right font-mono-nums font-semibold text-slate-800">¥1,496.62</td>
+                        <td class="p-3 text-right font-mono-nums font-bold text-red-600">+¥54.73</td>
+                        <td class="p-3 text-right font-mono-nums font-medium text-slate-600">2.36%</td>
+                        <td class="p-3 text-right font-mono-nums"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-200">-0.62%</span></td>
+                        <td class="p-3 text-right font-mono-nums text-amber-600 font-medium">-</td>
                         <td class="p-3 text-slate-500 text-[11px]"><span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-600 mr-1">混合型</span>窄幅震荡</td>
-                    </tr><tr class="hover:bg-slate-50/80 transition-colors">
+                    </tr>
+                    
+                    <tr class="hover:bg-slate-50/80 transition-colors">
                         <td class="p-3 font-mono-nums font-semibold text-slate-500">014662</td>
-                        <td class="p-3 font-bold text-slate-900">天弘上海金ETF发起联接C</td><td class="p-3 text-right font-mono-nums font-semibold text-slate-800">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums font-bold text-slate-500">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums font-medium text-slate-600">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums text-amber-600 font-medium">【组合运作细节按合规要求不公开】</td>
+                        <td class="p-3 font-bold text-slate-900">天弘上海金ETF发起联接C</td>
+                        <td class="p-3 text-right font-mono-nums font-semibold text-slate-800">¥0.10</td>
+                        <td class="p-3 text-right font-mono-nums font-bold text-slate-500">0.00</td>
+                        <td class="p-3 text-right font-mono-nums font-medium text-slate-600">0.00%</td>
+                        <td class="p-3 text-right font-mono-nums"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-200">-0.65%</span></td>
+                        <td class="p-3 text-right font-mono-nums text-amber-600 font-medium">-</td>
                         <td class="p-3 text-slate-500 text-[11px]"><span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-600 mr-1">指数型</span>窄幅震荡</td>
-                    </tr><tr class="hover:bg-slate-50/80 transition-colors">
+                    </tr>
+                    
+                    <tr class="hover:bg-slate-50/80 transition-colors">
                         <td class="p-3 font-mono-nums font-semibold text-slate-500">GOLD</td>
-                        <td class="p-3 font-bold text-slate-900">黄金（非基金）</td><td class="p-3 text-right font-mono-nums font-semibold text-slate-800">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums font-bold text-emerald-600">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums font-medium text-slate-600">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums">【组合运作细节按合规要求不公开】</td><td class="p-3 text-right font-mono-nums text-amber-600 font-medium">【组合运作细节按合规要求不公开】</td>
+                        <td class="p-3 font-bold text-slate-900">黄金（非基金）</td>
+                        <td class="p-3 text-right font-mono-nums font-semibold text-slate-800">¥3,907.41</td>
+                        <td class="p-3 text-right font-mono-nums font-bold text-emerald-600">-¥43.78</td>
+                        <td class="p-3 text-right font-mono-nums font-medium text-slate-600">6.17%</td>
+                        <td class="p-3 text-right font-mono-nums"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-200">-0.57%</span></td>
+                        <td class="p-3 text-right font-mono-nums text-amber-600 font-medium">-</td>
                         <td class="p-3 text-slate-500 text-[11px]"><span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-600 mr-1">避险商品</span>窄幅震荡</td>
-                    </tr></table>
+                    </tr>
+                    
+                </tbody>
+            </table>
         </div>
     </section>
 
@@ -486,7 +687,8 @@
                 <div class="font-bold text-amber-900 mb-1.5 flex items-center gap-1">
                     <span>⚠️</span> 算力硬件暴露诊断
                 </div>
-                <p class="text-amber-800/90 text-[11px]">【组合运作细节按合规要求不公开】<strong></strong>。高集中度是今日净值出现明显回撤的直接原因；但红利低波与海外标普纳指有效发挥了减震对冲功能。
+                <p class="text-amber-800/90 text-[11px]">
+                    底层股票穿透后，CPO与AI算力在纯基金中实际占比达 <strong>34.74% (¥20,645.16)</strong>。高集中度是今日净值出现明显回撤的直接原因；但红利低波与海外标普纳指有效发挥了减震对冲功能。
                 </p>
             </div>
 
@@ -495,7 +697,8 @@
                 <div class="font-bold text-slate-900 mb-1.5 flex items-center gap-1">
                     <span>🛑</span> 是否清仓？坚决否决
                 </div>
-                <p class="text-slate-600 text-[11px]">【组合运作细节按合规要求不公开】。【组合运作细节按合规要求不公开】；【组合运作细节按合规要求不公开】。【组合运作细节按合规要求不公开】。【组合运作细节按合规要求不公开】。
+                <p class="text-slate-600 text-[11px]">
+                    当前组合处于浮亏回撤阶段（-¥2,412.05，浮亏率 -4.06%）。浮亏集中项：景顺长城沪港深精选股票A(¥-1,599.79)、景顺长城品质长青混合A(¥-1,306.20)、富国创业板人工智能ETF发起式联接C(¥-812.50)；盈利缓冲项：汇添富全球移动互联混合(+¥1,046.86)、摩根标普500指数(+¥432.90)、摩根纳斯达克100指数(+¥246.83)。在途买入定投（¥632.00）持续平滑成本。评级驱动的组合动作见上，单日涨跌（加权 -0.57%，估值覆盖率 100.0%）不改变既定纪律。
                 </p>
             </div>
 
@@ -505,7 +708,7 @@
                     <span>🎯</span> 渐进式调仓优化方案
                 </div>
                 <p class="text-blue-800/90 text-[11px]">
-                    <strong>Σ 评级【信号矛盾】（+0.125，代码计算）→ 标准动作：暂停一切主动买入；只挂低于现价 ≥2% 的吸买单；明日重点验证三个待确认信号</strong>。当前外盘校验：外盘隔夜美股（纳指/SOX）处于回调调整或盘整阶段，未出现强阳线止跌企稳信号。；【组合运作细节按合规要求不公开】。
+                    <strong>Σ 评级【信号矛盾】（+0.125，代码计算）→ 标准动作：暂停一切主动买入；只挂低于现价 ≥2% 的吸买单；明日重点验证三个待确认信号</strong>。当前外盘校验：外盘隔夜美股（纳指/SOX）处于回调调整或盘整阶段，未出现强阳线止跌企稳信号。；定投在途 ¥632.00 按既定扣款日执行，不因单日波动手动干预。
                 </p>
             </div>
         </div>
@@ -517,6 +720,31 @@
     </footer>
 
     <!-- Chart.js 渲染脚本 -->
-    <!-- [隐私] 内联脚本数据已移除 -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const ctx = document.getElementById('sectorPenetrationChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ["CPO", "人工智能", "标普500", "红利低波", "纳斯达克100", "其它"],
+                    datasets: [{
+                        data: [27.41, 7.33, 9.36, 6.73, 5.35, 50.39],
+                        backgroundColor: ['#EF4444', '#F59E0B', '#3B82F6', '#10B981', '#8B5CF6', '#64748B'],
+                        borderWidth: 2,
+                        borderColor: '#ffffff',
+                        hoverOffset: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    cutout: '72%'
+                }
+            });
+        });
+    </script>
 </body>
 </html>

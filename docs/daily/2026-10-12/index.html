@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>2026-10-12 每日市场脉搏 · Daily Market Pulse</title>
+<meta name="description" content="Σ 评级【信号矛盾】（+0.000），覆盖 2 项任务产出，数据时点 盘中时点。">
+<meta property="og:title" content="2026-10-12 每日市场脉搏 · Daily Market Pulse">
+<meta property="og:description" content="Σ 评级【信号矛盾】（+0.000），覆盖 2 项任务产出，数据时点 盘中时点。">
+<meta property="og:type" content="website">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#111214; --ink-2:#4a4d52; --ink-3:#868a91;
+  --bg:#fcfcfb; --surface:#fff; --line:#e8e8e6; --line-2:#f0f0ee;
+  --accent:#b45309; --accent-soft:#fef6ec;
+  --radius:14px;
+  --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--font); background:var(--bg); color:var(--ink);
+  font-size:16px; line-height:1.7; -webkit-font-smoothing:antialiased;
+  font-feature-settings:"tnum" 1;
+}
+a{color:inherit}
+
+/* ---- 布局容器：桌面舒适、移动端收紧 ---- */
+.shell{max-width:760px;margin:0 auto;padding:0 24px}
+@media(min-width:1024px){.shell{max-width:840px;padding:0 32px}}
+
+/* ---- 顶部导航 ---- */
+.nav{
+  position:sticky;top:0;z-index:20;background:rgba(252,252,251,.85);
+  backdrop-filter:saturate(180%) blur(12px);-webkit-backdrop-filter:saturate(180%) blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.nav-in{max-width:760px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:28px;height:56px}
+@media(min-width:1024px){.nav-in{max-width:840px;padding:0 32px;gap:34px}}
+.nav-brand{
+  font-size:14.5px;font-weight:700;letter-spacing:-.01em;text-decoration:none;
+  color:var(--ink);white-space:nowrap;flex-shrink:0;
+}
+.nav-links{display:flex;gap:22px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{
+  font-size:13.5px;font-weight:500;color:var(--ink-3);text-decoration:none;
+  white-space:nowrap;transition:color .15s;padding:2px 0;
+}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a[aria-current="page"]{color:var(--ink);font-weight:600;box-shadow:inset 0 -1.5px 0 var(--accent)}
+
+/* ---- 页头 ---- */
+.page-head{padding:52px 0 40px}
+@media(max-width:640px){.page-head{padding:34px 0 28px}}
+.page-head h1{
+  font-size:clamp(26px,5.2vw,36px);font-weight:800;letter-spacing:-.028em;
+  line-height:1.18;margin-bottom:14px;
+}
+.page-head .lede{font-size:15.5px;color:var(--ink-2);line-height:1.72;max-width:62ch}
+.page-head .meta{
+  margin-top:22px;font-size:13px;color:var(--ink-3);font-family:var(--mono);
+  letter-spacing:-.01em;
+}
+
+/* ---- 日期分组 ---- */
+.issue{margin-bottom:64px}
+@media(max-width:640px){.issue{margin-bottom:48px}}
+.issue-head{
+  display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+  padding-bottom:14px;margin-bottom:4px;border-bottom:1px solid var(--line);
+}
+.issue-date{
+  font-family:var(--mono);font-size:15px;font-weight:600;letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;
+}
+.issue-dow{font-size:13px;color:var(--ink-3)}
+.issue-spacer{flex:1}
+.issue-rating{
+  display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;
+  color:#fff;padding:3px 11px;border-radius:999px;letter-spacing:.01em;
+}
+.issue-sigma{font-family:var(--mono);font-size:12.5px;font-weight:600;letter-spacing:-.01em}
+
+/* ---- 每日时间线 ---- */
+.tl{list-style:none;margin-top:6px}
+.tl-item{
+  display:grid;grid-template-columns:64px 1fr;gap:20px;
+  padding:22px 0;border-bottom:1px solid var(--line-2);
+  align-items:start;
+}
+.tl-item:last-child{border-bottom:0}
+@media(max-width:640px){
+  .tl-item{grid-template-columns:1fr;gap:9px;padding:18px 0}
+}
+.tl-time{
+  font-family:var(--mono);font-size:13.5px;font-weight:600;color:var(--ink-3);
+  letter-spacing:-.02em;padding-top:2px;white-space:nowrap;
+  display:flex;align-items:center;gap:7px;
+}
+@media(max-width:640px){
+  .tl-time{padding-top:0;align-items:center}
+  .tl-time::after{content:"";flex:1;height:1px;background:var(--line-2)}
+}
+.tl-run{display:block;font-size:10.5px;font-weight:500;color:var(--ink-3);
+  letter-spacing:0;margin-top:3px;opacity:.75;font-family:var(--font)}
+@media(max-width:640px){.tl-run{display:inline;margin:0 0 0 10px}}
+.tl-time::before{
+  content:"";width:6px;height:6px;border-radius:50%;
+  background:var(--accent);flex-shrink:0;
+}
+.tl-body{min-width:0}
+.tl-title{
+  font-size:17px;font-weight:700;letter-spacing:-.015em;line-height:1.4;
+  margin-bottom:5px;
+}
+.tl-title a{text-decoration:none;background-image:linear-gradient(var(--accent),var(--accent));
+  background-size:0% 1.5px;background-repeat:no-repeat;background-position:0 100%;
+  transition:background-size .2s,color .15s;padding-bottom:1px}
+.tl-title a:hover{color:var(--accent);background-size:100% 1.5px}
+.tl-kicker{font-size:12.5px;font-weight:600;color:var(--accent);letter-spacing:.02em;margin-bottom:4px}
+.tl-sum{font-size:14.5px;color:var(--ink-2);line-height:1.68;margin-bottom:11px}
+.tl-tags{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.tag{
+  font-size:11.5px;font-weight:600;color:var(--ink-2);background:var(--line-2);
+  padding:2px 9px;border-radius:5px;letter-spacing:.01em;
+}
+.tag-rating{color:#fff}
+.tl-stage{font-size:11.5px;color:var(--ink-3);border:1px solid var(--line);padding:1px 8px;border-radius:5px}
+
+/* ---- 段落标题 ---- */
+.sec-title{
+  font-size:12px;font-weight:700;color:var(--ink-3);letter-spacing:.09em;
+  text-transform:uppercase;margin-bottom:18px;
+}
+
+/* ---- 空态 ---- */
+.empty{
+  text-align:center;padding:60px 24px;color:var(--ink-3);
+  border:1px dashed var(--line);border-radius:var(--radius);background:var(--surface);
+}
+.empty-title{font-size:15.5px;font-weight:600;color:var(--ink-2);margin-bottom:6px}
+
+/* ---- 页脚 ---- */
+.foot{
+  margin-top:72px;padding:28px 0 56px;border-top:1px solid var(--line);
+  font-size:12.5px;color:var(--ink-3);line-height:1.72;
+}
+.foot a{color:var(--ink-2)}
+@media(max-width:640px){.foot{margin-top:48px;padding-bottom:40px}}
+
+/* ---- 面包屑 ---- */
+.crumb{font-size:13px;color:var(--ink-3);padding:22px 0 0}
+.crumb a{text-decoration:none}
+.crumb a:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-in">
+    <a class="nav-brand" href="../../index.html">每日市场脉搏</a>
+    <div class="nav-links">
+    <a href="../../index.html">首页 / Home</a>
+    <a href="../../methodology/">方法论 / Method</a>
+    <a href="../../weekly/">周报 / Weekly</a>
+    <a href="../../monthly/">月报 / Monthly</a>
+    <a href="../../feed.xml">RSS</a>
+    </div>
+  </div>
+</nav>
+<div class="shell">
+  <p class="crumb"><a href="../../index.html">← 全部归档 / All issues</a></p>
+  <header class="page-head">
+    <h1>2026-10-12<br><span style="font-size:.55em;font-weight:600;color:var(--ink-3);letter-spacing:-.01em">周一 · Mon</span></h1>
+    <p class="lede">Σ 评级【信号矛盾】（+0.000），覆盖 2 项任务产出，数据时点 盘中时点。</p>
+    <p class="lede" style="font-size:14px;color:var(--ink-3);margin-top:8px">Sigma rating [Signal Conflict] (+0.000), covering 2 task outputs, data stage Intraday.</p>
+    <p class="meta">盘中时点 / Intraday · <span class="issue-rating" style="background:#475569">↔ 信号矛盾</span><span class="issue-sigma">Σ +0.000</span></p>
+  </header>
+  <main>
+    <p class="sec-title">当日产出时间线 / Timeline</p>
+    <ul class="tl">
+      <li class="tl-item" data-time="11:00" data-slug="fund-market">
+        <div class="tl-time">11:00<span class="tl-run">生成 11:06</span></div>
+        <div class="tl-body">
+          <div class="tl-kicker">基金盘面</div>
+          <h3 class="tl-title"><a href="../../daily/2026-10-12/fund-market.html">基金每日盘面分析与加权预估报告（11:00午盘版）</a></h3>
+          <p class="tl-sum">上证指数：3,808.04 点（-0.15%）</p>
+          <div class="tl-tags"><span class="tag tag-rating" style="background:#475569">↔ 信号矛盾</span><span class="tag">Σ +0.000</span><span class="tl-stage">盘中时点 / Intraday</span><span class="tag">基金盘面</span></div>
+        </div>
+      </li>
+      <li class="tl-item" data-time="14:30" data-slug="fund-guide">
+        <div class="tl-time">14:30<span class="tl-run">生成 14:32</span></div>
+        <div class="tl-body">
+          <div class="tl-kicker">基金操作指引</div>
+          <h3 class="tl-title">基金每日操作指引（14:30）— 真实记忆抓取、仓位加权估算与外盘企稳校验版（无脱敏/剔除北向资金）</h3>
+          <p class="tl-sum">记忆文件动态解析：彻底拒绝代码硬编码持仓！每日自动读取 ~/.workbuddy/MEMORY.md 提取最新基金持仓金额与占比，自动计算总持仓 (62,883.47 元)。</p>
+          <div class="tl-tags"><span class="tag tag-rating" style="background:#475569">↔ 信号矛盾</span><span class="tag">Σ +0.000</span><span class="tl-stage">盘中时点 / Intraday</span><span class="tag">基金操作指引</span></div>
+        </div>
+      </li>
+    </ul>
+  </main>
+  <footer class="foot">
+    <p>免责声明：本站内容基于公开数据与量化分析生成，仅供参考，不构成投资建议。市场有风险，投资需谨慎。</p>
+    <p>Disclaimer: Generated from public data and quantitative analysis. For reference only — not investment advice.</p>
+    <p style="margin-top:10px">数据来源：腾讯自选股 MCP 实时采集 · 信号评分由
+      <a href="https://github.com/seaquake97/daily-decision-engine">daily-decision-engine</a> 确定性计算</p>
+  </footer>
+</div>
+</body>
+</html>
