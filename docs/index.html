@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日市场脉搏 · Daily Market Pulse</title>
+<style>
+  :root { --ink:#1c1917; --sub:#57534e; --line:#e7e5e4; --bg:#fafaf9; --card:#ffffff; --amber:#d97706; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+         background:var(--bg); color:var(--ink); font-size:15px; line-height:1.75; }
+  .wrap { max-width:880px; margin:0 auto; padding:32px 16px 48px; }
+  header.dp-head { border-bottom:2px solid var(--line); padding-bottom:20px; margin-bottom:24px; }
+  header.dp-head h1 { font-size:26px; font-weight:800; }
+  header.dp-head .sub { color:var(--sub); font-size:14px; margin-top:6px; }
+  .dp-card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:20px; margin-bottom:16px; }
+  .dp-card-head { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+  .dp-date { font-weight:800; font-size:15px; }
+  .dp-rating { color:#fff; font-size:12.5px; font-weight:700; padding:2px 10px; border-radius:6px; }
+  .dp-stage { font-size:12px; color:var(--sub); border:1px solid var(--line); padding:1px 8px; border-radius:5px; }
+  .dp-title { font-size:18px; font-weight:700; }
+  .dp-title-en { font-size:13.5px; color:var(--sub); margin:2px 0 8px; }
+  .dp-summary { font-size:14px; }
+  .dp-tasks { font-size:12.5px; color:var(--sub); margin-top:8px; }
+  .dp-link { display:inline-block; margin-top:10px; color:var(--amber); font-weight:700; text-decoration:none; font-size:14px; }
+  .dp-link:hover { text-decoration:underline; }
+  .dp-empty { color:var(--sub); padding:24px 0; }
+  nav.dp-nav { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px; }
+  nav.dp-nav a { font-size:13px; font-weight:600; color:var(--sub); text-decoration:none;
+                  border:1px solid var(--line); background:var(--card); padding:4px 12px; border-radius:6px; }
+  nav.dp-nav a:hover { color:var(--amber); border-color:var(--amber); }
+  nav.dp-nav a.current { color:var(--amber); border-color:var(--amber); background:#fffbeb; }
+  footer.dp-foot { margin-top:32px; border-top:1px solid var(--line); padding-top:16px; font-size:12.5px; color:var(--sub); }
+  @media (max-width:600px) { header.dp-head h1 { font-size:22px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="dp-head">
+    <h1>每日市场脉搏 · Daily Market Pulse</h1>
+    <p class="sub">数据驱动的 A 股/基金每日研判档案 / Data-driven daily research archive for A-shares & funds</p>
+    <p class="sub">生成时间 / Generated: 2026-10-14 20:31 · 共 1 期 / issues</p>
+  </header>
+  <nav class="dp-nav">
+    <a class="current" href="./">首页 / Home</a>
+    <a href="./methodology/">方法论 / Methodology</a>
+    <a href="./weekly/">周报 / Weekly</a>
+    <a href="./monthly/">月报 / Monthly</a>
+    <a href="./feed.xml">订阅 / RSS</a>
+  </nav>
+  <main>
+
+    <article class="dp-card" data-date="2026-10-14" data-rating="防守" data-sigma="-0.339">
+      <div class="dp-card-head">
+        <time class="dp-date">2026-10-14</time>
+        <span class="dp-rating" style="background:#15803D">▼ 防守 · Σ -0.339</span>
+        <span class="dp-stage">收盘时点 / Close</span>
+      </div>
+      <h2 class="dp-title">股票助手 · 2026-10-14（周三）盘中研判</h2>
+      <p class="dp-title-en">Daily Market Research · 2026-10-14</p>
+      <p class="dp-summary">Σ 评级【防守】（-0.339），覆盖 5 项任务产出，数据时点 收盘时点。</p>
+      <p class="dp-tasks">覆盖任务 / Tasks: 基金盘面分析、股票助手、基金操作指引、股票复盘、每日总复盘</p>
+      <a class="dp-link" href="./daily/2026-10-14/">阅读全文 / Read Full Report →</a>
+    </article>
+  </main>
+  <footer class="dp-foot">
+    <p>免责声明：本站内容基于公开数据与量化分析生成，仅供参考，不构成投资建议。市场有风险，投资需谨慎。</p>
+    <p>Disclaimer: Content is generated from public data and quantitative analysis, for reference only, not investment advice.</p>
+    <p style="margin-top:6px">数据来源：腾讯自选股 MCP（westock-mcp）实时采集 · 信号评分由 daily-decision-engine 代码计算</p>
+    <p>Data source: Tencent Self-Selected MCP (westock-mcp) · Signals computed by daily-decision-engine</p>
+  </footer>
+</div>
+</body>
+</html>

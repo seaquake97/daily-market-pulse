@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>研判方法论 · Methodology | 每日市场脉搏</title>
+<meta name="description" content="每日市场脉搏的研判方法论：daily-decision-engine 决策引擎七步流水线、S1-S6 确定性信号评分与五档 Σ 评级规则。">
+<style>
+  :root { --ink:#1c1917; --sub:#57534e; --line:#e7e5e4; --bg:#fafaf9; --card:#ffffff; --amber:#d97706; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+         background:var(--bg); color:var(--ink); font-size:15px; line-height:1.75; }
+  .wrap { max-width:880px; margin:0 auto; padding:32px 16px 48px; }
+  a { color:var(--amber); }
+  header.mp-head { border-bottom:2px solid var(--line); padding-bottom:20px; margin-bottom:24px; }
+  header.mp-head h1 { font-size:26px; font-weight:800; }
+  header.mp-head .sub { color:var(--sub); font-size:14px; margin-top:6px; }
+  .mp-nav { margin-bottom:20px; font-size:13.5px; }
+  section { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:20px 22px; margin-bottom:16px; }
+  h2 { font-size:18px; font-weight:800; margin-bottom:12px; padding-left:10px; border-left:4px solid var(--amber); }
+  h3 { font-size:15px; font-weight:700; margin:14px 0 6px; }
+  p { margin:6px 0; }
+  ul, ol { margin:6px 0 6px 22px; }
+  li { margin:3px 0; }
+  table { width:100%; border-collapse:collapse; margin:10px 0; font-size:13.5px; }
+  th, td { border:1px solid var(--line); padding:7px 10px; text-align:left; vertical-align:top; }
+  th { background:#f5f5f4; font-weight:700; white-space:nowrap; }
+  td.num { font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .flow { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+  .flow-step { background:#f5f5f4; border:1px solid var(--line); border-radius:8px; padding:8px 12px; font-size:13px; font-weight:600; }
+  .flow-step b { color:var(--amber); margin-right:4px; }
+  .badge { display:inline-block; color:#fff; font-size:12px; font-weight:700; padding:2px 10px; border-radius:6px; white-space:nowrap; }
+  .pos { color:#B91C1C; font-weight:700; }   /* 红涨 */
+  .neg { color:#15803D; font-weight:700; }   /* 绿跌 */
+  .note { background:#FFFBEB; border:1px solid #FDE68A; border-radius:8px; padding:10px 14px; font-size:13.5px; margin:10px 0; }
+  .muted { color:var(--sub); font-size:13px; }
+  footer.mp-foot { margin-top:32px; border-top:1px solid var(--line); padding-top:16px; font-size:12.5px; color:var(--sub); }
+  code { background:#f5f5f4; border:1px solid var(--line); border-radius:4px; padding:0 5px; font-size:12.5px;
+         font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+  @media (max-width:600px) { header.mp-head h1 { font-size:22px; } section { padding:16px 14px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="mp-nav"><a href="../">← 返回首页 / Back to Home</a></p>
+  <header class="mp-head">
+    <h1>研判方法论 · Methodology</h1>
+    <p class="sub">每日市场脉搏的全部结论由 daily-decision-engine 决策引擎按确定性流程产出：数据硬校验 → 代码化信号评分 → 专家圆桌对抗辩论 → Σ 评级。<br>
+    All conclusions are produced by a deterministic pipeline: validated data → code-computed signals → adversarial expert roundtable → Sigma rating.</p>
+  </header>
+
+  <section>
+    <h2>一、决策引擎七步流水线 / Seven-Step Pipeline</h2>
+    <div class="flow">
+      <div class="flow-step"><b>1</b>交易日判定<br><span class="muted">Trading Day Check</span></div>
+      <div class="flow-step"><b>2</b>数据采集（MCP）<br><span class="muted">Data Collection</span></div>
+      <div class="flow-step"><b>3</b>信号评分（代码）<br><span class="muted">Signal Scoring</span></div>
+      <div class="flow-step"><b>4</b>持仓解析<br><span class="muted">Holdings Parsing</span></div>
+      <div class="flow-step"><b>5</b>硬校验<br><span class="muted">Validation</span></div>
+      <div class="flow-step"><b>6</b>专家研判+对抗辩论<br><span class="muted">Expert Debate</span></div>
+      <div class="flow-step"><b>7</b>决策卡+台账落档<br><span class="muted">Decision Card</span></div>
+    </div>
+    <ol>
+      <li><b>交易日判定</b>：经交易日历确认目标日为 A 股交易日；非交易日静默结束，不产出。</li>
+      <li><b>数据采集</b>：行情、板块资金、涨跌分布、估值等全部经腾讯自选股 MCP（westock-mcp）实时获取，禁止写死数值或凭记忆填数。</li>
+      <li><b>信号评分</b>：S1-S6 六信号由代码计算并合入 verdict 字段，LLM 禁止手工调分。</li>
+      <li><b>持仓解析</b>：持仓与网格参数从本地记忆文件动态解析，代码与提示词中不写死任何持仓数据。</li>
+      <li><b>硬校验</b>：数据完整性断言任一失败即停产出，标注缺口清单，禁止带脏数据出报告。</li>
+      <li><b>专家研判</b>：六位虚拟专家（产业/信号/估值/逆向/财报/短线维度）多空对抗辩论，观点须引用当日数据。</li>
+      <li><b>决策卡落档</b>：结构化决策卡与观点台账归档，供后续准确率结算与连续错误熔断。</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>二、S1-S6 确定性信号评分 / Signal Scoring</h2>
+    <p>六信号全部由代码计算，缺失信号自动从归一化权重中剔除；Σ 为加权求和，范围 [-1, +1]。</p>
+    <table>
+      <tr><th>信号</th><th>维度</th><th>权重</th><th>输入口径</th><th>计算逻辑（简化）</th></tr>
+      <tr><td class="num">S1</td><td>量能 Volume</td><td class="num">0.20</td><td>沪指量比（相对过去 5 日同时段归一化）</td><td class="num">clamp((量比-1.0)/0.8)</td></tr>
+      <tr><td class="num">S2</td><td>宽度 Breadth</td><td class="num">0.20</td><td>上涨占比、涨停/跌停家数</td><td class="num">宽度项 0.7 + 涨跌停项 0.3</td></tr>
+      <tr><td class="num">S3</td><td>动量 Momentum</td><td class="num">0.15</td><td>上证 vs MA5/MA20 + 20 日涨跌幅</td><td class="num">均线偏离 0.5+0.5 与 20 日涨幅平均</td></tr>
+      <tr><td class="num">S4</td><td>分化 Dispersion</td><td class="num">0.15</td><td>创业板指+科创50 均值 vs 沪深300</td><td class="num">clamp(价差/2.0)</td></tr>
+      <tr><td class="num">S5</td><td>资金 Flows</td><td class="num">0.15</td><td>板块主力净流入 TOP1 - 净流出 TOP1</td><td class="num">clamp(净差/50亿)</td></tr>
+      <tr><td class="num">S6</td><td>估值 Valuation</td><td class="num">0.15</td><td>沪深300 PE + 60 日涨跌幅（超跌代理）</td><td class="num">clamp((15-PE)/3 + 超跌项 0.5)</td></tr>
+    </table>
+    <div class="note"><b>有效权重封顶规则（v1.2）</b>：有效权重 &lt; 0.50（过半信号缺失）时，评级强制封顶为「信号矛盾」并标记数据不足——单一信号不得主导方向性结论。</div>
+  </section>
+
+  <section>
+    <h2>三、Σ 评级五档 / Sigma Rating Tiers</h2>
+    <table>
+      <tr><th>评级</th><th>Σ 区间</th><th>操作含义</th></tr>
+      <tr><td><span class="badge" style="background:#B91C1C">▲▲ 进攻</span></td><td class="num">≥ +0.50</td><td>做多窗口：定投上浮 ≤20%、网格卖档上移、新增买入 ≤ 总仓位 5%</td></tr>
+      <tr><td><span class="badge" style="background:#B45309">▲ 均衡</span></td><td class="num">+0.15 ~ +0.50</td><td>基准定投 + 网格原参数，不主动加减仓</td></tr>
+      <tr><td><span class="badge" style="background:#475569">↔ 信号矛盾</span></td><td class="num">-0.15 ~ +0.15</td><td>暂停主动买入；只列多空证据 + 明日待验证信号，禁止给方向</td></tr>
+      <tr><td><span class="badge" style="background:#15803D">▼ 防守</span></td><td class="num">-0.50 ~ -0.15</td><td>暂停主动买入、定投可降 ≤30%、只挂更低吸买单</td></tr>
+      <tr><td><span class="badge" style="background:#166534">▼▼ 回避</span></td><td class="num">≤ -0.50</td><td>定投暂停一期、浮亏 &gt;15% 品种分笔减 ≤1/3、防御仓再平衡</td></tr>
+    </table>
+    <p class="muted">评级徽章采用色相 + 箭头双重编码（色盲友好）。箭头 ▲▲/▲/↔/▼/▼▼ 与色阶分离：箭头表方向强度，颜色仅区分档位，不与涨跌语义混淆。</p>
+    <div class="note"><b>行情颜色惯例</b>：本站行情数字遵循中国市场惯例 <span class="pos">红涨</span> / <span class="neg">绿跌</span>（红为上涨、绿为下跌），仅用于行情数值呈现；评级档位不用红绿表方向。</div>
+  </section>
+
+  <section>
+    <h2>四、反滥用设计 / Anti-Abuse Design</h2>
+    <ul>
+      <li><b>代码计算 Σ</b>：Σ 由代码写入数据文件的 verdict 字段，报告引用必须原样呈现，禁止四舍五入或改述。</li>
+      <li><b>LLM 禁调分</b>：语言模型不得修改任何信号分值，研判文本只解释代码结论。</li>
+      <li><b>零编造</b>：数据缺失明确标注「数据缺口」并降级，禁止用代理指标伪装真实值。</li>
+      <li><b>信息隔离</b>：持仓数据不参与信号评分输入，避免禀赋效应污染方向判断。</li>
+      <li><b>观点台账</b>：全部历史观点归档结算，连续错误触发熔断降级。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>五、数据来源与隐私 / Data &amp; Privacy</h2>
+    <ul>
+      <li>数据来源：腾讯自选股 MCP（westock-mcp）实时采集的行情、板块资金、涨跌分布与估值数据。</li>
+      <li>数据时点：每期报告头部标注（竞价 / 盘中 / 收盘），不同时点的结论不可直接对比。</li>
+      <li>隐私边界：公开版本报告仅包含市场数据、信号评分与方法论；个人持仓金额、成本、盈亏与账户信息在发布前经自动化脱敏流水线移除，并经红线门禁校验（零命中方可发布）。</li>
+    </ul>
+  </section>
+
+  <footer class="mp-foot">
+    <p><b>免责声明 / Disclaimer</b>：本站内容基于公开数据与量化分析生成，仅供参考，不构成投资建议。市场有风险，投资需谨慎。</p>
+    <p>Content is generated from public data and quantitative analysis, for reference only, not investment advice.</p>
+    <p style="margin-top:6px">引擎版本：daily-decision-engine v1.3 · 生成时间 / Generated: 2026-10-14 20:31</p>
+  </footer>
+</div>
+</body>
+</html>

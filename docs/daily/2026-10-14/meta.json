@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-14",
+  "title_zh": "股票助手 · 2026-10-14（周三）盘中研判",
+  "title_en": "Daily Market Research · 2026-10-14",
+  "summary_zh": "Σ 评级【防守】（-0.339），覆盖 5 项任务产出，数据时点 收盘时点。",
+  "summary_en": "Sigma rating [Defense] (-0.339), covering 5 task outputs, data stage Close.",
+  "rating": "防守",
+  "sigma": -0.339,
+  "data_stage": "close",
+  "tasks": [
+    "基金盘面分析",
+    "股票助手",
+    "基金操作指引",
+    "股票复盘",
+    "每日总复盘"
+  ],
+  "generated_at": "2026-10-14T20:31:09"
+}
