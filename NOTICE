@@ -5,6 +5,24 @@ Copyright (c) 2026 seaquake97 (老北京的热干面 / Laobei Beijing Hot Dry No
 本仓库内容采用 **CC BY-NC-SA 4.0**（署名-非商业性使用-相同方式共享4.0）发布，
 许可证全文见 [LICENSE](LICENSE)。
 
+SPDX-License-Identifier: `CC-BY-NC-SA-4.0`
+
+> **关于仓库侧边栏显示 "Other" 的说明**
+> GitHub 使用 licensee 引擎识别许可证，其内置语料库共 47 条，**不包含任何 CC 系列
+> 许可证**（CC-BY / CC-BY-SA / CC-BY-NC-SA / CC0 均无条目）。因此本仓库侧边栏会显示
+> "Other" 而非CC BY-NC-SA 4.0 徽章 —— 这是 GitHub 的语料库覆盖缺口，与本仓库的
+> LICENSE 文件无关。
+> 实证：creativecommons/chooser 与 creativecommons/creativecommons.github.io-source
+> 等 CC 官方仓库在 GitHub API 上同样返回 `NOASSERTION` 或 `None`。
+> 如需机器可读识别，请直接引用上方的 SPDX-License-Identifier。
+>
+> GitHub's license detector (licensee) ships a 47-entry corpus that contains **no
+> Creative Commons licenses at all**, so the sidebar shows "Other" for any CC-licensed
+> repository — including Creative Commons' own repositories. The `LICENSE` file here
+> is a byte-for-byte copy of the canonical SPDX text. Cite the SPDX identifier above
+> for machine-readable detection.
+> Reference: https://github.com/licensee/licensee/blob/main/docs/what-we-look-at.md
+
 ## 中文条款摘要 / Plain-language summary
 
 - **署名 (BY)** — 必须保留作者署名「老北京的热干面 / Laobei Beijing Hot Dry Noodles」及指向本仓库的链接。
