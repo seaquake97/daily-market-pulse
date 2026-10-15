@@ -8,9 +8,13 @@
     "summary": "上证指数 (sh000001)：3807.15 点 (+0.26%) | 竞价大幅低开 3760.80（-0.96%），盘中 V 型反转翻红，最高 3810.94，承接力强劲",
     "html": "stock-assistant.html",
     "md": "stock-assistant.md",
-    "rating": "信号矛盾",
-    "sigma": 0.0,
-    "stage": "intraday"
+    "rating": null,
+    "sigma": null,
+    "sigma_source": "missing",
+    "stage": "intraday",
+    "breadth_scope": null,
+    "snapshot_at": null,
+    "comparable": false
   },
   {
     "slug": "fund-market",
@@ -21,9 +25,13 @@
     "summary": "上证指数：3,807.93 点（+0.28%）",
     "html": "fund-market.html",
     "md": "fund-market.md",
-    "rating": "信号矛盾",
-    "sigma": 0.0,
-    "stage": "intraday"
+    "rating": null,
+    "sigma": null,
+    "sigma_source": "missing",
+    "stage": "intraday",
+    "breadth_scope": null,
+    "snapshot_at": null,
+    "comparable": false
   },
   {
     "slug": "fund-guide",
@@ -34,9 +42,13 @@
     "summary": "记忆文件动态解析：彻底拒绝代码硬编码持仓！每日自动读取 ~/.workbuddy/MEMORY.md 提取最新基金持仓金额与占比，自动计算总持仓 (63,322.65 元)。",
     "html": null,
     "md": "fund-guide.md",
-    "rating": "信号矛盾",
-    "sigma": 0.0,
-    "stage": "intraday"
+    "rating": null,
+    "sigma": null,
+    "sigma_source": "missing",
+    "stage": "intraday",
+    "breadth_scope": null,
+    "snapshot_at": null,
+    "comparable": false
   },
   {
     "slug": "stock-review",
@@ -47,9 +59,13 @@
     "summary": "上证指数：3800.86 🔺 +0.10% (+3.62点，探底3741点回升，守住3800点整数关)",
     "html": null,
     "md": "stock-review.md",
-    "rating": "信号矛盾",
-    "sigma": 0.0,
-    "stage": "close"
+    "rating": null,
+    "sigma": null,
+    "sigma_source": "missing",
+    "stage": "close",
+    "breadth_scope": null,
+    "snapshot_at": null,
+    "comparable": false
   },
   {
     "slug": "daily-review",
@@ -60,8 +76,12 @@
     "summary": "当日全部研判的汇总归档与观点结算",
     "html": "daily-review.html",
     "md": null,
-    "rating": "信号矛盾",
-    "sigma": 0.0,
-    "stage": "close"
+    "rating": null,
+    "sigma": null,
+    "sigma_source": "missing",
+    "stage": "close",
+    "breadth_scope": null,
+    "snapshot_at": null,
+    "comparable": false
   }
 ]

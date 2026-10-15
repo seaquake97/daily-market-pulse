@@ -8,9 +8,13 @@
     "summary": "上证指数：3,808.04 点（-0.15%）",
     "html": "fund-market.html",
     "md": "fund-market.md",
-    "rating": "信号矛盾",
-    "sigma": 0.0,
-    "stage": "intraday"
+    "rating": null,
+    "sigma": null,
+    "sigma_source": "missing",
+    "stage": "intraday",
+    "breadth_scope": null,
+    "snapshot_at": null,
+    "comparable": false
   },
   {
     "slug": "fund-guide",
@@ -21,8 +25,12 @@
     "summary": "记忆文件动态解析：彻底拒绝代码硬编码持仓！每日自动读取 ~/.workbuddy/MEMORY.md 提取最新基金持仓金额与占比，自动计算总持仓 (62,883.47 元)。",
     "html": null,
     "md": "fund-guide.md",
-    "rating": "信号矛盾",
-    "sigma": 0.0,
-    "stage": "intraday"
+    "rating": null,
+    "sigma": null,
+    "sigma_source": "missing",
+    "stage": "intraday",
+    "breadth_scope": null,
+    "snapshot_at": null,
+    "comparable": false
   }
 ]

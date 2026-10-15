@@ -8,9 +8,13 @@
     "summary": "估值深度支撑：沪深300 PE 13.19，60 日回撤 -11.14%，S6 满格 +1.000——历史上该区域对应中期底部特征",
     "html": "stock-assistant.html",
     "md": "stock-assistant.md",
-    "rating": "防守",
-    "sigma": -0.339,
-    "stage": "intraday"
+    "rating": "信号矛盾",
+    "sigma": 0.01,
+    "sigma_source": "verdict",
+    "stage": "intraday",
+    "breadth_scope": null,
+    "snapshot_at": null,
+    "comparable": false
   },
   {
     "slug": "fund-market",
@@ -21,9 +25,13 @@
     "summary": "上证指数：3,807.50 点（+0.17%）",
     "html": "fund-market.html",
     "md": "fund-market.md",
-    "rating": "防守",
-    "sigma": -0.339,
-    "stage": "intraday"
+    "rating": null,
+    "sigma": null,
+    "sigma_source": "missing",
+    "stage": "intraday",
+    "breadth_scope": null,
+    "snapshot_at": null,
+    "comparable": false
   },
   {
     "slug": "fund-guide",
@@ -35,8 +43,12 @@
     "html": null,
     "md": "fund-guide.md",
     "rating": "防守",
-    "sigma": -0.339,
-    "stage": "intraday"
+    "sigma": -0.263,
+    "sigma_source": "verdict",
+    "stage": "intraday",
+    "breadth_scope": null,
+    "snapshot_at": null,
+    "comparable": false
   },
   {
     "slug": "stock-review",
@@ -47,9 +59,13 @@
     "summary": "上证指数：3767.23（-0.88%，跌破3800关口）",
     "html": null,
     "md": "stock-review.md",
-    "rating": "防守",
-    "sigma": -0.339,
-    "stage": "close"
+    "rating": null,
+    "sigma": null,
+    "sigma_source": "missing",
+    "stage": "close",
+    "breadth_scope": null,
+    "snapshot_at": null,
+    "comparable": false
   },
   {
     "slug": "daily-review",
@@ -62,6 +78,10 @@
     "md": null,
     "rating": "防守",
     "sigma": -0.339,
-    "stage": "close"
+    "sigma_source": "verdict",
+    "stage": "close",
+    "breadth_scope": null,
+    "snapshot_at": null,
+    "comparable": false
   }
 ]
