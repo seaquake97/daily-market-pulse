@@ -104,6 +104,12 @@
   --surface-alt:       var(--ap-surface-alt);  /* 交替带 / 三级表面 */
   --surface-nav:       var(--ap-surface-nav);
   --surface-sunken:    var(--ap-surface-alt);
+  /* 反色表面：承载上游正文里的深色区块（封面 / 深色 hero）。浅色模式下是
+   * 近黑块，深色模式下是抬升深灰 —— 明度递进，不用投影。存在的理由：
+   * 上游深渐变被 gradient_pass 收敛后需要一个「深色表面」落点，此前误落
+   * --fg 导致「前景色当背景」的 fg-on-fg 不可见文本（2026-10-15 门禁发现）。 */
+  --surface-inverse:   var(--ap-ink);          /* #1D1D1F · 16.83:1 on --fg-on-inverse */
+  --fg-on-inverse:     var(--ap-dark-ink);     /* #F5F5F7 */
 
   /* --- 前景 --- */
   --fg:                var(--ap-ink);           /* 16.83:1 */
@@ -476,6 +482,9 @@
     --surface-alt:     var(--ap-dark-1);
     --surface-nav:     var(--ap-dark-nav);
     --surface-sunken:  var(--ap-dark-1);
+    /* 深色模式的反色表面 = 抬升深灰（比画布亮一档），不是反色 */
+    --surface-inverse: var(--ap-dark-2);
+    --fg-on-inverse:   var(--ap-dark-ink);
 
     /* --- 前景 --- */
     --fg:      var(--ap-dark-ink);    /* 19.24:1 */
@@ -602,6 +611,7 @@
   --foot-bg: var(--ap-dark-1); --rating-offensive-fg: var(--rt-offensive-dk);
   --rating-balanced-fg: var(--rt-balanced-dk); --rating-conflict-fg: var(--rt-conflict-dk);
   --rating-defensive-fg: var(--rt-defensive-dk); --rating-avoid-fg: var(--rt-avoid-dk);
+  --surface-inverse: var(--ap-dark-2); --fg-on-inverse: var(--ap-dark-ink);
 }
 
 
@@ -1235,7 +1245,7 @@ a:focus-visible{ outline-offset:3px; }
   <footer class="mp-foot">
     <p><b>免责声明 / Disclaimer</b>：本站内容基于公开数据与量化分析生成，仅供参考，不构成投资建议。市场有风险，投资需谨慎。</p>
     <p>Content is generated from public data and quantitative analysis, for reference only, not investment advice.</p>
-    <p>引擎版本：daily-decision-engine v1.3 · 数据截至 / Data as of 2026-10-15</p>
+    <p>引擎版本：daily-decision-engine v1.3 · 数据截至 / Data as of 2026-10-16</p>
   </footer>
 
 </div>
