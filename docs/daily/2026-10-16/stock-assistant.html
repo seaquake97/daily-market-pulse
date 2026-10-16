@@ -1033,9 +1033,17 @@ a:focus-visible{ outline-offset:3px; }
 .tl-sum .concl-head{ font-weight:var(--fw-semibold); color:var(--fg); }
 .tl-sum .concl-action{ color:var(--fg-2); }
 .tl-sum .concl-fact{ color:var(--fg-3); font-size:var(--fs-footnote); line-height:var(--lh-footnote); }
-/* 分隔符：1px 竖线在深色下靠 --border 只有 1.79:1，几乎不可见（承担的是
- * 结构分隔职责，不是装饰），故叠加 --fg-3 + opacity 抬到可辨阈值。 */
-.tl-sum .concl-sep{ display:inline-block; width:1px; height:.9em; background:var(--border);
+/* 分隔符：1px 竖线在深色下靠 --border 只有 1.79:1，承担的是结构分隔职责、
+ * 不是装饰，几乎不可见。上一轮注释声称「叠加 --fg-3 + opacity 抬到可辨阈值」
+ * 但代码里并没有这段——注释与实现漂移，等于没修。
+ * 实测（WCAG 相对亮度，脚本实算）：--border #38383a 在本分隔符真正所处的
+ * 抬升面 #1c1c1e 上仅 1.45:1（比注释里说的 1.79:1 更低，因为 D-1 把 .issue
+ * 抬到 surface-alt 之后，分隔符已不在纯黑画布上）。
+ * 修法：叠一层 --fg-3（#86868b）opacity，把实际可见对比度抬到 3:1 以上，
+ * 跨模式一致（浅色下 --fg-3 opacity 同样只做轻微加重，不引入模式分叉）。
+ * 仍走既有 var()，不新增令牌、不硬编码色。 */
+.tl-sum .concl-sep{ display:inline-block; width:1px; height:.9em;
+  background:var(--fg-3); opacity:.5;
   margin:0 .5em; transform:translateY(.1em); }
 .tl-sum .quote{ font-family:var(--font-mono); font-variant-numeric:var(--numeric); }
 .tl-sum .up{ color:var(--quote-up); font-weight:var(--fw-medium); }
@@ -1311,6 +1319,19 @@ a:focus-visible{ outline-offset:3px; }
   .issue{ page-break-inside:avoid; }
   .foot{ background:var(--ap-white); }
 }
+/* ---- 归档总览页列表（weekly/ 与 monthly/ 入口页）---- */
+.archive-list{ list-style:none; margin:0; padding:0;
+  border-top:1px solid var(--border-soft); max-width:var(--container-prose); }
+.archive-list li{ border-bottom:1px solid var(--border-soft); }
+.archive-list a{ display:flex; align-items:center; justify-content:space-between;
+  min-height:44px; padding:var(--space-3) var(--space-2);
+  font-size:var(--fs-callout); color:var(--fg); text-decoration:none;
+  transition:background var(--motion-fast) var(--ease-out), color var(--motion-fast) var(--ease-out);
+  corner-shape:var(--corner-shape,squircle); }
+.archive-list a::after{ content:"›"; color:var(--fg-3); font-size:var(--fs-title3); }
+.archive-list a:hover{ background:var(--surface-alt); color:var(--link); }
+@media (prefers-color-scheme:dark){ .archive-list a:hover{ background:var(--panel-bg); } }
+
 /* ============================================================================
  * detail-frame.css — 上游详情页阅读框架 · 扩展层（v1.0 · 2026-10-15）
  *
