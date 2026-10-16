@@ -1,0 +1,40 @@
+[
+  {
+    "slug": "fund-market",
+    "name": "基金盘面",
+    "time": "11:00",
+    "run_time": "11:06",
+    "title": "基金盘面分析 · 2026-10-11（周日）午盘",
+    "conclusion": "数据缺口 · 未评级｜本任务无可用评级，详见正文说明｜上证指数：3,813.79 点（+0.05%）",
+    "degraded": false,
+    "summary": "上证指数：3,813.79 点（+0.05%）",
+    "html": "fund-market.html",
+    "md": "fund-market.md",
+    "rating": null,
+    "sigma": null,
+    "sigma_source": "missing",
+    "stage": "intraday",
+    "breadth_scope": null,
+    "snapshot_at": null,
+    "comparable": false
+  },
+  {
+    "slug": "fund-guide",
+    "name": "基金操作指引",
+    "time": "14:30",
+    "run_time": "14:31",
+    "title": "基金操作指引 · 2026-10-11（周日）尾盘",
+    "conclusion": "数据缺口 · 未评级｜本任务无可用评级，详见正文说明｜涨停板数：73 家 （主板≥10%、创业/科创≥20%、北交所≥30%）",
+    "degraded": false,
+    "summary": "记忆文件动态解析：彻底拒绝代码硬编码持仓！每日自动读取 ~/.workbuddy/MEMORY.md 提取最新基金持仓金额与占比，自动计算总持仓 (62,883.47 元)。",
+    "html": "fund-guide.html",
+    "md": "fund-guide.md",
+    "rating": null,
+    "sigma": null,
+    "sigma_source": "missing",
+    "stage": "intraday",
+    "breadth_scope": null,
+    "snapshot_at": null,
+    "comparable": false
+  }
+]

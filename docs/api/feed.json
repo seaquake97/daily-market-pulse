@@ -34,11 +34,11 @@
   {
    "date": "2026-10-16",
    "title": "股票助手 · 2026-10-16（周五）早盘集合竞价研判",
-   "summary": "Σ 评级【均衡】（+0.180），覆盖 4 项任务产出，数据时点 收盘时点。",
+   "summary": "Σ 评级【均衡】（+0.180），覆盖 5 项任务产出，数据时点 收盘时点。",
    "rating": "均衡",
    "sigma": 0.18,
    "stage": "close",
-   "entryCount": 4,
+   "entryCount": 5,
    "url": "https://seaquake97.github.io/daily-market-pulse/daily/2026-10-16/",
    "entries": [
     {
@@ -85,6 +85,21 @@
      "dataGap": false,
      "comparable": false,
      "url": "https://seaquake97.github.io/daily-market-pulse/daily/2026-10-16/fund-guide.html"
+    },
+    {
+     "slug": "stock-review",
+     "name": "股票复盘",
+     "time": "15:05",
+     "runTime": "15:05",
+     "title": "股票复盘 · 2026-10-16（周五）收盘",
+     "conclusion": "均衡 · Σ+0.180｜定投按基准额度执行，网格按原参数运行，不主动加减仓｜上证指数：3716.28（+0.24%，探底 3678.96 点后长下影企稳回升，收复…",
+     "rating": "均衡",
+     "sigma": 0.18,
+     "stage": "close",
+     "degraded": false,
+     "dataGap": false,
+     "comparable": false,
+     "url": "https://seaquake97.github.io/daily-market-pulse/daily/2026-10-16/stock-review.html"
     },
     {
      "slug": "daily-review",
@@ -403,6 +418,48 @@
      "dataGap": true,
      "comparable": false,
      "url": "https://seaquake97.github.io/daily-market-pulse/daily/2026-10-12/fund-guide.html"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-11",
+   "title": "基金每日盘面分析与加权预估报告（11:00午盘版）",
+   "summary": "评级与 Σ 值数据缺口，覆盖 2 项任务产出，数据时点 盘中时点；缺口不做补零，避免生成虚假结论。",
+   "rating": null,
+   "sigma": null,
+   "stage": "intraday",
+   "entryCount": 2,
+   "url": "https://seaquake97.github.io/daily-market-pulse/daily/2026-10-11/",
+   "entries": [
+    {
+     "slug": "fund-market",
+     "name": "基金盘面",
+     "time": "11:00",
+     "runTime": "11:06",
+     "title": "基金盘面分析 · 2026-10-11（周日）午盘",
+     "conclusion": "数据缺口 · 未评级｜本任务无可用评级，详见正文说明｜上证指数：3,813.79 点（+0.05%）",
+     "rating": null,
+     "sigma": null,
+     "stage": "intraday",
+     "degraded": false,
+     "dataGap": true,
+     "comparable": false,
+     "url": "https://seaquake97.github.io/daily-market-pulse/daily/2026-10-11/fund-market.html"
+    },
+    {
+     "slug": "fund-guide",
+     "name": "基金操作指引",
+     "time": "14:30",
+     "runTime": "14:31",
+     "title": "基金操作指引 · 2026-10-11（周日）尾盘",
+     "conclusion": "数据缺口 · 未评级｜本任务无可用评级，详见正文说明｜涨停板数：73 家 （主板≥10%、创业/科创≥20%、北交所≥30%）",
+     "rating": null,
+     "sigma": null,
+     "stage": "intraday",
+     "degraded": false,
+     "dataGap": true,
+     "comparable": false,
+     "url": "https://seaquake97.github.io/daily-market-pulse/daily/2026-10-11/fund-guide.html"
     }
    ]
   }

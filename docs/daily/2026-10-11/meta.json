@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-11",
+  "title_zh": "基金每日盘面分析与加权预估报告（11:00午盘版）",
+  "title_en": "Daily Market Research · 2026-10-11",
+  "summary_zh": "评级与 Σ 值数据缺口，覆盖 2 项任务产出，数据时点 盘中时点；缺口不做补零，避免生成虚假结论。",
+  "summary_en": "Rating/Σ data gap, 2 task outputs archived, data stage Intraday. Gaps are never zero-filled.",
+  "rating": null,
+  "sigma": null,
+  "data_stage": "intraday",
+  "tasks": [
+    "基金盘面分析",
+    "基金操作指引"
+  ]
+}

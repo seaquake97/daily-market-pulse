@@ -57,6 +57,25 @@
     "comparable": false
   },
   {
+    "slug": "stock-review",
+    "name": "股票复盘",
+    "time": "15:05",
+    "run_time": "15:05",
+    "title": "股票复盘 · 2026-10-16（周五）收盘",
+    "conclusion": "均衡 · Σ+0.180｜定投按基准额度执行，网格按原参数运行，不主动加减仓｜上证指数：3716.28（+0.24%，探底 3678.96 点后长下影企稳回升，收复…",
+    "degraded": false,
+    "summary": "上证指数：3716.28（+0.24%，探底 3678.96 点后长下影企稳回升，收复 3710 关口）",
+    "html": "stock-review.html",
+    "md": "stock-review.md",
+    "rating": "均衡",
+    "sigma": 0.18,
+    "sigma_source": "verdict",
+    "stage": "close",
+    "breadth_scope": null,
+    "snapshot_at": null,
+    "comparable": false
+  },
+  {
     "slug": "daily-review",
     "name": "每日总复盘",
     "time": "15:30",

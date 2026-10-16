@@ -2,8 +2,8 @@
   "date": "2026-10-16",
   "title_zh": "股票助手 · 2026-10-16（周五）早盘集合竞价研判",
   "title_en": "Daily Market Research · 2026-10-16",
-  "summary_zh": "Σ 评级【均衡】（+0.180），覆盖 4 项任务产出，数据时点 收盘时点。",
-  "summary_en": "Sigma rating [Balanced] (+0.180), covering 4 task outputs, data stage Close.",
+  "summary_zh": "Σ 评级【均衡】（+0.180），覆盖 5 项任务产出，数据时点 收盘时点。",
+  "summary_en": "Sigma rating [Balanced] (+0.180), covering 5 task outputs, data stage Close.",
   "rating": "均衡",
   "sigma": 0.18,
   "data_stage": "close",
@@ -11,6 +11,7 @@
     "基金盘面分析",
     "股票助手",
     "基金操作指引",
+    "股票复盘",
     "每日总复盘"
   ]
 }
