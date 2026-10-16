@@ -1075,6 +1075,12 @@ a:focus-visible{ outline-offset:3px; }
 @media (prefers-color-scheme:dark){ .sub-url{ background:var(--panel-bg); border-color:var(--ap-dark-sep); } }
 .sub-hint{ display:flex; align-items:flex-start; gap:6px; color:var(--fg-3); max-width:var(--container-prose); }
 .sub-hint .ic{ margin-top:3px; flex:0 0 auto; }
+/* AI 标识与主体说明（订阅页）——RSS 全文会推送到第三方阅读器，
+ * 标识必须随内容走，不能只存在于网站页脚 */
+.sub-legal{ display:flex; align-items:flex-start; gap:6px; color:var(--fg-2);
+  max-width:var(--container-prose); margin-top:var(--space-3);
+  padding-top:var(--space-3); border-top:1px solid var(--border-soft); }
+.sub-legal .ic{ margin-top:3px; flex:0 0 auto; color:var(--fg-3); }
 .sub-steps{ margin:0 0 0 22px; list-style:decimal; }
 .sub-steps li{ font-size:var(--fs-callout); line-height:var(--lh-callout); color:var(--fg-2); margin:var(--space-3) 0; max-width:60ch; }
 .sub-steps li b{ color:var(--fg); font-weight:var(--fw-semibold); }
@@ -1129,6 +1135,13 @@ a:focus-visible{ outline-offset:3px; }
 .foot-col a .ic{ width:12px; height:12px; stroke-width:2; opacity:.7; }
 .foot-legal{ border-top:1px solid var(--foot-border); padding-top:var(--space-5); font-size:var(--fs-caption1); line-height:var(--lh-footnote); color:var(--fg-3); }
 .foot-legal p + p{ margin-top:var(--space-2); }
+/* AI 标识与发布主体说明（合规披露）：与正文同色系但加重，不折叠、不藏底部角落 */
+.foot-legal .foot-ai, .foot-legal .foot-pub{
+  display:flex; align-items:flex-start; gap:6px; color:var(--fg-2);
+  font-size:var(--fs-footnote); line-height:var(--lh-footnote);
+}
+.foot-legal .foot-ai{ padding-bottom:var(--space-2); }
+.foot-legal .foot-ai .ic, .foot-legal .foot-pub .ic{ margin-top:3px; flex:0 0 auto; color:var(--fg-3); }
 .foot-legal a{ color:var(--fg-2); border-bottom:1px solid var(--border); transition:color var(--motion-fast) var(--ease-out),border-color var(--motion-fast) var(--ease-out); }
 .foot-legal a:hover{ color:var(--link); border-color:var(--link); }
 
@@ -1197,6 +1210,8 @@ a:focus-visible{ outline-offset:3px; }
     <p class="sub-lede t-callout">在任意 RSS 阅读器中选择「添加订阅」，粘贴以下地址即可。使用支持 RSS 的浏览器访问本站时，地址栏的订阅图标也可一键添加。</p>
     <code class="sub-url">https://seaquake97.github.io/daily-market-pulse/feed.xml</code>
     <p class="sub-hint t-footnote"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-lightbulb"/></svg>订阅内容为研判全文，不是摘要——阅读器里即可读完，无需再点回网站。</p>
+    <p class="sub-legal t-footnote"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。
+      内容站由个人独立运营，非持牌证券投资咨询机构，不提供代客理财或荐股服务。</p>
   </section>
   <section aria-labelledby="sec-how" style="margin-top:var(--space-16)">
     <div class="sec-head">
@@ -1255,8 +1270,10 @@ a:focus-visible{ outline-offset:3px; }
       </nav>
     </div>
     <div class="foot-legal">
-      <p>免责声明：本站内容基于公开数据与量化分析生成，仅供参考，不构成投资建议。市场有风险，投资需谨慎。</p>
-      <p>Disclaimer: Generated from public data and quantitative analysis. For reference only — not investment advice.</p>
+      <p class="foot-ai"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</p>
+      <p class="foot-pub"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-shield"/></svg>内容站由个人独立运营，非持牌证券投资咨询机构，不提供代客理财或荐股服务。</p>
+      <p>免责声明：本站内容由 AI 依据公开数据与量化模型自动生成，属个人信息参考与研究记录，不构成证券投资咨询意见，亦非任何买卖要约。文中评级、Σ 值、网格参数与操作指令均为模型在特定假设下的推演结果，可能与实际市场不符，使用者据此操作风险自负。市场有风险，投资需谨慎。</p>
+      <p>Disclaimer: AI-generated from public data and quantitative models. For personal research records only — NOT securities investment advice and not an offer to buy or sell. Ratings, scores and grid parameters are model outputs under stated assumptions and may not reflect reality.</p>
       <p>数据来源：腾讯自选股 MCP 实时采集 · 信号评分由 daily-decision-engine 确定性计算</p>
     </div>
   </div>
