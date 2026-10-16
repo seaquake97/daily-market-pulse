@@ -1393,15 +1393,20 @@ a:focus-visible{ outline-offset:3px; }
 .tl-title a:hover .go{ transform:translateX(3px); }
 .tl-sum{ font-size:var(--fs-callout); line-height:var(--lh-callout); color:var(--tl-summary-fg); max-width:var(--container-prose); }
 
-/* ---- 结论先行摘要（一致性契约 C-2）：三段固定结构，三档视觉权重 ----
- * 段1 评级·Σ（最强，加粗）｜ 段2 标准动作（常规）｜ 段3 关键事实（最弱）
- * 目的：读者不看正文也能一眼知道「今天什么档、该做什么」。 */
-.tl-sum .conclusion{ display:flex; flex-wrap:wrap; align-items:baseline; gap:0 10px; }
+/* ---- 结论先行摘要（一致性契约 C-2 / DESIGN-SYSTEM-v2 D-3）：
+ * 三段固定结构，三档视觉权重 —— 段1 评级·Σ（最强）｜段2 标准动作｜段3 关键事实（最弱）。
+ * D-3 修订：conclusion 改回行内流（inline），不再用 flex。
+ * flex + wrap 会让中文长句在段内被强行折行、且 align-items:baseline 在混排
+ * 11/13/17px 时基线漂移；行内流让整段像一段话自然折行，分隔符随文字流动。
+ * 段间距交给分隔符的 inline margin承担，跨模式一致、无需深色覆写。 */
+.tl-sum .conclusion{ display:block; }
 .tl-sum .concl-head{ font-weight:var(--fw-semibold); color:var(--fg); }
 .tl-sum .concl-action{ color:var(--fg-2); }
 .tl-sum .concl-fact{ color:var(--fg-3); font-size:var(--fs-footnote); line-height:var(--lh-footnote); }
+/* 分隔符：1px 竖线在深色下靠 --border 只有 1.79:1，几乎不可见（承担的是
+ * 结构分隔职责，不是装饰），故叠加 --fg-3 + opacity 抬到可辨阈值。 */
 .tl-sum .concl-sep{ display:inline-block; width:1px; height:.9em; background:var(--border);
-  transform:translateY(.1em); }
+  margin:0 .5em; transform:translateY(.1em); }
 .tl-sum .quote{ font-family:var(--font-mono); font-variant-numeric:var(--numeric); }
 .tl-sum .up{ color:var(--quote-up); font-weight:var(--fw-medium); }
 .tl-sum .down{ color:var(--quote-down); font-weight:var(--fw-medium); }
@@ -1459,6 +1464,31 @@ a:focus-visible{ outline-offset:3px; }
 .tag .ic{ width:12px; height:12px; stroke-width:2; }
 .tag.gap{ color:var(--fg-3); border-style:dashed; }
 .tag-warn{ color:var(--warn); border-color:var(--warn); background:transparent; }
+
+/* ---- D-1 深色：时间线表面抬升 --------------------------------------------
+ * 根因：深色下 --bg = --card-bg = 纯黑，--tl-separator = #2c2c2e 仅 1.51:1，
+ * 行与行、行与组全部糊成一片（evidence/dark-day-1440.png 实测）。
+ * 修法（DESIGN-SYSTEM-v2 D-1「画布 / 抬升面 / 分隔 / 前景」四级）：
+ *   抬升做在「日组」这一层，不做在每一行 —— 每行加卡片会把 Apple 的
+ *   零卡片 hairline 节奏打成卡片段（--card-bg 深色下刻意等于纯黑，
+ *   就是为了不做卡）。日组给 surface-alt 抬升面 + 内缩 padding，
+ *   行分隔线提到 --ap-dark-sep（1.79:1），层级立刻可读且仍是「一组一行」。
+ * 全部走既有 var()，不新增令牌、不硬编码色。 */
+@media (prefers-color-scheme:dark){
+  .issue{
+    background:var(--surface-alt);
+    border-radius:var(--panel-radius);
+    padding:var(--space-5) var(--space-5) var(--space-4);
+  }
+  .issue-head{ border-bottom-color:var(--ap-dark-sep); }
+  .tl-item{ border-bottom-color:var(--ap-dark-sep); }
+  .tl-time::after{ background:var(--ap-dark-sep); }
+  /* 抬升面内的长摘要降一档前景，避免 #a1a1a6 直接压 #1c1c1e 时与画布层同权 */
+  .tl-sum{ color:var(--fg-2); }
+}
+@media (prefers-color-scheme:dark) and (max-width:640px){
+  .issue{ padding:var(--space-4) var(--space-4) var(--space-3); }
+}
 
 /* ============================== 面板 ====================================== */
 .panel{ background:var(--panel-bg); border-radius:var(--panel-radius); padding:var(--card-pad); corner-shape:var(--corner-shape,squircle); }
@@ -1546,6 +1576,23 @@ a:focus-visible{ outline-offset:3px; }
 .sub-steps li{ font-size:var(--fs-callout); line-height:var(--lh-callout); color:var(--fg-2); margin:var(--space-3) 0; max-width:60ch; }
 .sub-steps li b{ color:var(--fg); font-weight:var(--fw-semibold); }
 @media (max-width:640px){ .sub-url{ font-size:var(--fs-footnote); padding:var(--space-3) var(--space-4); } }
+
+/* ---- 当日结论速览（按时点分组）----
+ * 产品约束：五个任务的 Σ 落在竞价/盘中/收盘不同时点，横排会诱导跨时点
+ * 直接相比。按时点分组 = 同时点内可比 + 跨时点显式警示，两头都说到。 */
+.ov-group{ margin-bottom:var(--space-5); }
+.ov-stage{ display:flex; align-items:center; gap:var(--space-3); margin-bottom:var(--space-3); flex-wrap:wrap; }
+.ov-note{ font-size:var(--fs-caption1); color:var(--fg-3); }
+.ov-cells{ display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:var(--space-3); }
+.ov-cell{ border:1px solid var(--border-soft); border-radius:var(--radius-sm);
+  padding:var(--space-3) var(--space-4); background:var(--surface-alt);
+  corner-shape:var(--corner-shape,squircle); }
+@media (prefers-color-scheme:dark){ .ov-cell{ background:var(--panel-bg); border-color:var(--ap-dark-sep); } }
+.ov-name{ font-size:var(--fs-footnote); color:var(--fg-2); margin-bottom:6px; }
+.ov-badges{ display:flex; align-items:center; gap:var(--space-2); flex-wrap:wrap; }
+.ov-caution{ display:flex; align-items:flex-start; gap:6px; font-size:var(--fs-footnote);
+  line-height:var(--lh-footnote); color:var(--fg-3); margin-top:var(--space-4); }
+.ov-caution .ic{ margin-top:3px; flex:0 0 auto; }
 
 .btn-row{ display:flex; gap:var(--space-3); flex-wrap:wrap; align-items:center; }
 .btn{
@@ -1672,6 +1719,26 @@ html { scroll-padding-top: calc(var(--nav-h) + var(--space-4)); }
 }
 .doc .tbl-wrap { margin-block: var(--space-5); }
 .doc table { width: 100%; }
+
+/* ---- D-2 深色表格斑马纹 ----------------------------------------------------
+ * 浅色 --table-zebra = none 是刻意的（Apple 表格从不斑马纹，靠 hairline 分行）。
+ * 深色必须开：#000 画布上 --separator(#2c2c2e) 只有 1.51:1，跨 5 列宽表时
+ * 读者无法把「第 3 行的数字」和「第 3 列表头」对上（evidence/dark-detail-1440.png
+ * 底部 15:00 干预指令表实测）。
+ * 取值 = --surface-alt(#1c1c1e)，即四级表面契约里的「抬升面」第一级，
+ * 也正是 Apple 自家深色模式 inset list / 表格偶数行的官方取值，不是自造色。
+ * 浅色继续 none —— 两套模式规则不同是有理由的，不是漏改。 */
+@media (prefers-color-scheme:dark){
+  .doc :is(.tbl, table) tbody tr:nth-child(even){
+    background: var(--surface-alt);
+  }
+  .doc :is(.tbl, table) th{
+    border-bottom-color: var(--ap-dark-sep);
+  }
+  .doc :is(.tbl, table) td{
+    border-bottom-color: var(--ap-dark-sep-soft);
+  }
+}
 
 /* 上游页面级容器让位：.wrap(720/860/1100) / Tailwind .max-w-* 一律交还 .doc 裁定 */
 .doc :is(.wrap, .container, .max-w-6xl, .max-w-5xl, .max-w-4xl, .max-w-3xl) {
@@ -1852,14 +1919,27 @@ body[data-df] {
   padding: 2px 6px;
   border-radius: var(--radius-xs);
 }
+/* D-4 代码块表面：块级与行内必须分属两个层级，否则 pre 与 code 同色，
+ * 整段代码在深色下和正文融成一片（分号/括号失去视觉锚点）。
+ * 行内 code 保持 --surface-alt（轻），块级 pre 提到 --panel-bg（重一档），
+ * 浅色下二者同为 #f5f5f7 会撞色，故浅色靠 1px hairline 区分层级。 */
 .doc pre {
   background: var(--surface-alt);
   border-radius: var(--radius-md);
   padding: var(--space-4);
   overflow-x: auto;
   margin: 0 0 var(--space-4);
+  border: 1px solid var(--border-soft);
 }
 .doc pre code { background: none; padding: 0; }
+@media (prefers-color-scheme:dark){
+  .doc pre{
+    background: var(--panel-bg);
+    border-color: var(--ap-dark-sep);
+  }
+  /* 行内 code 在抬升面上再压一档，避免与 pre 抢层级 */
+  .doc code{ background: var(--ap-dark-2); }
+}
 .doc figure { margin: 0 0 var(--space-4); }
 .doc figcaption { font-size: var(--fs-caption1); color: var(--fg-3); margin-top: var(--space-2); }
 .doc img { max-width: 100%; height: auto; border-radius: var(--radius-md); }

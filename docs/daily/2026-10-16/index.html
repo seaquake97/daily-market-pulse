@@ -888,15 +888,20 @@ a:focus-visible{ outline-offset:3px; }
 .tl-title a:hover .go{ transform:translateX(3px); }
 .tl-sum{ font-size:var(--fs-callout); line-height:var(--lh-callout); color:var(--tl-summary-fg); max-width:var(--container-prose); }
 
-/* ---- 结论先行摘要（一致性契约 C-2）：三段固定结构，三档视觉权重 ----
- * 段1 评级·Σ（最强，加粗）｜ 段2 标准动作（常规）｜ 段3 关键事实（最弱）
- * 目的：读者不看正文也能一眼知道「今天什么档、该做什么」。 */
-.tl-sum .conclusion{ display:flex; flex-wrap:wrap; align-items:baseline; gap:0 10px; }
+/* ---- 结论先行摘要（一致性契约 C-2 / DESIGN-SYSTEM-v2 D-3）：
+ * 三段固定结构，三档视觉权重 —— 段1 评级·Σ（最强）｜段2 标准动作｜段3 关键事实（最弱）。
+ * D-3 修订：conclusion 改回行内流（inline），不再用 flex。
+ * flex + wrap 会让中文长句在段内被强行折行、且 align-items:baseline 在混排
+ * 11/13/17px 时基线漂移；行内流让整段像一段话自然折行，分隔符随文字流动。
+ * 段间距交给分隔符的 inline margin承担，跨模式一致、无需深色覆写。 */
+.tl-sum .conclusion{ display:block; }
 .tl-sum .concl-head{ font-weight:var(--fw-semibold); color:var(--fg); }
 .tl-sum .concl-action{ color:var(--fg-2); }
 .tl-sum .concl-fact{ color:var(--fg-3); font-size:var(--fs-footnote); line-height:var(--lh-footnote); }
+/* 分隔符：1px 竖线在深色下靠 --border 只有 1.79:1，几乎不可见（承担的是
+ * 结构分隔职责，不是装饰），故叠加 --fg-3 + opacity 抬到可辨阈值。 */
 .tl-sum .concl-sep{ display:inline-block; width:1px; height:.9em; background:var(--border);
-  transform:translateY(.1em); }
+  margin:0 .5em; transform:translateY(.1em); }
 .tl-sum .quote{ font-family:var(--font-mono); font-variant-numeric:var(--numeric); }
 .tl-sum .up{ color:var(--quote-up); font-weight:var(--fw-medium); }
 .tl-sum .down{ color:var(--quote-down); font-weight:var(--fw-medium); }
@@ -954,6 +959,31 @@ a:focus-visible{ outline-offset:3px; }
 .tag .ic{ width:12px; height:12px; stroke-width:2; }
 .tag.gap{ color:var(--fg-3); border-style:dashed; }
 .tag-warn{ color:var(--warn); border-color:var(--warn); background:transparent; }
+
+/* ---- D-1 深色：时间线表面抬升 --------------------------------------------
+ * 根因：深色下 --bg = --card-bg = 纯黑，--tl-separator = #2c2c2e 仅 1.51:1，
+ * 行与行、行与组全部糊成一片（evidence/dark-day-1440.png 实测）。
+ * 修法（DESIGN-SYSTEM-v2 D-1「画布 / 抬升面 / 分隔 / 前景」四级）：
+ *   抬升做在「日组」这一层，不做在每一行 —— 每行加卡片会把 Apple 的
+ *   零卡片 hairline 节奏打成卡片段（--card-bg 深色下刻意等于纯黑，
+ *   就是为了不做卡）。日组给 surface-alt 抬升面 + 内缩 padding，
+ *   行分隔线提到 --ap-dark-sep（1.79:1），层级立刻可读且仍是「一组一行」。
+ * 全部走既有 var()，不新增令牌、不硬编码色。 */
+@media (prefers-color-scheme:dark){
+  .issue{
+    background:var(--surface-alt);
+    border-radius:var(--panel-radius);
+    padding:var(--space-5) var(--space-5) var(--space-4);
+  }
+  .issue-head{ border-bottom-color:var(--ap-dark-sep); }
+  .tl-item{ border-bottom-color:var(--ap-dark-sep); }
+  .tl-time::after{ background:var(--ap-dark-sep); }
+  /* 抬升面内的长摘要降一档前景，避免 #a1a1a6 直接压 #1c1c1e 时与画布层同权 */
+  .tl-sum{ color:var(--fg-2); }
+}
+@media (prefers-color-scheme:dark) and (max-width:640px){
+  .issue{ padding:var(--space-4) var(--space-4) var(--space-3); }
+}
 
 /* ============================== 面板 ====================================== */
 .panel{ background:var(--panel-bg); border-radius:var(--panel-radius); padding:var(--card-pad); corner-shape:var(--corner-shape,squircle); }
@@ -1041,6 +1071,23 @@ a:focus-visible{ outline-offset:3px; }
 .sub-steps li{ font-size:var(--fs-callout); line-height:var(--lh-callout); color:var(--fg-2); margin:var(--space-3) 0; max-width:60ch; }
 .sub-steps li b{ color:var(--fg); font-weight:var(--fw-semibold); }
 @media (max-width:640px){ .sub-url{ font-size:var(--fs-footnote); padding:var(--space-3) var(--space-4); } }
+
+/* ---- 当日结论速览（按时点分组）----
+ * 产品约束：五个任务的 Σ 落在竞价/盘中/收盘不同时点，横排会诱导跨时点
+ * 直接相比。按时点分组 = 同时点内可比 + 跨时点显式警示，两头都说到。 */
+.ov-group{ margin-bottom:var(--space-5); }
+.ov-stage{ display:flex; align-items:center; gap:var(--space-3); margin-bottom:var(--space-3); flex-wrap:wrap; }
+.ov-note{ font-size:var(--fs-caption1); color:var(--fg-3); }
+.ov-cells{ display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:var(--space-3); }
+.ov-cell{ border:1px solid var(--border-soft); border-radius:var(--radius-sm);
+  padding:var(--space-3) var(--space-4); background:var(--surface-alt);
+  corner-shape:var(--corner-shape,squircle); }
+@media (prefers-color-scheme:dark){ .ov-cell{ background:var(--panel-bg); border-color:var(--ap-dark-sep); } }
+.ov-name{ font-size:var(--fs-footnote); color:var(--fg-2); margin-bottom:6px; }
+.ov-badges{ display:flex; align-items:center; gap:var(--space-2); flex-wrap:wrap; }
+.ov-caution{ display:flex; align-items:flex-start; gap:6px; font-size:var(--fs-footnote);
+  line-height:var(--lh-footnote); color:var(--fg-3); margin-top:var(--space-4); }
+.ov-caution .ic{ margin-top:3px; flex:0 0 auto; }
 
 .btn-row{ display:flex; gap:var(--space-3); flex-wrap:wrap; align-items:center; }
 .btn{
@@ -1134,6 +1181,26 @@ a:focus-visible{ outline-offset:3px; }
     <p class="lede-en t-subhead">Sigma rating [Balanced] (+0.180), covering 4 task outputs, data stage Close.</p>
   </header>
   <dl class="kpi-row"><div class="kpi"><dt><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>Σ 综合评分</dt><dd><span class="num">+0.180</span></dd></div><div class="kpi"><dt><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-scale"/></svg>Σ 评级</dt><dd><span class="rating rating-balanced"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg><span class="arrow">▲</span>均衡</span></dd></div><div class="kpi"><dt><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>数据时点</dt><dd><span class="num" style="font-family:var(--font-text)">收盘时点</span></dd></div><div class="kpi"><dt><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-inbox"/></svg>产出条目</dt><dd><span class="num">4</span><span class="u">项</span></dd></div><div class="kpi"><dt><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>Σ 数据缺口</dt><dd><span class="num">0</span><span class="u">项</span></dd></div><div class="kpi"><dt><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>口径待标注</dt><dd><span class="num">4</span><span class="u">项</span></dd></div></dl>
+  <section aria-labelledby="sec-ov" style="margin-top:var(--space-12)">
+    <div class="sec-head">
+      <h2 class="t-title3" id="sec-ov">当日结论速览</h2>
+      <span class="spacer"></span>
+      <span class="aside"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-scale"/></svg>按时点分组 · 同时点内可比</span>
+    </div>
+        <div class="ov-group">
+      <p class="ov-stage"><span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>竞价时点 / Pre-open</span>
+        <span class="ov-note">同时点任务可比</span></p>
+      <div class="ov-cells"><div class="ov-cell"><p class="ov-name">股票助手</p><p class="ov-badges"><span class="rating rating-offensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-trending-up"/></svg><span class="arrow">▲▲</span>进攻</span><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>+0.510</span></p></div></div>
+    </div>    <div class="ov-group">
+      <p class="ov-stage"><span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点 / Intraday</span>
+        <span class="ov-note">同时点任务可比</span></p>
+      <div class="ov-cells"><div class="ov-cell"><p class="ov-name">基金盘面</p><p class="ov-badges"><span class="rating rating-offensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-trending-up"/></svg><span class="arrow">▲▲</span>进攻</span><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>+0.514</span></p></div><div class="ov-cell"><p class="ov-name">基金操作指引</p><p class="ov-badges"><span class="rating rating-conflict"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-shuffle"/></svg><span class="arrow">↔</span>信号矛盾</span><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.011</span></p></div></div>
+    </div>    <div class="ov-group">
+      <p class="ov-stage"><span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点 / Close</span>
+        <span class="ov-note">同时点任务可比</span></p>
+      <div class="ov-cells"><div class="ov-cell"><p class="ov-name">每日总复盘</p><p class="ov-badges"><span class="rating rating-balanced"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg><span class="arrow">▲</span>均衡</span><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>+0.180</span></p></div></div>
+    </div>    <p class="ov-caution"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>各时点数据口径不同（竞价快照 / 盘中实时 / 收盘定格），Σ 跨时点不可直接比较，请以同时点内的对比为准。</p>
+  </section>
   <section aria-labelledby="sec-day-tl" style="margin-top:var(--space-12)">
     <div class="sec-head">
       <h2 class="t-title3" id="sec-day-tl">当日产出时间线</h2>
@@ -1150,10 +1217,10 @@ a:focus-visible{ outline-offset:3px; }
       <div class="tl-body">
         <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-bar-chart"/></svg>股票助手</p>
         <h3 class="tl-title"><a href="../../daily/2026-10-16/stock-assistant.html">股票助手 · 2026-10-16（周五）早盘竞价<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum"><span class="conclusion"><span class="concl-head">进攻 · Σ+0.510</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">定投额度上浮 ≤<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>20%</span>，网格卖单档位可上移，单日新增买入 ≤ 总仓位 <span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>5%</span></span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">隔夜美股纳斯达克指数微幅收涨 <span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+0.08%</span>（报 26,713.03 点），英伟达微跌 -1.…</span></span></p>
+        <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据源降级 · 本轮结论不适用</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">取数非实时（详见正文数据源说明），标准动作暂不执行</span></span></p>
       </div>
       <div class="tl-meta">
-        <span class="rating rating-offensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-trending-up"/></svg><span class="arrow">▲▲</span>进攻</span><span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点 / Intraday</span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg>数据源降级</span>
+        <span class="rating rating-offensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-trending-up"/></svg><span class="arrow">▲▲</span>进攻</span><span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>竞价时点 / Pre-open</span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg>数据源降级</span>
         <span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>+0.510</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
       </div>
     </li>
@@ -1165,7 +1232,7 @@ a:focus-visible{ outline-offset:3px; }
       <div class="tl-body">
         <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-database"/></svg>基金盘面</p>
         <h3 class="tl-title"><a href="../../daily/2026-10-16/fund-market.html">基金盘面分析 · 2026-10-16（周五）午盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum"><span class="conclusion"><span class="concl-head">进攻 · Σ+0.514</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">定投额度上浮 ≤<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>20%</span>，网格卖单档位可上移，单日新增买入 ≤ 总仓位 <span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>5%</span></span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：`3,747.19` 点（`<span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+1.07%</span>`）</span></span></p>
+        <p class="tl-sum"><span class="conclusion"><span class="concl-head">进攻 · Σ+0.514</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">定投额度上浮 ≤<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>20%</span>，网格卖单档位可上移，单日新增买入 ≤ 总仓位 <span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>5%</span></span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：3,747.19 点（<span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+1.07%</span>）</span></span></p>
       </div>
       <div class="tl-meta">
         <span class="rating rating-offensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-trending-up"/></svg><span class="arrow">▲▲</span>进攻</span><span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点 / Intraday</span>
