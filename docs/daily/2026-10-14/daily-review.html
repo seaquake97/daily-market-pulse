@@ -2,9 +2,9 @@
 <html lang="zh-CN">
 <head>
 <meta name="color-scheme" content="light dark">
-<meta name="description" content="当日全部研判的汇总归档与观点结算">
+<meta name="description" content="防守 · Σ-0.339｜暂停主动买入（含手动追加），定投可降档 ≤30%，卖出仅在触发线执行">
 <meta property="og:title" content="每日总复盘 · 2026-10-14（周三）收盘">
-<meta property="og:description" content="当日全部研判的汇总归档与观点结算">
+<meta property="og:description" content="防守 · Σ-0.339｜暂停主动买入（含手动追加），定投可降档 ≤30%，卖出仅在触发线执行">
 <meta property="og:type" content="article">
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>基金股票每日复盘 - 2026年10月14日 — 每日市场脉搏</title>
@@ -1522,6 +1522,14 @@ a:focus-visible{ outline-offset:3px; }
 }
 .tbl td{ padding:var(--table-cell-pad); border-bottom:1px solid var(--separator); vertical-align:top; }
 .tbl tbody tr:last-child td{ border-bottom:none; }
+/* D-2 深色斑马纹（站点层）：detail-frame.css 那条以 .doc 为作用域，只覆盖详情页。
+ * 订阅页 / 周月归档页的表格在 .tbl-wrap 内但不在 .doc 里，必须在此补齐，
+ * 否则「同一条表格规则在详情页有斑马、在订阅页没有」本身就是不一致。
+ * 取值与理由见 DESIGN-SYSTEM-v2 D-2（Apple 官方深色 inset list 偶数行值）。 */
+@media (prefers-color-scheme:dark){
+  .tbl-wrap .tbl tbody tr:nth-child(even){ background:var(--surface-alt); }
+  .tbl-wrap .tbl th{ border-bottom-color:var(--ap-dark-sep); }
+}
 .tbl .num{ text-align:right; font-family:var(--font-mono); font-variant-numeric:var(--numeric); white-space:nowrap; }
 .tbl th.num{ text-align:right; }
 .tbl .up{ color:var(--quote-up); }
