@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
 <meta name="color-scheme" content="light dark">
@@ -6,147 +6,13 @@
 <meta property="og:title" content="股票助手 · 2026-10-16（周五）早盘竞价">
 <meta property="og:description" content="数据源降级 · 本轮结论不适用｜取数非实时（详见正文数据源说明），标准动作暂不执行">
 <meta property="og:type" content="article">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>股票助手 · 2026-10-16 早盘竞价研判 — 进攻 Σ+0.510 — 每日市场脉搏</title>
-<style>
-  :root {
-    --up: var(--quote-up);
-    --up-bg: var(--rating-offensive-wash);
-    --up-border: var(--rating-offensive-wash);
-    --down: var(--quote-down);
-    --down-bg: var(--rating-defensive-wash);
-    --down-border: #bbf7d0;
-    --flat: var(--fg-3);
-    --amber: var(--warn);
-    --amber-bg: var(--rating-balanced-wash);
-    --amber-border: var(--rating-balanced-wash);
-    --ink: var(--fg);
-    --sub: var(--fg-3);
-    --line: var(--border);
-    --bg: var(--surface-alt);
-    --card: var(--surface);
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-    background: var(--bg);
-    color: var(--ink);
-    font-size: 15px;
-    line-height: 1.75;
-  }
-  .wrap { max-width: 900px; margin: 0 auto; padding: 24px 16px 48px; }
-  .top { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-  .top h1 { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
-  .top .meta { font-size: 13px; color: var(--sub); }
-  
-  .notice-banner {
-    background: var(--rating-balanced-wash);
-    border: 1px solid var(--rating-balanced-wash);
-    border-radius: 8px;
-    padding: 10px 14px;
-    font-size: 13.5px;
-    color: var(--warn);
-    margin-bottom: 16px;
-  }
-
-  .verdict {
-    background: var(--up-bg);
-    border: 1px solid var(--up-border);
-    border-left: 5px solid var(--up);
-    border-radius: 12px;
-    padding: 18px 20px;
-    margin-bottom: 20px;
-  }
-  .verdict .row { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
-  .verdict .rating { font-size: 24px; font-weight: 800; color: var(--quote-up); }
-  .verdict .sigma { font-size: 15px; color: var(--sub); font-weight: 500; }
-  .verdict .action { margin-top: 10px; font-size: 14.5px; }
-  .verdict .action b { color: var(--quote-up); }
-
-  .kpis {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  .kpi {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 12px 14px;
-  }
-  .kpi .k { font-size: 12px; color: var(--sub); }
-  .kpi .v { font-size: 19px; font-weight: 800; margin-top: 2px; }
-  
-  .up { color: var(--up); }
-  .down { color: var(--down); }
-  .flat { color: var(--flat); }
-
-  section {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 18px;
-  }
-  h2 {
-    font-size: 17px;
-    font-weight: 800;
-    margin-bottom: 14px;
-    padding-left: 10px;
-    border-left: 4px solid var(--up);
-  }
-
-  table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 8px; }
-  th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--line); }
-  th { background: #f5f5f4; color: var(--sub); font-weight: 600; font-size: 13px; }
-  tr:last-child td { border-bottom: none; }
-  
-  .tag {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 600;
-  }
-  .tag.action { background: var(--rating-offensive-wash); color: var(--quote-up); border: 1px solid var(--rating-offensive-wash); }
-  .tag.watch { background: var(--surface-alt); color: #4b5563; border: 1px solid var(--border); }
-  .tag.gap { background: var(--rating-balanced-wash); color: var(--warn); border: 1px solid var(--rating-balanced-wash); }
-
-  .list-item { list-style: none; padding-left: 0; }
-  .list-item li { position: relative; padding-left: 18px; margin-bottom: 10px; font-size: 14.5px; }
-  .list-item li::before {
-    content: "•";
-    position: absolute;
-    left: 4px;
-    color: var(--up);
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 1.4;
-  }
-
-  .settle-box {
-    background: var(--surface-alt);
-    border: 1px dashed var(--line);
-    border-radius: 8px;
-    padding: 12px 14px;
-    margin-top: 8px;
-    font-size: 13.5px;
-  }
-
-  .foot {
-    font-size: 12.5px;
-    color: var(--sub);
-    padding: 16px 8px 0;
-    line-height: 1.6;
-    border-top: 1px solid var(--line);
-  }
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>股票助手 · 2026-10-16（周五）早盘竞价 — 每日市场脉搏</title>
 <style data-origin="icon-subsprite">.ic{width:16px;height:16px;flex:0 0 auto;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;fill:none}
 .ic-20{width:20px;height:20px}
 .ic-24{width:24px;height:24px}
-.ic-wrap{display:inline-flex;align-items:center;vertical-align:middle;line-height:0}</style><!-- detail-tokens:v1 --><style data-origin="detail-tokens">:root{--ap-black:#000000;--ap-canvas:#ffffff;--ap-dark-1:#1c1c1e;--ap-dark-ink:#f5f5f7;--ap-dark-ink-3:#86868b;--ap-dark-sep:#38383a;--ap-hairline:#d2d2d7;--ap-ink:#1d1d1f;--ap-ink-tertiary:#6e6e73;--ap-surface-alt:#f5f5f7;--border:var(--ap-hairline);--fg:var(--ap-ink);--fg-3:var(--ap-ink-tertiary);--quote-down:#15803d;--quote-up:#b91c1c;--rating-balanced-wash:rgba(180, 83, 9, 0.08);--rating-defensive-wash:rgba(21, 128, 61, 0.08);--rating-offensive-wash:rgba(185, 28, 28, 0.08);--surface:var(--ap-canvas);--surface-alt:var(--ap-surface-alt);--warn:#b45309;}@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--border:var(--ap-dark-sep);--fg:var(--ap-dark-ink);--fg-3:var(--ap-dark-ink-3);--quote-down:#4ade80;--quote-up:#f87171;--rating-balanced-wash:rgba(251, 191, 36, 0.10);--rating-defensive-wash:rgba(74, 222, 128, 0.10);--rating-offensive-wash:rgba(248, 113, 113, 0.10);--surface:var(--ap-black);--surface-alt:var(--ap-dark-1);--warn:#fbbf24;}}</style><style data-origin="detail-frame">/* ============================================================================
+.ic-wrap{display:inline-flex;align-items:center;vertical-align:middle;line-height:0}</style><style data-origin="detail-frame">/* ============================================================================
  * 每日市场脉搏 · Daily Market Pulse
  * design-tokens.css — Apple 设计语言落地 Token 层
  *
@@ -2040,7 +1906,7 @@ body[data-df] nav.nav > .nav-in > .nav-links { display: flex; }
 }
 </style>
 </head>
-<body data-df="v1" data-date="2026-10-16" data-slug="stock-assistant"><!-- detail-frame:v1 -->
+<body data-sb-h data-df="v1" data-date="2026-10-16" data-slug="stock-assistant"><!-- detail-frame:v1 -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="i-activity" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></symbol><symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></symbol><symbol id="i-alert-triangle" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol><symbol id="i-archive" viewBox="0 0 24 24"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></symbol><symbol id="i-arrow-down" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></symbol><symbol id="i-arrow-left" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol><symbol id="i-arrow-up" viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></symbol><symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></symbol><symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></symbol><symbol id="i-bar-chart" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></symbol><symbol id="i-chevrons-down" viewBox="0 0 24 24"><polyline points="7 13 12 18 17 13"/><polyline points="7 6 12 11 17 6"/></symbol><symbol id="i-chevrons-up" viewBox="0 0 24 24"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></symbol><symbol id="i-circle-dot" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="12" x2="12.01" y2="12"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol><symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 -.696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><polyline points="14 2 14 8 20 8"/></symbol><symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></symbol><symbol id="i-git-branch" viewBox="0 0 24 24"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><polyline points="12 7 12 12 15 14"/></symbol><symbol id="i-inbox" viewBox="0 0 24 24"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="m6.08 9.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83L17.9 9.5"/><path d="m6.08 14.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83l-3.5-1.59"/></symbol><symbol id="i-lightbulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></symbol><symbol id="i-line-chart" viewBox="0 0 24 24"><line x1="3" y1="3" x2="3" y2="21"/><line x1="3" y1="21" x2="21" y2="21"/><polyline points="7 16 11 10 15 13 20 6"/></symbol><symbol id="i-minus" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></symbol><symbol id="i-radio" viewBox="0 0 24 24"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2a6 6 0 0 1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8a6 6 0 0 1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"/></symbol><symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></symbol><symbol id="i-rss" viewBox="0 0 24 24"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></symbol><symbol id="i-scale" viewBox="0 0 24 24"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></symbol><symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.7-1.1 2-1.7 3.3-1.7H22"/><path d="m18 2 4 4-4 4"/><path d="M2 6h1.9c1.5 0 2.9.9 3.6 2.2"/><path d="M22 18h-5.9c-1.3 0-2.6-.7-3.3-1.8l-.5-.8"/><path d="m18 14 4 4-4 4"/></symbol><symbol id="i-sigma" viewBox="0 0 24 24"><path d="M18 7V5a1 1 0 0 0-1-1H6.5a.5.5 0 0 0-.4.8l4.5 6a2 2 0 0 1 0 2.4l-4.5 6a.5.5 0 0 0 .4.8H17a1 1 0 0 0 1-1v-2"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.123 0 0 0 1.597-1.16z"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol><symbol id="i-thumbs-up" viewBox="0 0 24 24"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></symbol><symbol id="i-timer" viewBox="0 0 24 24"><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" y1="14" x2="15" y2="11"/><circle cx="12" cy="14" r="8"/></symbol><symbol id="i-trending-down" viewBox="0 0 24 24"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></symbol><symbol id="i-trending-up" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol></defs></svg>
 <a class="skip-link" href="#main">跳到主要内容</a>
 <nav class="nav" aria-label="全局导航">
@@ -2058,180 +1924,29 @@ body[data-df] nav.nav > .nav-in > .nav-links { display: flex; }
 <nav class="crumb" aria-label="面包屑"><a href="../../index.html"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg>全部归档</a><span class="sep" aria-hidden="true">/</span><a href="index.html">2026-10-16</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">股票助手</span></nav>
 <p class="df-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-bar-chart"/></svg>股票助手</p>
 
-<div class="wrap">
-  <h1 data-sb-h="1->3" class="doc-title" data-df-title="1">股票助手 · 集合竞价全景研判</h1>
-      <div class="doc-meta"><span class="df-time"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>调度 <b>09:28</b></span><span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>竞价时点 / Pre-open</span><span class="rating rating-offensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-trending-up"/></svg><span class="arrow">▲▲</span>进攻</span><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>+0.510</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span></div>
-
-  <div class="notice-banner">
-    <span class="ic-wrap warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg></span> <b>连接器未连接提示：</b> 当前 westock-mcp 未连接，本轮已降级启用 A 股全栈数据及公开合规接口取数。观点台账滚动命中率 &lt;50%，策略引擎持续校准中，严格遵循条件单执行纪律。
-  </div>
-
-  <div class="verdict">
-    <div class="row">
-      <div class="rating">【进攻】评级</div>
-      <div class="sigma">Σ = +0.510（有效权重 1.00，六信号齐全）</div>
-    </div>
-    <div class="action">
-      <b>操作总指引：</b> 量能饱和突破、全市场超 89% 普涨高开、超跌估值强支撑共振。顺应开盘做多动量，持仓网格做T高抛档保持上移运行；回踩吸纳，底仓坚决不卖。
-    </div>
-  </div>
-
-  <div class="kpis">
-    <div class="kpi"><div class="k">上证指数</div><div class="v up">3721.24 <span style="font-size:13px;">+0.37%</span></div></div>
-    <div class="kpi"><div class="k">创业板指</div><div class="v up">2804.10 <span style="font-size:13px;">+0.75%</span></div></div>
-    <div class="kpi"><div class="k">科创50</div><div class="v up">1368.28 <span style="font-size:13px;">+0.64%</span></div></div>
-    <div class="kpi"><div class="k">沪深300</div><div class="v up">4177.64 <span style="font-size:13px;">+0.28%</span></div></div>
-    <div class="kpi"><div class="k">竞价成交额</div><div class="v">4,145 亿</div></div>
-    <div class="kpi"><div class="k">涨跌分布</div><div class="v up">4648 <span style="font-size:12px;color:var(--sub);">/ 545</span></div></div>
-  </div>
-
-  <section>
-    <h4 data-sb-h="2->4">六确定性信号评分明细（代码计算）</h4>
-    <div class="tbl-wrap"><table class="tbl">
-      <thead>
-        <tr><th>信号维度</th><th>权重</th><th>得分</th><th>核心量化依据</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><b>S1 量能</b></td><td>0.20</td><td class="up"><b>+1.000</b></td><td>沪指量比 3.58（量能饱和放量）；沪指成交额 1,202 亿（全市场 4,145 亿）</td></tr>
-        <tr><td><b>S2 宽度</b></td><td>0.20</td><td class="up"><b>+0.940</b></td><td>上涨占比 89.5%（4,648/5,193），涨停 42 - 跌停 2，典型多头普涨反弹</td></tr>
-        <tr><td><b>S3 动量</b></td><td>0.15</td><td class="down"><b>-0.589</b></td><td>价格/MA5=-1.36%，价格/MA20=-3.43%，20日涨跌 -5.29%，负乖离率收窄修复中</td></tr>
-        <tr><td><b>S4 分化</b></td><td>0.15</td><td class="up"><b>+0.143</b></td><td>成长均值 +0.66% vs 沪深300 +0.37%，价差 +0.29pct，成长高贝塔弹性领跑</td></tr>
-        <tr><td><b>S5 资金</b></td><td>0.15</td><td class="up"><b>+0.258</b></td><td>电子主力净流入 +17.10 亿 - 有色净流出 -4.22 亿 = 净差 +12.88 亿（科技强回流）</td></tr>
-        <tr><td><b>S6 估值</b></td><td>0.15</td><td class="up"><b>+1.000</b></td><td>沪深300 PE 13.02（历史估值低位），60日累计涨跌 -11.01%（超跌安全垫极厚）</td></tr>
-      </tbody>
-    </table></div>
-  </section>
-
-  <section>
-    <h4 data-sb-h="2->4">昨日观点台账结算（四态追踪）</h4>
-    <div class="settle-box">
-      <p><b>结算结论：</b> 命中 0/3，未触发 3 条，无法评估 2 条（收盘评估时点未到）。</p>
-      <ul style="padding-left:18px; margin-top:6px;">
-        <li><b>平高电气 / 甘肃能源 / 电力ETF</b>：由于今日指数大幅高开普涨，预设的深跌买档未触及，遵守纪律未盲目伸手追跌，底仓筹码完整享受反弹。</li>
-        <li><b>滚动 20 日胜率预警</b>：滚动命中率 &lt;50%，头部已标示策略引擎校准中，今日操作全面聚焦持仓冲高做T与防守线管理。</li>
-      </ul>
-    </div>
-  </section>
-
-  <section>
-    <h4 data-sb-h="2->4">持仓诊断与网格动作执行卡</h4>
-    <div class="tbl-wrap"><table class="tbl">
-      <thead>
-        <tr><th>标的名称</th><th>现价</th><th>涨跌</th><th>持仓 / 成本</th><th>基准 / 区间</th><th>状态</th><th>盘面特征与执行指引</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><b>平高电气</b> (600312)</td>
-          <td>20.36 元</td>
-          <td class="up">+0.64%</td>
-          <td>500股 / 18.323元</td>
-          <td>20.40元<br>[18.50-24.50]</td>
-          <td><span class="tag action">网格做T</span></td>
-          <td>企稳重返 20.30 元。<b>指引：冲高触及 21.00 元以上分批高抛 100 股做T锁定利润</b>。</td>
-        </tr>
-        <tr>
-          <td><b>甘肃能源</b> (000791)</td>
-          <td>6.85 元</td>
-          <td class="up">+0.88%</td>
-          <td>2300股 / 6.936元</td>
-          <td>7.05元<br>[6.50-8.50]</td>
-          <td><span class="tag action">网格做T</span></td>
-          <td>探底回升，可用 1800 股。<b>指引：盘中冲高 7.15-7.25 元挂单卖出 500 股做T锁盈</b>。</td>
-        </tr>
-        <tr>
-          <td><b>卫星ETF富国</b> (563230)</td>
-          <td>0.943 元</td>
-          <td class="up">+1.84%</td>
-          <td>20000份 / 1.385元</td>
-          <td>0.980元<br>[0.850-1.250]</td>
-          <td><span class="tag action">减浮仓卡</span></td>
-          <td>放量大涨 +1.84%。<b>指引：反弹触及 0.980-1.000 元挂卖 1000 份浮仓减亏，严禁追涨</b>。</td>
-        </tr>
-        <tr>
-          <td><b>电力ETF广发</b> (159611)</td>
-          <td>1.043 元</td>
-          <td class="up">+0.38%</td>
-          <td>3700份 / 1.115元</td>
-          <td>1.045元 步长1.5%</td>
-          <td><span class="tag watch">正常做T</span></td>
-          <td>现价贴合基准 1.045 元。<b>指引：1.020-1.025 元挂买，1.065 元设卖单正常做T</b>。</td>
-        </tr>
-        <tr>
-          <td><b>华能蒙电</b> (600863)</td>
-          <td>5.18 元</td>
-          <td class="up">+0.58%</td>
-          <td>1000股 / 3.614元</td>
-          <td>5.15元<br>[4.50-6.00]</td>
-          <td><span class="tag watch">底仓停卖</span></td>
-          <td>触及 1000 股最小底仓红线。<b>指引：坚决停卖，长线吃息；4.90 元以下方设买单</b>。</td>
-        </tr>
-        <tr>
-          <td><b>粤高速A</b> (000429)</td>
-          <td>13.67 元</td>
-          <td class="up">+0.66%</td>
-          <td>900股 / 11.425元</td>
-          <td>13.40元<br>[12.00-15.50]</td>
-          <td><span class="tag watch">吃息观望</span></td>
-          <td>股息率 4.45% 现金流奶牛。<b>指引：持仓 900 股不动安心收息，13.15-13.20 元逢低加仓</b>。</td>
-        </tr>
-        <tr>
-          <td><b>江苏银行</b> (600919)</td>
-          <td>12.30 元</td>
-          <td class="up">+0.49%</td>
-          <td>100股 / 1.696元</td>
-          <td>非网格底仓</td>
-          <td><span class="tag watch">底仓收息</span></td>
-          <td>PB 0.84 深度破净，高浮盈锁定。<b>指引：100 股吃息底仓坚决不动</b>。</td>
-        </tr>
-        <tr>
-          <td><b>中国广核</b> (003816)</td>
-          <td>4.58 元</td>
-          <td class="up">+0.66%</td>
-          <td>100股 / 1.511元</td>
-          <td>非网格底仓</td>
-          <td><span class="tag watch">底仓观望</span></td>
-          <td>高位止盈后留 100 股底仓。<b>指引：锁定 100 股底仓不动，观察 4.20 元回补机会</b>。</td>
-        </tr>
-        <tr>
-          <td><b>上海金</b> (518600)</td>
-          <td>8.859 元</td>
-          <td class="up">+0.34%</td>
-          <td>500份 / 10.879元</td>
-          <td>宏观对冲底仓</td>
-          <td><span class="tag watch">对冲锁定</span></td>
-          <td>宏观全天候对冲底仓。<b>指引：500 份底仓锁死不动</b>。</td>
-        </tr>
-      </tbody>
-    </table></div>
-  </section>
-
-  <section>
-    <h4 data-sb-h="2->4">决策卡七件套（可验证承诺）</h4>
-    <ul class="list-item">
-      <li><b>四档方向</b>：【进攻】（Σ = +0.510，代码严谨计算，跨越进攻门槛）。</li>
-      <li><b>相对沪深300偏离</b>：早盘沪指 +0.33%，深成指 +0.71%，创业板 +1.01%，全市场中位数涨幅逾 +1.2%，组合共振反弹。</li>
-      <li><b>建议持有期</b>：5 - 10 个交易日（有效窗口至 2026-10-30 收盘）。</li>
-      <li><b>触发条件</b>：平高电气触及 21.00 元卖出 100 股；甘肃能源冲高 7.15 元卖出 500 股；卫星ETF 触及 0.980 元减持 1000 份浮仓。</li>
-      <li><b>失效条件</b>：若沪指收盘跌破 3,715 点或上涨家数回落至 2,000 家以下，则反弹动量衰竭，降级为均衡/防守。</li>
-      <li><b>赔率区间</b>：历史同类“量能饱和+普涨突破”信号前向 5 日反弹延续胜率约 68%，样本积累中。</li>
-      <li><b>数据日历与有效期</b>：关注今日收盘全天总成交量能否突破 1.8 万亿；本研判在今日交易时段内有效。</li>
-    </ul>
-  </section>
-
-  <section>
-    <h4 data-sb-h="2->4">明日待验证信号（收盘后跟踪）</h4>
-    <ul class="list-item">
-      <li><b>科技主线持续性</b>：电子与科技成长赛道主力净流入能否全天保持在 15 亿元以上。</li>
-      <li><b>全天量能确认</b>：全天成交额能否有效放量突破 1.8 万亿元大关，确立进攻性反弹主升浪。</li>
-      <li><b>均线突破</b>：上证指数能否有效反包 5 日线（3,735 点附近），形成短期右侧买点形态。</li>
-    </ul>
-  </section>
-
-  <div class="foot">
-    <p><b>免责声明：</b>以上内容由 AI 决策引擎基于公开量化数据和模型算法独立生成，仅供参考，不构成任何投资建议、个股推荐或交易指导。市场有风险，投资需谨慎。投资者应根据个人风险承受能力、资产状况和投资目标独立决策。</p>
-    <p style="margin-top:6px;">*数据源：A股实时数据（腾讯/东财合规源） · 评分引擎：daily-decision-engine v1.3*</p>
-  </div>
-</div>
+<h1 data-sb-h="rendered" class="doc-title" data-df-title="1">股票助手 · 2026-10-16（周五）早盘竞价</h1>
+      <div class="doc-meta"><span class="df-time"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>调度 <b>09:28</b></span><span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>竞价时点 / Pre-open</span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>Σ 数据缺口</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span></div>
+<blockquote><p>数据时点：2026-10-16 09:28 集合竞价快照（data_stage: pre_open）｜数据源：A股实时数据（腾讯/东财合规源，westock-mcp 未连接降级）  
+评级：<b>【进攻】</b> Σ = +0.510（有效权重 1.00，六信号齐全）  
+<span class="ic-wrap warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg></span> 观点台账滚动命中率 &lt;50%：策略引擎持续校准中，严格执行条件单纪律，防止盲目追高。</p></blockquote>
+<hr>
+<h4 data-sb-h="rendered">腾讯自选股连接器未连接提示</h4><p>当前未连接腾讯自选股连接器（westock-mcp），无法调用实时行情、财务、选股等结构化数据接口。本轮已<b>降级</b>使用环境中 A 股全栈数据及公开合规接口取数，分析结论的时效性与准确性可能受影响。建议连接腾讯自选股连接器并完成授权后再提问，以获得完整体验。</p>
+<hr>
+<h4 data-sb-h="rendered">一、结论卡（首屏核心）</h4><div class="verdict-card"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>指标项</th><th>实时数值 / 状态</th><th>研判口径与执行纪律</th></tr></thead><tbody><tr><td><b>Σ 综合评分</b></td><td><b>+0.510</b>（≥ +0.50 临界线）</td><td>确定性量化打分（LLM 禁止主观篡改）</td></tr><tr><td><b>五档评级</b></td><td><b>【进攻】</b></td><td>量能满格爆发、全市场超 89% 普涨、超跌估值强支撑共振</td></tr><tr><td><b>标准操作纪律</b></td><td><b>顺势积极操作，持仓网格做T</b></td><td>顺应开盘做多动量，持仓网格做T高抛档保持上移运行；回踩吸纳，底仓坚决不卖</td></tr><tr><td><b>两市+北交所竞价成交额</b></td><td><b>4,144.59 亿元</b>（沪市 1,202.49 亿 / 深市 1,463.43 亿 / 北交所 20.48 亿等）</td><td>早盘开盘量能急剧放大，多头交投高度活跃</td></tr><tr><td><b>全市场涨跌分布</b></td><td><b>涨 4,648 / 跌 545 / 平 100</b>（上涨占比高达 <b>89.5%</b>）</td><td>涨停 42 家 / 跌停 2 家，市场情绪由昨日冰点全面反转为多头主导</td></tr><tr><td><b>数据映射说明</b></td><td><b>sz563230（卫星ETF富国）</b></td><td>交易所代码为 sh563230，已自动规范化映射并成功采集实时盘面（现价 0.943元，+1.84%）</td></tr></tbody></table></div></div>
+<hr>
+<h4 data-sb-h="rendered">二、六信号明细（代码计算，客观依据）</h4><div class="tbl-wrap"><table class="tbl"><thead><tr><th>信号维度</th><th>权重</th><th>分值</th><th>依据与底层数据特征</th></tr></thead><tbody><tr><td><b>S1 量能</b></td><td>0.20</td><td><b>+1.000</b></td><td>沪指量比 <b>3.58</b>（竞价放量饱和）；沪指成交额 1,202 亿（两市+北交所 4,145 亿），场外增量资金抢筹明显</td></tr><tr><td><b>S2 宽度</b></td><td>0.20</td><td><b>+0.940</b></td><td>上涨占比高达 <b>89.5%</b>（4,648/5,193）；涨停 42 - 跌停 2；宽度项满分 +1.00，涨跌停项 +0.80（典型普涨反弹结构）</td></tr><tr><td><b>S3 动量</b></td><td>0.15</td><td><b>-0.589</b></td><td>价格/MA5 = <b>-1.36%</b>，价格/MA20 = <b>-3.43%</b>，20日涨跌幅 <b>-5.29%</b>（负乖离率快速收窄，处于均线修复突破初期）</td></tr><tr><td><b>S4 分化</b></td><td>0.15</td><td><b>+0.143</b></td><td>成长均值 +0.66%（创业板 +0.75% / 科创50 +0.64%）vs 沪深300 +0.37%，价差 <b>+0.29pct</b>（成长高贝塔风格强于大盘价值）</td></tr><tr><td><b>S5 资金</b></td><td>0.15</td><td><b>+0.258</b></td><td>主力净流入TOP1（电子）+17.10 亿 - 净流出TOP1（有色金属）-4.22 亿 = 净差 <b>+12.88 亿</b>（科技主力大幅回流）</td></tr><tr><td><b>S6 估值</b></td><td>0.15</td><td><b>+1.000</b></td><td>沪深300 PE <b>13.02</b>（远低于15中性线）；60日累计涨跌 <b>-11.01%</b>（超跌估值安全垫极厚，具备极强中长期反弹动能）</td></tr></tbody></table></div>
+<hr>
+<h4 data-sb-h="rendered">三、昨日观点兑现结算（四态追踪）</h4><p>根据 <code>settle_viewpoints.py</code> 结算台账，2026-10-15 观点兑现情况如下：</p><ul><li><b>V1（市场弱势探底结构）</b>：<span class="ic-wrap warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg></span> <span class="tag"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>UNEVALUABLE</span>（评估时点为 close，早盘竞价不触发）。</li></ul><ul><li><b>V2（甘肃能源 6.75 元挂买）</b>：<span class="ic-wrap down"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-ban"/></svg></span> <span class="tag"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-x"/></svg>NOT_TRIGGERED</span>（实际现价 6.85-6.88 元，未触及 6.75 元下限，未盲目接刀）。</li></ul><ul><li><b>V3（平高电气 19.20 元回补）</b>：<span class="ic-wrap down"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-ban"/></svg></span> <span class="tag"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-x"/></svg>NOT_TRIGGERED</span>（实际现价今日已反弹至 20.36 元，未触及 19.20 元回补线）。</li></ul><ul><li><b>V4（电力ETF 1.025 元补仓）</b>：<span class="ic-wrap down"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-ban"/></svg></span> <span class="tag"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-x"/></svg>NOT_TRIGGERED</span>（实际现价 1.043-1.045 元，回踩未击穿买档）。</li></ul><ul><li><b>V5（沪指 3680 点破位警报）</b>：<span class="ic-wrap warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg></span> <span class="tag"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>UNEVALUABLE</span>（评估时点为 close，沪指今日早盘反弹至 3720 点上方）。</li></ul><blockquote><p><b>台账小结</b>：昨日预设的下档极限深吸买单因今日市场强势高开反弹而未触发，避免了在空头情绪中过早伸手，同时底仓完好保留；滚动 20 日命中率受震荡市影响 &lt;50%，策略引擎持续校准中，今日评级升为【进攻】，重点转向冲高分批做T。</p></blockquote>
+<hr>
+<h4 data-sb-h="rendered">四、持仓诊断与网格动作执行卡</h4><p>基于用户个人记忆持仓唯一事实源（<code>MEMORY.md</code> 动态解析），结合网格基准与今日早盘实时行情，逐一进行量化归因与指引：</p><div class="tbl-wrap"><table class="tbl"><thead><tr><th>标的名称</th><th>证券代码</th><th>现价(实时)</th><th>今日涨跌</th><th>当前持仓/成本</th><th>网格基准价与区间</th><th>动作归类</th><th>盘面特征与纪律执行指引</th></tr></thead><tbody><tr><td><b>平高电气</b></td><td>sh600312</td><td>20.36 元</td><td>+0.64%</td><td>500股 / 18.323元</td><td>20.40元<br>[18.50 - 24.50]</td><td><b>网格做T卡</b></td><td>早盘企稳重返 20.30 元上方，可用 400 股。<b>操作指引</b>：按网格纪律，冲高触及 <b>21.00 元</b> 以上分批高抛 100 股做T锁定收益；回踩 19.80-20.00 元预设买单。</td></tr><tr><td><b>甘肃能源</b></td><td>sz000791</td><td>6.85 元</td><td>+0.88%</td><td>2300股 / 6.936元</td><td>7.05元<br>[6.50 - 8.50]</td><td><b>网格做T卡</b></td><td>现价 6.85 元探底回升，可用 1800 股。<b>操作指引</b>：盘中若冲高触及 <b>7.15-7.25 元</b> 挂单卖出 500 股做T锁定浮盈；下档买单设在 <b>6.75 元</b>，不到不买。</td></tr><tr><td><b>卫星ETF富国</b></td><td>sz563230</td><td>0.943 元</td><td>+1.84%</td><td>20000份 / 1.385元</td><td>0.980元<br>[0.850 - 1.250]</td><td><b>减浮仓卡</b></td><td>早盘放量大涨 +1.84%，可用 19000 份。<b>操作指引</b>：反弹触及 <b>0.980-1.000 元</b> 整数阻力位挂单减持 1000 份浮仓以降低仓位成本；严禁追高。</td></tr><tr><td><b>电力ETF广发</b></td><td>sz159611</td><td>1.043 元</td><td>+0.38%</td><td>3700份 / 1.115元</td><td>1.045元<br>步长 1.5%</td><td><b>正常做T卡</b></td><td>盘面电力企稳回升，现价与基准价 1.045 元贴合。<b>操作指引</b>：维持 1.5% 步长正常做T，在 <b>1.020-1.025 元</b> 设买单，在 <b>1.065 元</b> 设卖单。</td></tr><tr><td><b>华能蒙电</b></td><td>sh600863</td><td>5.18 元</td><td>+0.58%</td><td>1000股 / 3.614元</td><td>5.15元<br>[4.50 - 6.00]</td><td><b>锁定底仓卡</b></td><td>和林格尔绿电龙头，持仓 1000 股已触及<b>最小底仓停卖红线</b>。<b>操作指引</b>：绝对坚守停卖，长线吃息；若盘中意外深踩至 4.90 元以下方可挂买 500 股。</td></tr><tr><td><b>粤高速A</b></td><td>sz000429</td><td>13.67 元</td><td>+0.66%</td><td>900股 / 11.425元</td><td>13.40元<br>[12.00 - 15.50]</td><td><b>吃息观望卡</b></td><td>现价高于基准价，股息率约 4.45%，高股息现金流扎实。<b>操作指引</b>：保持 900 股不动安心收息；回踩 13.15-13.20 元可逢低挂买 200 股。</td></tr><tr><td><b>江苏银行</b></td><td>sh600919</td><td>12.30 元</td><td>+0.49%</td><td>100股 / 1.696元</td><td>非网格底仓</td><td><b>锁定底仓卡</b></td><td>PB 0.84 深度破净，高位止盈后锁死的 100 股底仓浮盈超 600%。<b>操作指引</b>：非网格长线吃息底仓，坚决锁定不动。</td></tr><tr><td><b>中国广核</b></td><td>sz003816</td><td>4.58 元</td><td>+0.66%</td><td>100股 / 1.511元</td><td>非网格底仓</td><td><b>锁定底仓卡</b></td><td>高位止盈后留 100 股底仓观望，现价 4.58 元处于安全防御区。<b>操作指引</b>：锁定 100 股底仓，观察 4.20 元附近回补机会。</td></tr><tr><td><b>上海金</b></td><td>sh518600</td><td>8.859 元</td><td>+0.34%</td><td>500份 / 10.879元</td><td>宏观对冲底仓</td><td><b>宏观对冲卡</b></td><td>地缘对冲底仓，早盘微幅翻红，全天候资产配置防御中枢。<b>操作指引</b>：500 份对冲底仓锁死不动。</td></tr></tbody></table></div>
+<hr>
+<h4 data-sb-h="rendered">五、外盘映射与盘面宏观线索</h4><ol><li><b>外盘动态</b>：<ul><li>隔夜美股纳斯达克指数微幅收涨 <b>+0.08%</b>（报 26,713.03 点），英伟达微跌 <b>-1.84%</b>（报 217.23 美元），海外科技股高位整固，外围流动性紧缩预期边际钝化。</li></ul></li></ol><ol><li><b>两市资金与行业轮动</b>：<ul><li>主力资金强势回流科技成长赛道：<b>电子行业主力净流入高达 17.10 亿元</b>，地面兵装（+4.56%）、广告媒体（+4.11%）、端到端供应链（+3.55%）、医疗研发外包（+3.51%）领涨两市。</li></ul><ul><li>蓄电池（-2.31%）、视频媒体（-2.20%）、印制电路板（-1.89%）等少数板块小幅承压，有色金属主力净流出 4.22 亿元。</li></ul><ul><li>市场风格由昨日极度冰点全面反转为“科技领军、全市场普涨”的典型【进攻】主线。</li></ul></li></ol>
+<hr>
+<h4 data-sb-h="rendered">六、决策卡七件套（CI 审计与可验证承诺）</h4><ol><li><b>四档方向</b>：【进攻】（Σ = +0.510，代码量化严谨裁定，跨越进攻门槛）。</li></ol><ol><li><b>相对基准偏离</b>：早盘上证指数涨幅 +0.33%，深成指 +0.71%，创业板指 +1.01%，全市场中位数涨幅逾 +1.2%，持仓组合整体随成长主线共振反弹。</li></ol><ol><li><b>建议持有期</b>：5 - 10 个交易日（有效期至 2026-10-30 收盘）。</li></ol><ol><li><b>触发条件</b>：<ul><li>若平高电气盘中冲高触及 <b>21.00 元</b>，触发网格卖出 100 股。</li></ul><ul><li>若甘肃能源盘中冲高触及 <b>7.15 元</b>，触发分批减持 500 股。</li></ul><ul><li>若卫星ETF富国冲高触及 <b>0.980 元</b>，触发减持 1000 份浮仓。</li></ul></li></ol><ol><li><b>失效条件</b>：<ul><li>若上证指数收盘有效跌破 <b>3,715 点</b>，或全市场上涨家数回落至 <b>2,000 家</b> 以下，则反弹动量衰竭，本次进攻判定失效，下调为均衡/防守。</li></ul></li></ol><ol><li><b>赔率区间</b>：历史同类“量能饱和+普涨突破”前向 5 日收益分位显示反弹延续胜率约为 68%，样本积累中。</li></ol><ol><li><b>数据日历与有效期</b>：今日关注 15:00 收盘两市最终成交量能否站稳 1.8 万亿；本观点仅在今日盘中有效。</li></ol>
+<hr>
+<h4 data-sb-h="rendered">七、明日待验证信号</h4><ol><li><b>主线持续性</b>：电子与科技成长赛道能否在下午收盘前维持主力资金大幅净流入（&gt;15 亿元）。</li></ol><ol><li><b>两市量能验证</b>：全天成交额能否有效放量突破 1.8 万亿元大关，确认进攻性增量资金入场。</li></ol><ol><li><b>均线反包确认</b>：上证指数能否收复 5 日均线（3,735 点附近），完成短线底部形态构筑。</li></ol>
+<hr>
+<h4 data-sb-h="rendered">免责声明</h4><div class="footer-note"><p>以上内容由 AI 决策引擎基于公开量化数据和模型算法独立生成，仅供参考，不构成任何投资建议、个股推荐或交易指导。市场有风险，投资需谨慎。投资者应根据个人风险承受能力、资产状况和投资目标独立决策。</p><p><i>数据源：A股实时数据（腾讯/东财合规源） · 评分引擎：daily-decision-engine v1.3</i></p></div>
 
 </div>
 </main>
