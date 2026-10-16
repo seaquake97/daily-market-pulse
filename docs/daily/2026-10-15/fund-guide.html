@@ -592,8 +592,18 @@
 
     --tl-separator: var(--ap-dark-sep-soft);
     --tl-dot:       var(--ap-dark-ink);
+    --tl-dot-stage-close: var(--ap-dark-ink);
     --tl-time-fg:   var(--ap-dark-ink);
     --tl-run-fg:    var(--ap-dark-ink-3);
+    /* 时间线三件套深色覆写（2026-10-16 修复）：漏覆写时 tl-title 沿用
+     * --ap-ink(#1d1d1f)，黑底对比度约 1.1:1 —— 标题近乎不可读（用户实锤）。
+     * 不变量由 test_dark_mode.py 守护：任何引用 --ap-ink* 的 token 若无
+     * 深色覆写即测试失败，防止此类漏改复发。 */
+    --tl-kicker-fg: var(--ap-dark-ink-2);
+    --tl-title-fg:  var(--ap-dark-ink);
+    --tl-summary-fg: var(--ap-dark-ink-2);
+
+    --foot-fg: var(--ap-dark-ink-2);
 
     /* 深色模式：投影不可见，直接置空，改由明度分层承担深度 */
     --elev-overlay: 0 8px 28px rgba(0, 0, 0, 0.55);
@@ -878,6 +888,16 @@ a:focus-visible{ outline-offset:3px; }
 .tl-title .go{ display:inline-flex; vertical-align:-1px; margin-left:5px; width:15px; height:15px; color:var(--link); transition:transform var(--motion-base) var(--ease-out); }
 .tl-title a:hover .go{ transform:translateX(3px); }
 .tl-sum{ font-size:var(--fs-callout); line-height:var(--lh-callout); color:var(--tl-summary-fg); max-width:var(--container-prose); }
+
+/* ---- 结论先行摘要（一致性契约 C-2）：三段固定结构，三档视觉权重 ----
+ * 段1 评级·Σ（最强，加粗）｜ 段2 标准动作（常规）｜ 段3 关键事实（最弱）
+ * 目的：读者不看正文也能一眼知道「今天什么档、该做什么」。 */
+.tl-sum .conclusion{ display:flex; flex-wrap:wrap; align-items:baseline; gap:0 10px; }
+.tl-sum .concl-head{ font-weight:var(--fw-semibold); color:var(--fg); }
+.tl-sum .concl-action{ color:var(--fg-2); }
+.tl-sum .concl-fact{ color:var(--fg-3); font-size:var(--fs-footnote); line-height:var(--lh-footnote); }
+.tl-sum .concl-sep{ display:inline-block; width:1px; height:.9em; background:var(--border);
+  transform:translateY(.1em); }
 .tl-sum .quote{ font-family:var(--font-mono); font-variant-numeric:var(--numeric); }
 .tl-sum .up{ color:var(--quote-up); font-weight:var(--fw-medium); }
 .tl-sum .down{ color:var(--quote-down); font-weight:var(--fw-medium); }
@@ -1784,7 +1804,6 @@ body[data-df] nav.nav > .nav-in > .nav-links { display: flex; }
 
 <h1 data-sb-h="rendered" class="doc-title" data-df-title="1">基金操作指引 · 2026-10-15（周四）尾盘</h1>
       <div class="doc-meta"><span class="df-time"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>调度 <b>14:30</b></span><span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点 / Intraday</span><span class="rating rating-defensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg><span class="arrow">▼</span>防守</span><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.285</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span></div>
-<h3 data-sb-h="rendered">基金每日操作指引（14:30）</h3>
 <blockquote><p><b>生成时点</b>：2026年10月15日 14:30（A股盘中尾盘决策窗口）  
 <b>数据架构</b>：腾讯自选股连接器鉴权降级联网采集 + 个人记忆库（<code>MEMORY.md</code>）持仓动态解析 + 六维量化信号确定性评分（<code>Σ = -0.285</code>） + 观点台账审计  
 <b>数据时点</b>：行情及板块数据均截止于 2026-10-15 14:30 盘中时点，港股实时，美股隔夜收盘（2026-10-14）</p></blockquote>

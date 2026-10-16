@@ -592,8 +592,18 @@
 
     --tl-separator: var(--ap-dark-sep-soft);
     --tl-dot:       var(--ap-dark-ink);
+    --tl-dot-stage-close: var(--ap-dark-ink);
     --tl-time-fg:   var(--ap-dark-ink);
     --tl-run-fg:    var(--ap-dark-ink-3);
+    /* 时间线三件套深色覆写（2026-10-16 修复）：漏覆写时 tl-title 沿用
+     * --ap-ink(#1d1d1f)，黑底对比度约 1.1:1 —— 标题近乎不可读（用户实锤）。
+     * 不变量由 test_dark_mode.py 守护：任何引用 --ap-ink* 的 token 若无
+     * 深色覆写即测试失败，防止此类漏改复发。 */
+    --tl-kicker-fg: var(--ap-dark-ink-2);
+    --tl-title-fg:  var(--ap-dark-ink);
+    --tl-summary-fg: var(--ap-dark-ink-2);
+
+    --foot-fg: var(--ap-dark-ink-2);
 
     /* 深色模式：投影不可见，直接置空，改由明度分层承担深度 */
     --elev-overlay: 0 8px 28px rgba(0, 0, 0, 0.55);
@@ -878,6 +888,16 @@ a:focus-visible{ outline-offset:3px; }
 .tl-title .go{ display:inline-flex; vertical-align:-1px; margin-left:5px; width:15px; height:15px; color:var(--link); transition:transform var(--motion-base) var(--ease-out); }
 .tl-title a:hover .go{ transform:translateX(3px); }
 .tl-sum{ font-size:var(--fs-callout); line-height:var(--lh-callout); color:var(--tl-summary-fg); max-width:var(--container-prose); }
+
+/* ---- 结论先行摘要（一致性契约 C-2）：三段固定结构，三档视觉权重 ----
+ * 段1 评级·Σ（最强，加粗）｜ 段2 标准动作（常规）｜ 段3 关键事实（最弱）
+ * 目的：读者不看正文也能一眼知道「今天什么档、该做什么」。 */
+.tl-sum .conclusion{ display:flex; flex-wrap:wrap; align-items:baseline; gap:0 10px; }
+.tl-sum .concl-head{ font-weight:var(--fw-semibold); color:var(--fg); }
+.tl-sum .concl-action{ color:var(--fg-2); }
+.tl-sum .concl-fact{ color:var(--fg-3); font-size:var(--fs-footnote); line-height:var(--lh-footnote); }
+.tl-sum .concl-sep{ display:inline-block; width:1px; height:.9em; background:var(--border);
+  transform:translateY(.1em); }
 .tl-sum .quote{ font-family:var(--font-mono); font-variant-numeric:var(--numeric); }
 .tl-sum .up{ color:var(--quote-up); font-weight:var(--fw-medium); }
 .tl-sum .down{ color:var(--quote-down); font-weight:var(--fw-medium); }
@@ -1785,7 +1805,6 @@ body[data-df] nav.nav > .nav-in > .nav-links { display: flex; }
 <h1 data-sb-h="rendered" class="doc-title" data-df-title="1">股票复盘 · 2026-10-13（周二）收盘</h1>
       <div class="doc-meta"><span class="df-time"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>调度 <b>15:05</b></span><span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点 / Close</span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>Σ 数据缺口</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span></div>
 <p class="gap-note"><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>评级未标注</span>数据缺口：front-matter / 正文元信息 / market_data.json 均未提供评级标注，本页不编造评级。</p>
-<h3 data-sb-h="rendered">2026-10-13 A股三维一体每日复盘与持仓诊断报告</h3>
 <h4 data-sb-h="rendered">01 结论卡</h4><div class="verdict-card"><h4 data-sb-h="rendered">YOU ASKED</h4><blockquote><p>读取记忆，查看我的持仓股票和网格策略等信息，结合大盘和外围信息，帮我生成今天的A股每日复盘报告，用三维一体看盘风格。</p></blockquote><h4 data-sb-h="rendered">当前关键数据快照</h4><ul><li><b>上证指数</b>：<code>3800.86</code> <span class="ic-wrap up"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg></span> +0.10% (+3.62点，探底3741点回升，守住3800点整数关)</li></ul><ul><li><b>深证成指</b>：<code>12353.70</code> <span class="ic-wrap down"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg></span> -0.25% (-31.17点，结构性高低切换)</li></ul><ul><li><b>创业板指</b>：<code>2958.34</code> <span class="ic-wrap down"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg></span> -0.18% (-5.48点，企稳筑底态势明显)</li></ul><ul><li><b>科创50</b>：<code>1427.18</code> <span class="ic-wrap up"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg></span> +0.03% (+0.46点，硬科技韧性托底)</li></ul><ul><li><b>沪深300</b>：<code>4275.68</code> <span class="ic-wrap down"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg></span> -0.29% (-12.30点，权重股稳固护盘)</li></ul><ul><li><b>北证50</b>：<code>1008.66</code> <span class="ic-wrap down"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg></span> -0.31% (-3.09点，千点关口窄幅博弈)</li></ul><ul><li><b>两市成交</b>：<code>16,891.33</code> 亿元 (两市+北交所，牢牢站稳1.68万亿高流动性能级)</li></ul><ul><li><b>上涨/下跌</b>：<code>2909</code> 家 / <code>2486</code> 家 (全场52%股票翻红，涨停 70 家，跌停仅 10 家)</li></ul><h4 data-sb-h="rendered">圆桌综合视角</h4><blockquote><p><b>今日A股呈现缩量良性整固与局部结构性轮动特征，上证指数微涨+0.10%收于3800.86点坚守三千八关口。两市成交1.69万亿保持活跃，全场近3000家翻红且跌停仅10家。CPO算力与半导体震荡回暖，传媒凡拓数创大涨+13.91%，平高电气与卫星ETF红盘抗跌。组合仓位大换防后流动性充沛，网格交易与攒股收息按纪律执行。</b></p></blockquote><h4 data-sb-h="rendered">核心分析观点</h4><ol><li><span class="ic-wrap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-layers"/></svg></span> <b>产业维度（星望远）</b>：算力网与数字媒体展现高弹性活力，凡拓数创(+13.91%)、中际旭创(+1.45%)与新易盛(+1.06%)回暖，AI端侧与算力基础设施中长线景气度未改。</li></ol><ol><li><span class="ic-wrap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-radio"/></svg></span> <b>信号维度（洲四方）</b>：两市成交稳定在1.69万亿元，上涨家数2909家多于下跌2486家，跌停仅10家无恐慌抛盘。大盘在3780-3820区间展开健康换手，系统性风险可控。</li></ol><ol><li><span class="ic-wrap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg></span> <b>估值维度（文衡价）</b>：江苏银行由700股降至100股、中国广核由600股降至100股高位兑现大量浮盈，平高电气加至500股、甘肃能源加至2300股、卫星ETF加至20000份，攻守弹性显著增强。</li></ol><ol><li><span class="ic-wrap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevrons-down"/></svg></span> <b>逆向维度（坤候底）</b>：卫星ETF在0.97-0.98元构筑坚实双底，今日微涨+0.31%企稳；平高电气守稳20.50元上方(现价20.62元)，甘肃能源6.99元触及7.00元支撑带，网格高抛低吸安全垫厚实。</li></ol><ol><li><span class="ic-wrap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-file-text"/></svg></span> <b>财报维度（钊审财）</b>：三季报窗口期临近，特高压龙头平高电气在手订单充沛，粤高速A现金流稳健股息率达4.5%，火电与绿电盈利稳定性良好。</li></ol><ol><li><span class="ic-wrap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-activity"/></svg></span> <b>短线维度（磊追浪）</b>：外盘费半SOX(-2.67%)与恒生科技(-1.22%)仍处于震荡整理阶段，A股走出独立抗跌韧性；短线切忌盲目追涨，遵循网格条件单委托纪律。</li></ol><h4 data-sb-h="rendered">圆桌立场分布</h4><ul><li>整体看盘态度：<b>4票 偏多 / 2票 中性 / 0票 看空</b></li></ul><ul><li>杠铃持仓建议：<b>坚守底仓收息 + 享受算力弹性 + 网格条件单自动化运作</b></li></ul></div>
 <hr>
 <h4 data-sb-h="rendered">02 子专家观点</h4><h4 data-sb-h="rendered">产业策略师（星望远）· 产业趋势与景气度</h4><blockquote><p>“数字媒体与算力硬件轮动活跃，产业中长期赋能主线保持坚定。”</p></blockquote><ul><li>凡拓数创(301313)暴涨13.91%领跑数字传媒，中际旭创(300308)涨1.45%、新易盛(300502)涨1.06%，算力CPO龙头逐步消化前期外盘扰动，多头资金逢低承接有力。</li></ul><ul><li>胜宏科技(300476)涨1.18%收199.10元，PCB硬件算力链条维持高稼动率，十五五算力网与新型电网政策红利持续释放。</li></ul><h4 data-sb-h="rendered">信号派首席（洲四方）· 趋势信号与系统性风险</h4><blockquote><p>“两市1.69万亿量能维持良性水准，跌停仅10家，大盘回踩夯实3800点平台底座。”</p></blockquote><ul><li>上证指数收3800.86点(+0.10%)，全市场上涨2909家(占比52%)，涨停70家，跌停仅10家，亏钱效应显著受控，市场属于典型缩量磨底蓄势形态。</li></ul><ul><li>卫星ETF富国(563230)微涨+0.31%收0.983元，平高电气(600312)微涨+0.10%收20.62元，金ETF(518600)涨+0.16%收8.960元，多头防线构筑严密。</li></ul><h4 data-sb-h="rendered">估值分析师（文衡价）· 估值定价与仓位配置</h4><blockquote><p>“仓位大换防兑现历史大额浮盈，高弹性重仓标的估值处于历史安全边际带。”</p></blockquote><ul><li>组合在江苏银行(+638%浮盈)与中国广核(+195%浮盈)完成高位止盈减持至各100股底仓，释放大量现金流并加仓平高电气(500股)、甘肃能源(2300股)及卫星ETF(20000份)，持仓结构攻守兼备。</li></ul><ul><li>粤高速A(000429)股息率达4.51%，江苏银行股息率4.55%，高股息与稳定分红资产继续提供稳定现金流保护。</li></ul><h4 data-sb-h="rendered">逆向投资人（坤候底）· 支撑位与困境反转</h4><blockquote><p>“卫星ETF与甘肃能源处于底部估值蓄势区间，网格分批做T锁定收益。”</p></blockquote><ul><li>卫星ETF富国持仓20000份，成本摊薄至1.385元，在0.95-1.00元底部区间构筑扎实双底，今日收0.983元，冲高1.000-1.020区间分批减浮仓。</li></ul><ul><li>甘肃能源收6.99元，动态PE仅10.97倍，贴近6.50-8.50网格下轨，持仓2300股稳健，冲高7.25-7.40高抛500股网格条件单随时待命。</li></ul><h4 data-sb-h="rendered">财报研究员（钊审财）· 个股基本面与业绩跟踪</h4><blockquote><p>“特高压电网与绿电运营商现金流稳定，业绩兑现具备高确定性。”</p></blockquote><ul><li>平高电气(600312)特高压GIS订单高景气交付，2026年三季报业绩预期向好，持仓500股市值突破万元。</li></ul><ul><li>华能蒙电(600863)受和林格尔算电协同支撑，持仓1000股触及最小底仓红线，锁死一股不卖，4.90以下挂买。</li></ul><h4 data-sb-h="rendered">短线冲浪手（磊追浪）· 短线主线与止盈止损位</h4><blockquote><p>“外盘未企稳背景下拒绝盲目追高，严格遵照条件单自动执行。”</p></blockquote><ul><li>隔夜纳指(-0.44%)、英伟达(-1.29%)、费半SOX(-2.67%)调整，今日A股早盘探底后顽强回升，走出独立震荡格局。</li></ul><ul><li>短线操作恪守网格纪律：电力ETF(1.044元)在1.020-1.025挂买、1.065挂卖；平高电气在21.00以上分批高抛做T。</li></ul>

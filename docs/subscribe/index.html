@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<link rel="alternate" type="application/rss+xml" title="每日市场脉搏 · Daily Market Pulse" href="./feed.xml">
+<link rel="alternate" type="application/rss+xml" title="每日市场脉搏 · Daily Market Pulse" href="../feed.xml">
 <title>订阅更新 · Subscribe | 每日市场脉搏</title>
 <meta name="description" content="订阅每日市场脉搏：每交易时点的 A 股 / 基金研判全文 RSS，无需注册、免费。">
 <meta property="og:title" content="订阅更新 · Subscribe | 每日市场脉搏">
@@ -591,8 +591,18 @@
 
     --tl-separator: var(--ap-dark-sep-soft);
     --tl-dot:       var(--ap-dark-ink);
+    --tl-dot-stage-close: var(--ap-dark-ink);
     --tl-time-fg:   var(--ap-dark-ink);
     --tl-run-fg:    var(--ap-dark-ink-3);
+    /* 时间线三件套深色覆写（2026-10-16 修复）：漏覆写时 tl-title 沿用
+     * --ap-ink(#1d1d1f)，黑底对比度约 1.1:1 —— 标题近乎不可读（用户实锤）。
+     * 不变量由 test_dark_mode.py 守护：任何引用 --ap-ink* 的 token 若无
+     * 深色覆写即测试失败，防止此类漏改复发。 */
+    --tl-kicker-fg: var(--ap-dark-ink-2);
+    --tl-title-fg:  var(--ap-dark-ink);
+    --tl-summary-fg: var(--ap-dark-ink-2);
+
+    --foot-fg: var(--ap-dark-ink-2);
 
     /* 深色模式：投影不可见，直接置空，改由明度分层承担深度 */
     --elev-overlay: 0 8px 28px rgba(0, 0, 0, 0.55);
@@ -877,6 +887,16 @@ a:focus-visible{ outline-offset:3px; }
 .tl-title .go{ display:inline-flex; vertical-align:-1px; margin-left:5px; width:15px; height:15px; color:var(--link); transition:transform var(--motion-base) var(--ease-out); }
 .tl-title a:hover .go{ transform:translateX(3px); }
 .tl-sum{ font-size:var(--fs-callout); line-height:var(--lh-callout); color:var(--tl-summary-fg); max-width:var(--container-prose); }
+
+/* ---- 结论先行摘要（一致性契约 C-2）：三段固定结构，三档视觉权重 ----
+ * 段1 评级·Σ（最强，加粗）｜ 段2 标准动作（常规）｜ 段3 关键事实（最弱）
+ * 目的：读者不看正文也能一眼知道「今天什么档、该做什么」。 */
+.tl-sum .conclusion{ display:flex; flex-wrap:wrap; align-items:baseline; gap:0 10px; }
+.tl-sum .concl-head{ font-weight:var(--fw-semibold); color:var(--fg); }
+.tl-sum .concl-action{ color:var(--fg-2); }
+.tl-sum .concl-fact{ color:var(--fg-3); font-size:var(--fs-footnote); line-height:var(--lh-footnote); }
+.tl-sum .concl-sep{ display:inline-block; width:1px; height:.9em; background:var(--border);
+  transform:translateY(.1em); }
 .tl-sum .quote{ font-family:var(--font-mono); font-variant-numeric:var(--numeric); }
 .tl-sum .up{ color:var(--quote-up); font-weight:var(--fw-medium); }
 .tl-sum .down{ color:var(--quote-down); font-weight:var(--fw-medium); }
@@ -1094,13 +1114,13 @@ a:focus-visible{ outline-offset:3px; }
 <a class="skip-link" href="#main">跳到主要内容</a>
 <nav class="nav" aria-label="全局导航">
   <div class="nav-in">
-    <a class="nav-brand" href="./index.html"><svg class="ic mark" aria-hidden="true" focusable="false"><use href="#i-line-chart"/></svg>每日市场脉搏</a>
+    <a class="nav-brand" href="../index.html"><svg class="ic mark" aria-hidden="true" focusable="false"><use href="#i-line-chart"/></svg>每日市场脉搏</a>
     <div class="nav-links">
-<a href="./index.html"><span class="nav-zh">首页</span><span class="nav-en"> / Home</span></a>
-<a href="./methodology/"><span class="nav-zh">方法论</span><span class="nav-en"> / Method</span></a>
-<a href="./weekly/" data-optional><span class="nav-zh">周报</span><span class="nav-en"> / Weekly</span></a>
-<a href="./monthly/" data-optional><span class="nav-zh">月报</span><span class="nav-en"> / Monthly</span></a>
-<a href="./subscribe/"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-rss"/></svg><span class="sr">RSS 订阅</span></a>
+<a href="../index.html"><span class="nav-zh">首页</span><span class="nav-en"> / Home</span></a>
+<a href="../methodology/"><span class="nav-zh">方法论</span><span class="nav-en"> / Method</span></a>
+<a href="../weekly/" data-optional><span class="nav-zh">周报</span><span class="nav-en"> / Weekly</span></a>
+<a href="../monthly/" data-optional><span class="nav-zh">月报</span><span class="nav-en"> / Monthly</span></a>
+<a href="../subscribe/"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-rss"/></svg><span class="sr">RSS 订阅</span></a>
     </div>
   </div>
 </nav>
@@ -1151,8 +1171,8 @@ a:focus-visible{ outline-offset:3px; }
       </table>
     </div>
     <div class="btn-row" style="margin-top:var(--space-8)">
-      <a class="btn btn-quiet" href="index.html"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-archive"/></svg>浏览全部归档</a>
-      <a class="btn btn-quiet" href="methodology/"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-book"/></svg>研判方法论</a>
+      <a class="btn btn-quiet" href="../index.html"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-archive"/></svg>浏览全部归档</a>
+      <a class="btn btn-quiet" href="../methodology/"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-book"/></svg>研判方法论</a>
     </div>
   </section>
   </div>
@@ -1161,21 +1181,21 @@ a:focus-visible{ outline-offset:3px; }
   <div class="foot-in">
     <div class="foot-top">
       <div class="foot-brand">
-        <a class="nav-brand" href="./index.html"><svg class="ic mark" aria-hidden="true" focusable="false"><use href="#i-line-chart"/></svg>每日市场脉搏</a>
+        <a class="nav-brand" href="../index.html"><svg class="ic mark" aria-hidden="true" focusable="false"><use href="#i-line-chart"/></svg>每日市场脉搏</a>
         <p class="t-footnote">每交易日的判断轨迹存档。结论由 daily-decision-engine 确定性计算，同数据必得同结论。</p>
       </div>
       <nav class="foot-cols" aria-label="页脚导航">
         <div class="foot-col">
           <h4>归档</h4>
-          <ul><li><a href="./index.html">全部归档</a></li><li><a href="./weekly/">周报</a></li><li><a href="./monthly/">月报</a></li></ul>
+          <ul><li><a href="../index.html">全部归档</a></li><li><a href="../weekly/">周报</a></li><li><a href="../monthly/">月报</a></li></ul>
         </div>
         <div class="foot-col">
           <h4>关于</h4>
-          <ul><li><a href="./methodology/">研判方法论</a></li><li><a href="./subscribe/"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-rss"/></svg>订阅更新</a></li></ul>
+          <ul><li><a href="../methodology/">研判方法论</a></li><li><a href="../subscribe/"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-rss"/></svg>订阅更新</a></li></ul>
         </div>
         <div class="foot-col">
           <h4>来源</h4>
-          <ul><li><a href="./methodology/"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-database"/></svg>腾讯自选股 MCP</a></li><li><a href="./methodology/"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-git-branch"/></svg>daily-decision-engine</a></li></ul>
+          <ul><li><a href="../methodology/"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-database"/></svg>腾讯自选股 MCP</a></li><li><a href="../methodology/"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-git-branch"/></svg>daily-decision-engine</a></li></ul>
         </div>
       </nav>
     </div>

@@ -591,8 +591,18 @@
 
     --tl-separator: var(--ap-dark-sep-soft);
     --tl-dot:       var(--ap-dark-ink);
+    --tl-dot-stage-close: var(--ap-dark-ink);
     --tl-time-fg:   var(--ap-dark-ink);
     --tl-run-fg:    var(--ap-dark-ink-3);
+    /* 时间线三件套深色覆写（2026-10-16 修复）：漏覆写时 tl-title 沿用
+     * --ap-ink(#1d1d1f)，黑底对比度约 1.1:1 —— 标题近乎不可读（用户实锤）。
+     * 不变量由 test_dark_mode.py 守护：任何引用 --ap-ink* 的 token 若无
+     * 深色覆写即测试失败，防止此类漏改复发。 */
+    --tl-kicker-fg: var(--ap-dark-ink-2);
+    --tl-title-fg:  var(--ap-dark-ink);
+    --tl-summary-fg: var(--ap-dark-ink-2);
+
+    --foot-fg: var(--ap-dark-ink-2);
 
     /* 深色模式：投影不可见，直接置空，改由明度分层承担深度 */
     --elev-overlay: 0 8px 28px rgba(0, 0, 0, 0.55);
@@ -877,6 +887,16 @@ a:focus-visible{ outline-offset:3px; }
 .tl-title .go{ display:inline-flex; vertical-align:-1px; margin-left:5px; width:15px; height:15px; color:var(--link); transition:transform var(--motion-base) var(--ease-out); }
 .tl-title a:hover .go{ transform:translateX(3px); }
 .tl-sum{ font-size:var(--fs-callout); line-height:var(--lh-callout); color:var(--tl-summary-fg); max-width:var(--container-prose); }
+
+/* ---- 结论先行摘要（一致性契约 C-2）：三段固定结构，三档视觉权重 ----
+ * 段1 评级·Σ（最强，加粗）｜ 段2 标准动作（常规）｜ 段3 关键事实（最弱）
+ * 目的：读者不看正文也能一眼知道「今天什么档、该做什么」。 */
+.tl-sum .conclusion{ display:flex; flex-wrap:wrap; align-items:baseline; gap:0 10px; }
+.tl-sum .concl-head{ font-weight:var(--fw-semibold); color:var(--fg); }
+.tl-sum .concl-action{ color:var(--fg-2); }
+.tl-sum .concl-fact{ color:var(--fg-3); font-size:var(--fs-footnote); line-height:var(--lh-footnote); }
+.tl-sum .concl-sep{ display:inline-block; width:1px; height:.9em; background:var(--border);
+  transform:translateY(.1em); }
 .tl-sum .quote{ font-family:var(--font-mono); font-variant-numeric:var(--numeric); }
 .tl-sum .up{ color:var(--quote-up); font-weight:var(--fw-medium); }
 .tl-sum .down{ color:var(--quote-down); font-weight:var(--fw-medium); }
@@ -1130,7 +1150,7 @@ a:focus-visible{ outline-offset:3px; }
       <div class="tl-body">
         <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-bar-chart"/></svg>股票助手</p>
         <h3 class="tl-title"><a href="../../daily/2026-10-13/stock-assistant.html">股票助手 · 2026-10-13（周二）早盘竞价<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum">上证指数 (sh000001)：3807.15 点 (<span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+0.26%</span>) | 竞价大幅低开 3760.80（<span class="down"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>-0.96%</span>），盘中 V 型反转翻红，最高 3810.94，承接力强劲</p>
+        <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据缺口 · 未评级</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">本任务无可用评级，详见正文说明</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数 (sh000001)：3807.15 点 (<span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+0.26%</span>) | 竞价大幅低开 37…</span></span></p>
       </div>
       <div class="tl-meta">
         <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点 / Intraday</span>
@@ -1145,7 +1165,7 @@ a:focus-visible{ outline-offset:3px; }
       <div class="tl-body">
         <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-database"/></svg>基金盘面</p>
         <h3 class="tl-title"><a href="../../daily/2026-10-13/fund-market.html">基金盘面分析 · 2026-10-13（周二）午盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum">上证指数：3,807.93 点（<span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+0.28%</span>）</p>
+        <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据缺口 · 未评级</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">本任务无可用评级，详见正文说明</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：`3,807.93` 点（`<span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+0.28%</span>`）</span></span></p>
       </div>
       <div class="tl-meta">
         <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点 / Intraday</span>
@@ -1160,7 +1180,7 @@ a:focus-visible{ outline-offset:3px; }
       <div class="tl-body">
         <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-target"/></svg>基金操作指引</p>
         <h3 class="tl-title"><a href="../../daily/2026-10-13/fund-guide.html">基金操作指引 · 2026-10-13（周二）尾盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum">记忆文件动态解析：彻底拒绝代码硬编码持仓！每日自动读取 ~/.workbuddy/MEMORY.md 提取最新基金持仓金额与占比，自动计算总持仓 (63,322.65 元)。</p>
+        <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据缺口 · 未评级</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">本任务无可用评级，详见正文说明</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact"> 涨停板数：`72` 家 （主板≥<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>10%</span>、创业/科创≥<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>20%</span>、北交所≥<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>30%</span>）</span></span></p>
       </div>
       <div class="tl-meta">
         <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点 / Intraday</span>
@@ -1175,7 +1195,7 @@ a:focus-visible{ outline-offset:3px; }
       <div class="tl-body">
         <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-line-chart"/></svg>股票复盘</p>
         <h3 class="tl-title"><a href="../../daily/2026-10-13/stock-review.html">股票复盘 · 2026-10-13（周二）收盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum">上证指数：3800.86 <span class="up"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg></span> <span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+0.10%</span> (+3.62点，探底3741点回升，守住3800点整数关)</p>
+        <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据缺口 · 未评级</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">本任务无可用评级，详见正文说明</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：`3800.86` <span class="up"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg></span> <span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+0.10%</span> (+3.62点，探底3741点回升，守住38…</span></span></p>
       </div>
       <div class="tl-meta">
         <span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点 / Close</span>
@@ -1190,7 +1210,7 @@ a:focus-visible{ outline-offset:3px; }
       <div class="tl-body">
         <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-inbox"/></svg>每日总复盘</p>
         <h3 class="tl-title"><a href="../../daily/2026-10-13/daily-review.html">每日总复盘 · 2026-10-13（周二）收盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum">当日全部研判的汇总归档与观点结算</p>
+        <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据缺口 · 未评级</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">本任务无可用评级，详见正文说明</span></span></p>
       </div>
       <div class="tl-meta">
         <span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点 / Close</span>

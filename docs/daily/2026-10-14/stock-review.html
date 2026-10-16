@@ -592,8 +592,18 @@
 
     --tl-separator: var(--ap-dark-sep-soft);
     --tl-dot:       var(--ap-dark-ink);
+    --tl-dot-stage-close: var(--ap-dark-ink);
     --tl-time-fg:   var(--ap-dark-ink);
     --tl-run-fg:    var(--ap-dark-ink-3);
+    /* 时间线三件套深色覆写（2026-10-16 修复）：漏覆写时 tl-title 沿用
+     * --ap-ink(#1d1d1f)，黑底对比度约 1.1:1 —— 标题近乎不可读（用户实锤）。
+     * 不变量由 test_dark_mode.py 守护：任何引用 --ap-ink* 的 token 若无
+     * 深色覆写即测试失败，防止此类漏改复发。 */
+    --tl-kicker-fg: var(--ap-dark-ink-2);
+    --tl-title-fg:  var(--ap-dark-ink);
+    --tl-summary-fg: var(--ap-dark-ink-2);
+
+    --foot-fg: var(--ap-dark-ink-2);
 
     /* 深色模式：投影不可见，直接置空，改由明度分层承担深度 */
     --elev-overlay: 0 8px 28px rgba(0, 0, 0, 0.55);
@@ -878,6 +888,16 @@ a:focus-visible{ outline-offset:3px; }
 .tl-title .go{ display:inline-flex; vertical-align:-1px; margin-left:5px; width:15px; height:15px; color:var(--link); transition:transform var(--motion-base) var(--ease-out); }
 .tl-title a:hover .go{ transform:translateX(3px); }
 .tl-sum{ font-size:var(--fs-callout); line-height:var(--lh-callout); color:var(--tl-summary-fg); max-width:var(--container-prose); }
+
+/* ---- 结论先行摘要（一致性契约 C-2）：三段固定结构，三档视觉权重 ----
+ * 段1 评级·Σ（最强，加粗）｜ 段2 标准动作（常规）｜ 段3 关键事实（最弱）
+ * 目的：读者不看正文也能一眼知道「今天什么档、该做什么」。 */
+.tl-sum .conclusion{ display:flex; flex-wrap:wrap; align-items:baseline; gap:0 10px; }
+.tl-sum .concl-head{ font-weight:var(--fw-semibold); color:var(--fg); }
+.tl-sum .concl-action{ color:var(--fg-2); }
+.tl-sum .concl-fact{ color:var(--fg-3); font-size:var(--fs-footnote); line-height:var(--lh-footnote); }
+.tl-sum .concl-sep{ display:inline-block; width:1px; height:.9em; background:var(--border);
+  transform:translateY(.1em); }
 .tl-sum .quote{ font-family:var(--font-mono); font-variant-numeric:var(--numeric); }
 .tl-sum .up{ color:var(--quote-up); font-weight:var(--fw-medium); }
 .tl-sum .down{ color:var(--quote-down); font-weight:var(--fw-medium); }
@@ -1785,7 +1805,6 @@ body[data-df] nav.nav > .nav-in > .nav-links { display: flex; }
 <h1 data-sb-h="rendered" class="doc-title" data-df-title="1">股票复盘 · 2026-10-14（周三）收盘</h1>
       <div class="doc-meta"><span class="df-time"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>调度 <b>15:05</b></span><span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点 / Close</span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>Σ 数据缺口</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span></div>
 <p class="gap-note"><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>评级未标注</span>数据缺口：front-matter / 正文元信息 / market_data.json 均未提供评级标注，本页不编造评级。</p>
-<h3 data-sb-h="rendered">2026-10-14 股票每日复盘研判报告（圆桌多视角与决策卡）</h3>
 <h4 data-sb-h="rendered">01 结论卡</h4><div class="verdict-card"><h4 data-sb-h="rendered">YOU ASKED</h4><blockquote><p>2026年10月14日 A股收盘全景研判与投资策略组合复盘</p></blockquote><h4 data-sb-h="rendered">当前关键数据快照</h4><ul><li><b>上证指数</b>：3767.23（-0.88%，跌破3800关口）</li></ul><ul><li><b>深证成指</b>：12110.59（-1.97%）</li></ul><ul><li><b>创业板指</b>：2866.76（-3.10%，失守2900点）</li></ul><ul><li><b>科创50</b>：1380.26（-3.29%，领跌两市）</li></ul><ul><li><b>沪深300</b>：4217.68（-1.36%）</li></ul><ul><li><b>两市+北交所成交额</b>：14,266.01 亿元（较前日缩量逾 2600 亿）</li></ul><ul><li><b>市场涨跌比</b>：979 涨 : 4496 跌（涨停 39 家 / 跌停 13 家，全市场仅 17.9% 翻红）</li></ul><ul><li><b>资金风向</b>：元件主力净流入 +13.84 亿元，半导体主力净流出 -70.42 亿元</li></ul><h4 data-sb-h="rendered">圆桌综合视角</h4><blockquote><p>今日大盘受成长科技股大幅重挫拖累震荡下挫，上证指数收报 3767.23 点（-0.88%），创业板与科创50遭遇逾 3% 深度调整，全市场呈现普跌避险格局。Σ 评级由代码裁定为&lt;strong&gt;【防守】&lt;/strong&gt;（-0.339）。操作策略&lt;em&gt;全面转入防守控制风险&lt;/em&gt;：严格暂停一切主动买入，底仓高息资产一股不卖，仅允许通过网格被动低吸做T与维持既定基础定投。</p></blockquote><h4 data-sb-h="rendered">核心分析观点</h4><ol><li>产业卡位：半导体与通信设备遭遇估值与资金双重挤压，油服工程、出版传媒逆市走强，公用事业与电力板块抗跌显现避险防御底色。</li></ol><ol><li>估值水位：沪深300 PE回落至13.10倍，60日累计跌幅-12.07%带来左侧超跌估值保护，但短线情绪尚未见底。</li></ol><ol><li>信号面：确定性信号评分 Σ = -0.339（有效权重 1.00），市场宽度（S2=-0.544）与资金净流向（S5=-1.000）严重偏空，强制触发【防守】评级。</li></ol><ol><li>逆向与底仓：持仓华能蒙电（+4.71%）、粤高速A（+2.99%）、中国广核（+2.71%）逆市大涨创阶段新高，底仓护城河坚不可摧，证明杠铃策略的极强韧性。</li></ol><ol><li>短线盘面：两市缩量至1.42万亿，题材热点高低切换明显，短期科技成长主线进入混沌休整期，必须控制仓位回撤。</li></ol><h4 data-sb-h="rendered">圆桌立场分布</h4><ul><li>偏多 1 票</li></ul><ul><li>偏空 3 票</li></ul><ul><li>观望 2 票</li></ul></div>
 <hr>
 <h4 data-sb-h="rendered">02 子专家观点</h4><h4 data-sb-h="rendered">星望远 · 产业策略师</h4><blockquote><p>&quot;高位硬科技进入流动性挤压期，公用事业与资源红利迎来防守窗口。&quot;</p></blockquote><ul><li><b>产业景气度跟踪</b>：半导体设备与光模块产业链在连续冲高后遭遇获利回吐，通信设备板块整体大跌 -4.50%，半导体下挫 -3.20%。资金开始向低估值、高现金流的传统能源与电力公用事业迁徙。</li></ul><ul><li><b>配置结论</b>：产业趋势未破但短线波动放大，战略性看好“算电协同”与新型电网，但短期需回避无业绩支撑的高位题材股，耐心等待科技赛道筹码清洗完毕。</li></ul><h4 data-sb-h="rendered">洲四方 · 信号派首席</h4><blockquote><p>&quot;宽度指标全线告急，主力资金大幅撤离高贝塔赛道，防守警报拉响。&quot;</p></blockquote><ul><li><b>四层信号矩阵</b>：<ul><li>政策面：稳中偏多，央行流动性保持宽裕。</li></ul><ul><li>资金面：主力资金单日净流出半导体达 70.42 亿元，元件板块净流入仅 13.84 亿元，资金呈防御收缩态势。</li></ul><ul><li>情绪面：全市场红盘率仅 17.9%，4496 只股票下跌，亏钱效应显著。</li></ul><ul><li>技术面：沪指收于 5 日与 20 日均线下方，动量指标 S3 达 -0.514。</li></ul></li></ul><ul><li><b>纪律建议</b>：Σ 综合得分 -0.339 触及防守区间，严禁逆势追高任何强势股，严控单日交易频次。</li></ul><h4 data-sb-h="rendered">文衡价 · 估值分析师</h4><blockquote><p>&quot;沪深300进入13倍估值黄金坑，以时间换空间坚守核心蓝筹底座。&quot;</p></blockquote><ul><li><b>估值水位剖析</b>：<ul><li>沪深300当前 PE 为 13.10 倍，处于近十年 30% 分位以下，S6 估值项给出满分 +1.000。</li></ul><ul><li>然而科创50 PE 达 112.89 倍，深指 PE 达 38.38 倍，结构性估值高企仍需时间消化。</li></ul></li></ul><ul><li><b>配置模型</b>：建议维持“70%高股息蓝筹防御底仓 + 30%硬核科技弹性网格”的杠铃组合，抵御估值中枢波动。</li></ul><h4 data-sb-h="rendered">坤候底 · 逆向投资人</h4><blockquote><p>&quot;大跌之下见真金，华能蒙电与粤高速证明了收息框架的无上定力。&quot;</p></blockquote><ul><li><b>持仓与支撑位诊断</b>：<ul><li><b>华能蒙电（sh600863）</b>：收报 5.34 元 (+4.71%)，从前期 5.10 元底仓位置强力反弹，浮盈扩大至 +41.4%，底仓 1,000 股一股不卖。</li></ul><ul><li><b>粤高速A（sz000429）</b>：收报 13.80 元 (+2.99%)，盘中创 13.80 元新高，股息率 4.38%，现金流奶牛定海神针。</li></ul><ul><li><b>平高电气（sh600312）</b>：收报 20.13 元 (-2.38%)，回踩 20.00 元强支撑，持仓 500 股保持耐心，触及 18.50 底轨前不轻易加仓。</li></ul><ul><li><b>卫星ETF富国（sh563230）</b>：收报 0.963 元 (-2.03%)，持仓 20,000 份，0.950-1.020 元区间做好网格高抛低吸准备。</li></ul></li></ul><ul><li><b>心态建议</b>：不必为指数单日调整焦虑，好公司在下跌中才能拿到便宜筹码。</li></ul><h4 data-sb-h="rendered">钊审财 · 财报研究员</h4><blockquote><p>&quot;三季报窗口期临近，现金流与高分红企业构筑最坚固防波堤。&quot;</p></blockquote><ul><li><b>基本面质量研判</b>：<ul><li>江苏银行（sh600919）收报 12.41 元 (+0.08%)，动态 PE 仅 6.30 倍，股息率高达 4.55%，资产质量优异。</li></ul><ul><li>中国广核（sz003816）收报 4.55 元 (+2.71%)，核电基荷运营属性带来无与伦比的盈利确定性。</li></ul></li></ul><ul><li><b>基本面策略</b>：剔除三季报业绩预警品种，坚守 ROE &gt; 12% 且分红率可预期的领头羊。</li></ul><h4 data-sb-h="rendered">磊追浪 · 短线冲浪手</h4><blockquote><p>&quot;科创与创业板跌破短期上升通道，短线进入休整期，管住双手。&quot;</p></blockquote><ul><li><b>盘面结构观察</b>：<ul><li>跌停家数仅 13 家，表明并非系统性崩盘抛售，而是主力主动调仓导致的踩踏。</li></ul><ul><li>今日两市量能缩至 1.42 万亿，量比 0.94，呈现缩量抵抗形态。</li></ul></li></ul><ul><li><b>技术止损与止盈点</b>：若上证指数明日无法收复 3780 点，短线可能进一步探底 3740 点年线支撑；短线题材股严守 5 日线止损纪律。</li></ul>
