@@ -738,6 +738,7 @@ a:focus-visible{ outline-offset:3px; }
 .nav-links a{
   font-size:var(--fs-footnote); color:var(--nav-fg); white-space:nowrap; padding:2px 0;
   position:relative; display:inline-flex; align-items:center; gap:5px;
+  min-height:var(--nav-h);   /* Apple HIG：44px 最小触达高（探针实测 23px 返工） */
   transition:color var(--motion-fast) var(--ease-out);
 }
 .nav-links a:hover{ color:var(--nav-fg-hover); }
@@ -746,7 +747,13 @@ a:focus-visible{ outline-offset:3px; }
   content:""; position:absolute; left:0; right:0; bottom:-1px;
   height:var(--localnav-active-underline); background:var(--nav-underline);
 }
-@media (max-width:640px){ .nav-links a[data-optional]{ display:none; } }
+@media (max-width:640px){
+  .nav-links a[data-optional]{ display:none; }
+  /* 窄屏：英文段整体隐藏 + 收紧间距，导航在 320px 也不溢出（探针实测返工） */
+  .nav-links .nav-en{ display:none; }
+  .nav-links{ gap:var(--space-4); }
+  .nav-in{ gap:var(--space-4); }
+}
 
 /* ============================== 容器 ====================================== */
 .shell{ max-width:var(--container-max); margin:0 auto; padding:0 var(--gutter-tablet); }
@@ -799,6 +806,10 @@ a:focus-visible{ outline-offset:3px; }
 .sec-head h2{ flex-shrink:0; }
 .sec-head .spacer{ flex:1 1 auto; }
 .sec-head .aside{ font-size:var(--fs-footnote); color:var(--fg-3); display:inline-flex; align-items:center; gap:6px; }
+/* 区块说明行：徽章体系的读法锚点——口径徽章说「是什么」，这句说「怎么读」 */
+.sec-note{ display:flex; align-items:flex-start; gap:6px; color:var(--fg-3);
+  max-width:var(--container-prose); margin-top:calc(-1 * var(--space-5)); margin-bottom:var(--space-7); }
+.sec-note .ic{ margin-top:3px; flex:0 0 auto; }
 
 /* ============================================================================
  * site_blocks.css — 业务组件层（时间线 / 徽章 / 芯片 / 表格 / 页脚 / 响应式）
@@ -917,7 +928,7 @@ a:focus-visible{ outline-offset:3px; }
 }
 @media (prefers-color-scheme:dark){ .tag{ background:var(--ap-dark-2); border-color:var(--ap-dark-sep); } }
 .tag .ic{ width:12px; height:12px; stroke-width:2; }
-.tag-gap{ color:var(--fg-3); border-style:dashed; }
+.tag.gap{ color:var(--fg-3); border-style:dashed; }
 .tag-warn{ color:var(--warn); border-color:var(--warn); background:transparent; }
 
 /* ============================== 面板 ====================================== */
@@ -988,6 +999,24 @@ a:focus-visible{ outline-offset:3px; }
 .empty .ic-24{ margin:0 auto var(--space-4); color:var(--fg-3); opacity:.7; }
 .empty h3{ font-size:var(--fs-title4); color:var(--fg-2); margin-bottom:var(--space-2); letter-spacing:var(--tracking-title4); }
 .empty p{ font-size:var(--fs-subhead); max-width:44ch; margin:0 auto var(--space-5); line-height:var(--lh-subhead); }
+
+/* ============================== 订阅页 ==================================== */
+.sub-lede{ color:var(--fg-2); max-width:var(--container-prose); }
+/* 订阅地址：长 URL 必须 anywhere 断行，否则 390px 视口整页横滚（G-4） */
+.sub-url{
+  display:block; font-family:var(--font-mono); font-size:var(--fs-subhead);
+  color:var(--fg); background:var(--surface-alt); border:1px solid var(--border-soft);
+  border-radius:var(--radius-sm); padding:var(--space-4) var(--space-5);
+  margin:var(--space-4) 0 var(--space-3); overflow-wrap:anywhere; word-break:break-all;
+  corner-shape:var(--corner-shape,squircle);
+}
+@media (prefers-color-scheme:dark){ .sub-url{ background:var(--panel-bg); border-color:var(--ap-dark-sep); } }
+.sub-hint{ display:flex; align-items:flex-start; gap:6px; color:var(--fg-3); max-width:var(--container-prose); }
+.sub-hint .ic{ margin-top:3px; flex:0 0 auto; }
+.sub-steps{ margin:0 0 0 22px; list-style:decimal; }
+.sub-steps li{ font-size:var(--fs-callout); line-height:var(--lh-callout); color:var(--fg-2); margin:var(--space-3) 0; max-width:60ch; }
+.sub-steps li b{ color:var(--fg); font-weight:var(--fw-semibold); }
+@media (max-width:640px){ .sub-url{ font-size:var(--fs-footnote); padding:var(--space-3) var(--space-4); } }
 
 .btn-row{ display:flex; gap:var(--space-3); flex-wrap:wrap; align-items:center; }
 .btn{

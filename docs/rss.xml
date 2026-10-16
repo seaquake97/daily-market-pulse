@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>每日市场脉搏 · Daily Market Pulse</title>
+  <link>https://seaquake97.github.io/daily-market-pulse/</link>
+  <description>数据驱动的 A 股/基金每日研判档案 / Data-driven daily research archive</description>
+  <language>zh-CN</language>
+  <item>
+    <title>股票助手 · 2026-10-16（周五）早盘集合竞价研判</title>
+    <link>https://seaquake97.github.io/daily-market-pulse/daily/2026-10-16/</link>
+    <guid isPermaLink="true">https://seaquake97.github.io/daily-market-pulse/daily/2026-10-16/</guid>
+    <description>Σ 评级【均衡】（+0.180），覆盖 4 项任务产出，数据时点 收盘时点。</description>
+    <pubDate>Fri, 16 Oct 2026 00:00:00 +0000</pubDate>
+  </item>
+  <item>
+    <title>股票助手 · 2026-10-15（周四）早盘集合竞价研判</title>
+    <link>https://seaquake97.github.io/daily-market-pulse/daily/2026-10-15/</link>
+    <guid isPermaLink="true">https://seaquake97.github.io/daily-market-pulse/daily/2026-10-15/</guid>
+    <description>Σ 评级【防守】（-0.290），覆盖 5 项任务产出，数据时点 收盘时点。</description>
+    <pubDate>Thu, 15 Oct 2026 00:00:00 +0000</pubDate>
+  </item>
+  <item>
+    <title>股票助手 · 2026-10-14（周三）盘中研判</title>
+    <link>https://seaquake97.github.io/daily-market-pulse/daily/2026-10-14/</link>
+    <guid isPermaLink="true">https://seaquake97.github.io/daily-market-pulse/daily/2026-10-14/</guid>
+    <description>Σ 评级【防守】（-0.339），覆盖 5 项任务产出，数据时点 收盘时点。</description>
+    <pubDate>Wed, 14 Oct 2026 00:00:00 +0000</pubDate>
+  </item>
+  <item>
+    <title>A股持仓每日投研诊断与网格交易操作指南（2026-10-13 周二 午后补跑全景研判）</title>
+    <link>https://seaquake97.github.io/daily-market-pulse/daily/2026-10-13/</link>
+    <guid isPermaLink="true">https://seaquake97.github.io/daily-market-pulse/daily/2026-10-13/</guid>
+    <description>Σ 评级【信号矛盾】（+0.000），覆盖 5 项任务产出，数据时点 盘中时点。</description>
+    <pubDate>Tue, 13 Oct 2026 00:00:00 +0000</pubDate>
+  </item>
+  <item>
+    <title>基金每日盘面分析与加权预估报告（11:00午盘版）</title>
+    <link>https://seaquake97.github.io/daily-market-pulse/daily/2026-10-12/</link>
+    <guid isPermaLink="true">https://seaquake97.github.io/daily-market-pulse/daily/2026-10-12/</guid>
+    <description>Σ 评级【信号矛盾】（+0.000），覆盖 2 项任务产出，数据时点 盘中时点。</description>
+    <pubDate>Mon, 12 Oct 2026 00:00:00 +0000</pubDate>
+  </item>
+</channel>
+</rss>

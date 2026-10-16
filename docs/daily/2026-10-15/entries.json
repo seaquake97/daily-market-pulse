@@ -40,7 +40,7 @@
     "run_time": "14:30",
     "title": "基金操作指引 · 2026-10-15（周四）尾盘",
     "summary": "根据 daily-decision-engine 核心算法计算，今日六维确定性信号综合评分：",
-    "html": null,
+    "html": "fund-guide.html",
     "md": "fund-guide.md",
     "rating": "防守",
     "sigma": -0.285,

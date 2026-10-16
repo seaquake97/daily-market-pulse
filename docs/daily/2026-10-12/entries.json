@@ -23,7 +23,7 @@
     "run_time": "14:32",
     "title": "基金操作指引 · 2026-10-12（周一）尾盘",
     "summary": "记忆文件动态解析：彻底拒绝代码硬编码持仓！每日自动读取 ~/.workbuddy/MEMORY.md 提取最新基金持仓金额与占比，自动计算总持仓 (62,883.47 元)。",
-    "html": null,
+    "html": "fund-guide.html",
     "md": "fund-guide.md",
     "rating": null,
     "sigma": null,
