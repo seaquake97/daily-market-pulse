@@ -1016,7 +1016,8 @@ a:focus-visible{ outline-offset:3px; }
 .foot-brand{ max-width:38ch; }
 .foot-brand p{ font-size:var(--foot-fs); line-height:var(--lh-footnote); color:var(--foot-fg); margin-top:var(--space-3); }
 .foot-cols{ display:flex; gap:var(--space-10); flex-wrap:wrap; }
-.foot-col h3{ font-size:var(--fs-caption1); color:var(--fg); font-weight:var(--fw-semibold); letter-spacing:var(--tracking-caption); margin-bottom:var(--space-3); }
+/* 页脚栏目标题：h4（frame 注入晚于 sanitize，无标记 h3 会被降级致字节漂移） */
+.foot-col h4{ font-size:var(--fs-caption1); color:var(--fg); font-weight:var(--fw-semibold); letter-spacing:var(--tracking-caption); margin-bottom:var(--space-3); }
 .foot-col li{ margin-bottom:var(--space-2); }
 .foot-col a{ font-size:var(--foot-fs); color:var(--foot-fg); display:inline-flex; align-items:center; gap:5px; transition:color var(--motion-fast) var(--ease-out); }
 .foot-col a:hover{ color:var(--link); }
@@ -1046,12 +1047,16 @@ a:focus-visible{ outline-offset:3px; }
   .tl-time::after{ content:""; flex:1 1 auto; height:1px; background:var(--tl-separator); min-width:var(--space-6); }
 }
 
-/* 打印：Apple 官网同样提供干净打印样式 */
+/* 打印：Apple 官网同样提供干净打印样式。
+   色值走 var(--ap-white)/var(--ap-black) 而非 #fff/#000 字面量：token_map 会把
+   #fff/#000 映射成 var(--surface)/var(--fg)，frame 注入块再消毒时 map_css 会改
+   写这三个声明（打印要的是恒白/恒黑，不是随主题变的 surface），字节也不再稳定。
+   --ap-* 是 LAYER 0 原语（design-tokens.css 唯一定义处，深色块不覆盖），等价且稳定。 */
 @media print{
   .nav,.foot-cols .go,.btn-row,.skip-link{ display:none; }
-  body{ background:#fff; color:#000; }
+  body{ background:var(--ap-white); color:var(--ap-black); }
   .issue{ page-break-inside:avoid; }
-  .foot{ background:#fff; }
+  .foot{ background:var(--ap-white); }
 }</style>
 </head>
 <body>
@@ -1093,7 +1098,7 @@ a:focus-visible{ outline-offset:3px; }
       </div>
       <div class="tl-body">
         <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-database"/></svg>基金盘面</p>
-        <h3 class="tl-title"><a href="../../daily/2026-10-12/fund-market.html">基金每日盘面分析与加权预估报告（11:00午盘版）<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+        <h3 class="tl-title"><a href="../../daily/2026-10-12/fund-market.html">基金盘面分析 · 2026-10-12（周一）午盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
         <p class="tl-sum">上证指数：3,808.04 点（<span class="down"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>-0.15%</span>）</p>
       </div>
       <div class="tl-meta">
@@ -1108,7 +1113,7 @@ a:focus-visible{ outline-offset:3px; }
       </div>
       <div class="tl-body">
         <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-target"/></svg>基金操作指引</p>
-        <h3 class="tl-title"><span>基金每日操作指引（14:30）— 真实记忆抓取、仓位加权估算与外盘企稳校验版（无脱敏/剔除北向资金）</span></h3>
+        <h3 class="tl-title"><span>基金操作指引 · 2026-10-12（周一）尾盘</span></h3>
         <p class="tl-sum">记忆文件动态解析：彻底拒绝代码硬编码持仓！每日自动读取 ~/.workbuddy/MEMORY.md 提取最新基金持仓金额与占比，自动计算总持仓 (62,883.47 元)。</p>
       </div>
       <div class="tl-meta">
@@ -1129,15 +1134,15 @@ a:focus-visible{ outline-offset:3px; }
       </div>
       <nav class="foot-cols" aria-label="页脚导航">
         <div class="foot-col">
-          <h3>归档</h3>
+          <h4>归档</h4>
           <ul><li><a href="../../index.html">全部归档</a></li><li><a href="../../weekly/">周报</a></li><li><a href="../../monthly/">月报</a></li></ul>
         </div>
         <div class="foot-col">
-          <h3>关于</h3>
+          <h4>关于</h4>
           <ul><li><a href="../../methodology/">研判方法论</a></li><li><a href="../../feed.xml"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-rss"/></svg>RSS 订阅</a></li></ul>
         </div>
         <div class="foot-col">
-          <h3>来源</h3>
+          <h4>来源</h4>
           <ul><li><a href="../../methodology/"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-database"/></svg>腾讯自选股 MCP</a></li><li><a href="../../methodology/"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-git-branch"/></svg>daily-decision-engine</a></li></ul>
         </div>
       </nav>

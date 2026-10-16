@@ -3,7 +3,7 @@
 <head>
 <meta name="color-scheme" content="light dark">
 <meta name="description" content="上证指数 (sh000001)：3807.15 点 (+0.26%) | 竞价大幅低开 3760.80（-0.96%），盘中 V 型反转翻红，最高 3810.94，承接力强劲">
-<meta property="og:title" content="A股持仓每日投研诊断与网格交易操作指南（2026-10-13 周二 午后补跑全景研判）">
+<meta property="og:title" content="股票助手 · 2026-10-13（周二）早盘竞价">
 <meta property="og:description" content="上证指数 (sh000001)：3807.15 点 (+0.26%) | 竞价大幅低开 3760.80（-0.96%），盘中 V 型反转翻红，最高 3810.94，承接力强劲">
 <meta property="og:type" content="article">
 <meta charset="UTF-8">
@@ -106,7 +106,7 @@ table.data tr:hover td { background: var(--bg-elevated); }
 <style data-origin="icon-subsprite">.ic{width:16px;height:16px;flex:0 0 auto;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;fill:none}
 .ic-20{width:20px;height:20px}
 .ic-24{width:24px;height:24px}
-.ic-wrap{display:inline-flex;align-items:center;vertical-align:middle;line-height:0}</style><!-- detail-tokens:v1 --><style data-origin="detail-tokens">:root{--ap-black:#000000;--ap-canvas:#ffffff;--ap-dark-1:#1c1c1e;--ap-dark-ink:#f5f5f7;--ap-surface-alt:#f5f5f7;--fg-on-inverse:var(--ap-dark-ink);--quote-down:#15803d;--quote-up:#b91c1c;--rating-balanced-wash:rgba(180, 83, 9, 0.08);--rating-defensive-wash:rgba(21, 128, 61, 0.08);--surface:var(--ap-canvas);--surface-alt:var(--ap-surface-alt);--warn:#b45309;}@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--fg-on-inverse:var(--ap-dark-ink);--quote-down:#4ade80;--quote-up:#f87171;--rating-balanced-wash:rgba(251, 191, 36, 0.10);--rating-defensive-wash:rgba(74, 222, 128, 0.10);--surface:var(--ap-black);--surface-alt:var(--ap-dark-1);--warn:#fbbf24;}}</style><style>/* ============================================================================
+.ic-wrap{display:inline-flex;align-items:center;vertical-align:middle;line-height:0}</style><!-- detail-tokens:v1 --><style data-origin="detail-tokens">:root{--ap-black:#000000;--ap-canvas:#ffffff;--ap-dark-1:#1c1c1e;--ap-dark-ink:#f5f5f7;--ap-surface-alt:#f5f5f7;--fg-on-inverse:var(--ap-dark-ink);--quote-down:#15803d;--quote-up:#b91c1c;--rating-balanced-wash:rgba(180, 83, 9, 0.08);--rating-defensive-wash:rgba(21, 128, 61, 0.08);--surface:var(--ap-canvas);--surface-alt:var(--ap-surface-alt);--warn:#b45309;}@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--fg-on-inverse:var(--ap-dark-ink);--quote-down:#4ade80;--quote-up:#f87171;--rating-balanced-wash:rgba(251, 191, 36, 0.10);--rating-defensive-wash:rgba(74, 222, 128, 0.10);--surface:var(--ap-black);--surface-alt:var(--ap-dark-1);--warn:#fbbf24;}}</style><style data-origin="detail-frame">/* ============================================================================
  * 每日市场脉搏 · Daily Market Pulse
  * design-tokens.css — Apple 设计语言落地 Token 层
  *
@@ -135,7 +135,7 @@ table.data tr:hover td { background: var(--bg-elevated); }
 
 :root {
   /* --- Apple 中性色阶（浅色） --- */
-  --ap-white: var(--fg-on-inverse);
+  --ap-white:          #ffffff;
   --ap-canvas:         #ffffff;
   --ap-surface-alt:    #f5f5f7;   /* Apple 浅灰交替带，非纯白 */
   --ap-surface-nav:    #fafafc;
@@ -151,12 +151,12 @@ table.data tr:hover td { background: var(--bg-elevated); }
   --ap-blue:           #0071e3;   /* CTA / 焦点环 / 选中态 */
   --ap-blue-hover:     #0077ed;
   --ap-blue-link:      #0066cc;   /* 正文链接，AA 5.57:1 */
-  --ap-blue-link-dk: var(--accent);   /* 深色背景上的链接 */
+  --ap-blue-link-dk:   #2997ff;   /* 深色背景上的链接 */
   --ap-blue-press:     #006edb;
 
   /* --- Apple 深色模式中性色阶 --- */
-  --ap-black: var(--fg);
-  --ap-dark-1: var(--fg);   /* 抬升表面 */
+  --ap-black:          #000000;
+  --ap-dark-1:         #1c1c1e;   /* 抬升表面 */
   --ap-dark-2:         #2c2c2e;   /* 三级表面 / 输入框 */
   --ap-dark-3:         #3a3a3c;   /* 四级填充 */
   --ap-dark-sep:       #38383a;   /* 深色分隔线 */
@@ -169,24 +169,24 @@ table.data tr:hover td { background: var(--bg-elevated); }
   /* --- 五档评级色阶（中国红涨绿跌惯例，浅色模式基准） ---
    * 全部 ≥4.5:1 于 #ffffff；白字于色块内亦 ≥4.5:1（红 6.47 / 琥珀 5.02
    * / 石板 7.58 / 绿 5.01 / 深绿 7.13） */
-  --rt-offensive: var(--quote-up);   /* 进攻 */
-  --rt-balanced: var(--warn);   /* 均衡 */
-  --rt-conflict: var(--fg-2);   /* 信号矛盾 — 中性灰，刻意避开红绿 */
-  --rt-defensive: var(--quote-down);   /* 防守 */
+  --rt-offensive:      #b91c1c;   /* 进攻 */
+  --rt-balanced:       #b45309;   /* 均衡 */
+  --rt-conflict:       #475569;   /* 信号矛盾 — 中性灰，刻意避开红绿 */
+  --rt-defensive:      #15803d;   /* 防守 */
   --rt-avoid:          #166534;   /* 回避 */
 
   /* --- 五档评级色阶（深色模式提亮版，同色相族） ---
    * 全部 ≥4.5:1 于 #1c1c1e（6.15 / 10.20 / 6.63 / 9.76 / 7.47） */
-  --rt-offensive-dk: var(--quote-up);
-  --rt-balanced-dk: var(--fg-on-inverse);
-  --rt-conflict-dk: var(--fg-3);
-  --rt-defensive-dk: var(--quote-down);
+  --rt-offensive-dk:   #f87171;
+  --rt-balanced-dk:    #fbbf24;
+  --rt-conflict-dk:    #94a3b8;
+  --rt-defensive-dk:   #4ade80;
   --rt-avoid-dk:       #22c55e;
 
   /* --- 语义色 --- */
-  --ap-green: var(--quote-down);
-  --ap-red: var(--quote-up);
-  --ap-orange: var(--warn);
+  --ap-green:          #008009;
+  --ap-red:            #e30000;
+  --ap-orange:         #c93400;
 }
 
 
@@ -399,9 +399,9 @@ table.data tr:hover td { background: var(--bg-elevated); }
   --z-toast: 1400;
 
   /* --- 通用语义色 --- */
-  --success: var(--quote-down);
+  --success: #008009;
   --warn:    #b45309;
-  --danger: var(--quote-up);
+  --danger:  #e30000;
   --info:    var(--ap-blue-link);
 }
 
@@ -605,7 +605,7 @@ table.data tr:hover td { background: var(--bg-elevated); }
 
     /* --- 通用语义色提亮 --- */
     --success: #30d158;
-    --warn: var(--fg-on-inverse);
+    --warn:    #fbbf24;
     --danger:  #ff453a;
     --info:    var(--ap-blue-link-dk);
 
@@ -1112,7 +1112,8 @@ a:focus-visible{ outline-offset:3px; }
 .foot-brand{ max-width:38ch; }
 .foot-brand p{ font-size:var(--foot-fs); line-height:var(--lh-footnote); color:var(--foot-fg); margin-top:var(--space-3); }
 .foot-cols{ display:flex; gap:var(--space-10); flex-wrap:wrap; }
-.foot-col h3{ font-size:var(--fs-caption1); color:var(--fg); font-weight:var(--fw-semibold); letter-spacing:var(--tracking-caption); margin-bottom:var(--space-3); }
+/* 页脚栏目标题：h4（frame 注入晚于 sanitize，无标记 h3 会被降级致字节漂移） */
+.foot-col h4{ font-size:var(--fs-caption1); color:var(--fg); font-weight:var(--fw-semibold); letter-spacing:var(--tracking-caption); margin-bottom:var(--space-3); }
 .foot-col li{ margin-bottom:var(--space-2); }
 .foot-col a{ font-size:var(--foot-fs); color:var(--foot-fg); display:inline-flex; align-items:center; gap:5px; transition:color var(--motion-fast) var(--ease-out); }
 .foot-col a:hover{ color:var(--link); }
@@ -1142,12 +1143,16 @@ a:focus-visible{ outline-offset:3px; }
   .tl-time::after{ content:""; flex:1 1 auto; height:1px; background:var(--tl-separator); min-width:var(--space-6); }
 }
 
-/* 打印：Apple 官网同样提供干净打印样式 */
+/* 打印：Apple 官网同样提供干净打印样式。
+   色值走 var(--ap-white)/var(--ap-black) 而非 #fff/#000 字面量：token_map 会把
+   #fff/#000 映射成 var(--surface)/var(--fg)，frame 注入块再消毒时 map_css 会改
+   写这三个声明（打印要的是恒白/恒黑，不是随主题变的 surface），字节也不再稳定。
+   --ap-* 是 LAYER 0 原语（design-tokens.css 唯一定义处，深色块不覆盖），等价且稳定。 */
 @media print{
   .nav,.foot-cols .go,.btn-row,.skip-link{ display:none; }
-  body{ background: var(--surface); color: var(--fg); }
+  body{ background:var(--ap-white); color:var(--ap-black); }
   .issue{ page-break-inside:avoid; }
-  .foot{ background: var(--surface); }
+  .foot{ background:var(--ap-white); }
 }
 /* ============================================================================
  * detail-frame.css — 上游详情页阅读框架 · 扩展层（v1.0 · 2026-10-15）
@@ -1850,7 +1855,7 @@ body[data-df] nav.nav > .nav-in > .nav-links { display: flex; }
   </div>
 </nav>
 
-<h1 data-sb-h="1- class="doc-title" data-df-title="1">3">A股持仓每日投研诊断与网格交易操作指南</h1>
+<h1 data-sb-h="1->3" class="doc-title" data-df-title="1">A股持仓每日投研诊断与网格交易操作指南</h1>
       <div class="doc-meta"><span class="df-time"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>调度 <b>09:28</b></span><span class="df-time"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>生成 <b>13:20</b></span><span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点 / Intraday</span><span class="tag tag-gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>Σ 数据缺口</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>口径未标注 · Σ 不可跨时点比较</span></div>
   <header class="hero">
   <div class="kicker">STOCK ASSISTANT DAILY · 2026-10-13 周二</div>
@@ -2008,15 +2013,15 @@ body[data-df] nav.nav > .nav-in > .nav-links { display: flex; }
       </div>
       <nav class="foot-cols" aria-label="页脚导航">
         <div class="foot-col">
-          <h4 data-sb-h="3->4">归档</h4>
+          <h4>归档</h4>
           <ul><li><a href="../../index.html">全部归档</a></li><li><a href="../../weekly/">周报</a></li><li><a href="../../monthly/">月报</a></li></ul>
         </div>
         <div class="foot-col">
-          <h4 data-sb-h="3->4">关于</h4>
+          <h4>关于</h4>
           <ul><li><a href="../../methodology/">研判方法论</a></li><li><a href="../../feed.xml"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-rss"/></svg>RSS 订阅</a></li></ul>
         </div>
         <div class="foot-col">
-          <h4 data-sb-h="3->4">来源</h4>
+          <h4>来源</h4>
           <ul><li><a href="../../methodology/"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-database"/></svg>腾讯自选股 MCP</a></li><li><a href="../../methodology/"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-git-branch"/></svg>daily-decision-engine</a></li></ul>
         </div>
       </nav>

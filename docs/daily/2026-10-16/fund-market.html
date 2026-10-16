@@ -3,7 +3,7 @@
 <head>
 <meta name="color-scheme" content="light dark">
 <meta name="description" content="上证指数：3,747.19 点（+1.07%）">
-<meta property="og:title" content="基金每日盘面分析与加权预估报告（11:00午盘版）">
+<meta property="og:title" content="基金盘面分析 · 2026-10-16（周五）午盘">
 <meta property="og:description" content="上证指数：3,747.19 点（+1.07%）">
 <meta property="og:type" content="article">
 <style data-origin="tailwind-static">/* 本文件由 scripts/build_body_css.py 生成，请勿手工编辑。
@@ -54,7 +54,7 @@
 <style data-origin="icon-subsprite">.ic{width:16px;height:16px;flex:0 0 auto;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;fill:none}
 .ic-20{width:20px;height:20px}
 .ic-24{width:24px;height:24px}
-.ic-wrap{display:inline-flex;align-items:center;vertical-align:middle;line-height:0}</style><!-- detail-tokens:v1 --><style data-origin="detail-tokens">:root{--accent:var(--ap-blue);--ap-black:#000000;--ap-blue:#0071e3;--ap-canvas:#ffffff;--ap-dark-1:#1c1c1e;--ap-dark-2:#2c2c2e;--ap-dark-ink:#f5f5f7;--ap-dark-ink-3:#86868b;--ap-dark-sep:#38383a;--ap-hairline:#d2d2d7;--ap-ink:#1d1d1f;--ap-ink-tertiary:#6e6e73;--ap-surface-alt:#f5f5f7;--border:var(--ap-hairline);--fg:var(--ap-ink);--fg-3:var(--ap-ink-tertiary);--quote-down:#15803d;--quote-up:#b91c1c;--surface:var(--ap-canvas);--surface-alt:var(--ap-surface-alt);--surface-inverse:var(--ap-ink);--warn:#b45309;}@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--accent:#2997ff;--border:var(--ap-dark-sep);--fg:var(--ap-dark-ink);--fg-3:var(--ap-dark-ink-3);--quote-down:#4ade80;--quote-up:#f87171;--surface:var(--ap-black);--surface-alt:var(--ap-dark-1);--surface-inverse:var(--ap-dark-2);--warn:#fbbf24;}}</style><style>/* ============================================================================
+.ic-wrap{display:inline-flex;align-items:center;vertical-align:middle;line-height:0}</style><!-- detail-tokens:v1 --><style data-origin="detail-tokens">:root{--accent:var(--ap-blue);--ap-black:#000000;--ap-blue:#0071e3;--ap-canvas:#ffffff;--ap-dark-1:#1c1c1e;--ap-dark-2:#2c2c2e;--ap-dark-ink:#f5f5f7;--ap-dark-ink-3:#86868b;--ap-dark-sep:#38383a;--ap-hairline:#d2d2d7;--ap-ink:#1d1d1f;--ap-ink-tertiary:#6e6e73;--ap-surface-alt:#f5f5f7;--border:var(--ap-hairline);--fg:var(--ap-ink);--fg-3:var(--ap-ink-tertiary);--quote-down:#15803d;--quote-up:#b91c1c;--surface:var(--ap-canvas);--surface-alt:var(--ap-surface-alt);--surface-inverse:var(--ap-ink);--warn:#b45309;}@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--accent:#2997ff;--border:var(--ap-dark-sep);--fg:var(--ap-dark-ink);--fg-3:var(--ap-dark-ink-3);--quote-down:#4ade80;--quote-up:#f87171;--surface:var(--ap-black);--surface-alt:var(--ap-dark-1);--surface-inverse:var(--ap-dark-2);--warn:#fbbf24;}}</style><style data-origin="detail-frame">/* ============================================================================
  * 每日市场脉搏 · Daily Market Pulse
  * design-tokens.css — Apple 设计语言落地 Token 层
  *
@@ -1060,7 +1060,8 @@ a:focus-visible{ outline-offset:3px; }
 .foot-brand{ max-width:38ch; }
 .foot-brand p{ font-size:var(--foot-fs); line-height:var(--lh-footnote); color:var(--foot-fg); margin-top:var(--space-3); }
 .foot-cols{ display:flex; gap:var(--space-10); flex-wrap:wrap; }
-.foot-col h3{ font-size:var(--fs-caption1); color:var(--fg); font-weight:var(--fw-semibold); letter-spacing:var(--tracking-caption); margin-bottom:var(--space-3); }
+/* 页脚栏目标题：h4（frame 注入晚于 sanitize，无标记 h3 会被降级致字节漂移） */
+.foot-col h4{ font-size:var(--fs-caption1); color:var(--fg); font-weight:var(--fw-semibold); letter-spacing:var(--tracking-caption); margin-bottom:var(--space-3); }
 .foot-col li{ margin-bottom:var(--space-2); }
 .foot-col a{ font-size:var(--foot-fs); color:var(--foot-fg); display:inline-flex; align-items:center; gap:5px; transition:color var(--motion-fast) var(--ease-out); }
 .foot-col a:hover{ color:var(--link); }
@@ -1090,12 +1091,16 @@ a:focus-visible{ outline-offset:3px; }
   .tl-time::after{ content:""; flex:1 1 auto; height:1px; background:var(--tl-separator); min-width:var(--space-6); }
 }
 
-/* 打印：Apple 官网同样提供干净打印样式 */
+/* 打印：Apple 官网同样提供干净打印样式。
+   色值走 var(--ap-white)/var(--ap-black) 而非 #fff/#000 字面量：token_map 会把
+   #fff/#000 映射成 var(--surface)/var(--fg)，frame 注入块再消毒时 map_css 会改
+   写这三个声明（打印要的是恒白/恒黑，不是随主题变的 surface），字节也不再稳定。
+   --ap-* 是 LAYER 0 原语（design-tokens.css 唯一定义处，深色块不覆盖），等价且稳定。 */
 @media print{
   .nav,.foot-cols .go,.btn-row,.skip-link{ display:none; }
-  body{ background:#fff; color:#000; }
+  body{ background:var(--ap-white); color:var(--ap-black); }
   .issue{ page-break-inside:avoid; }
-  .foot{ background:#fff; }
+  .foot{ background:var(--ap-white); }
 }
 /* ============================================================================
  * detail-frame.css — 上游详情页阅读框架 · 扩展层（v1.0 · 2026-10-15）
@@ -1788,7 +1793,7 @@ body[data-df] nav.nav > .nav-in > .nav-links { display: flex; }
 
 
     <!-- 顶部旗舰 Hero Banner -->
-    <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight mt-3 text-white doc-title" data-sb-h="1- data-df-title="1">3">
+    <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight mt-3 text-white doc-title" data-sb-h="1->3" data-df-title="1">
                     基金每日盘面分析与持仓穿透报告
                 </h1>
       <div class="doc-meta"><span class="df-time"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>调度 <b>11:00</b></span><span class="df-time"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>生成 <b>11:14</b></span><span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点 / Intraday</span><span class="rating rating-offensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-trending-up"/></svg><span class="arrow">▲▲</span>进攻</span><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>+0.514</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>口径未标注 · Σ 不可跨时点比较</span></div>
@@ -2477,15 +2482,15 @@ body[data-df] nav.nav > .nav-in > .nav-links { display: flex; }
       </div>
       <nav class="foot-cols" aria-label="页脚导航">
         <div class="foot-col">
-          <h3>归档</h3>
+          <h4>归档</h4>
           <ul><li><a href="../../index.html">全部归档</a></li><li><a href="../../weekly/">周报</a></li><li><a href="../../monthly/">月报</a></li></ul>
         </div>
         <div class="foot-col">
-          <h3>关于</h3>
+          <h4>关于</h4>
           <ul><li><a href="../../methodology/">研判方法论</a></li><li><a href="../../feed.xml"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-rss"/></svg>RSS 订阅</a></li></ul>
         </div>
         <div class="foot-col">
-          <h3>来源</h3>
+          <h4>来源</h4>
           <ul><li><a href="../../methodology/"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-database"/></svg>腾讯自选股 MCP</a></li><li><a href="../../methodology/"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-git-branch"/></svg>daily-decision-engine</a></li></ul>
         </div>
       </nav>

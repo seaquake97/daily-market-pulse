@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>基金操作指引 · 2026-10-15（周四）尾盘 — 每日市场脉搏</title>
+<style data-origin="icon-subsprite">.ic{width:16px;height:16px;flex:0 0 auto;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.ic-20{width:20px;height:20px}
+.ic-24{width:24px;height:24px}
+.ic-wrap{display:inline-flex;align-items:center;vertical-align:middle;line-height:0}</style></head>
+<body data-sb-h>
+<div class="verdict-card"><div class="row"><span class="rating rating-defensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg><span class="arrow">▼</span>防守</span><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.285</span><span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点 / Intraday</span></div><div class="action">数据时点以 chip 标注为准；盘中数据为实时估值，收盘数据为全日定格，两者不可直接比较。</div></div>
+<h3 data-sb-h="rendered">基金每日操作指引（14:30）</h3>
+<blockquote><b>生成时点</b>：2026年10月15日 14:30（A股盘中尾盘决策窗口） <b>数据架构</b>：腾讯自选股连接器鉴权降级联网采集 + 个人记忆库（<code>MEMORY.md</code>）持仓动态解析 + 六维量化信号确定性评分（<code>Σ = -0.285</code>） + 观点台账审计 <b>数据时点</b>：行情及板块数据均截止于 2026-10-15 14:30 盘中时点，港股实时，美股隔夜收盘（2026-10-14）</blockquote>
+<hr>
+<blockquote><span class="ic-wrap warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg></span> <b>数据源通道说明</b> 本轮运行中腾讯自选股连接器（<code>westock-mcp</code>）返回授权过期（需要用户重新授权），已按主理人降级协议降级为权威金融数据平台（东方财富、新浪财经、上交所、深交所、新华财经）实时交叉核验取数。数据时效精确至 14:29:54 盘中切片，核心行情与持仓价格全部通过 <code>validate_market_data.py</code> 硬断言校验。</blockquote>
+<hr>
+<h4 data-sb-h="rendered">核心决策：Σ 评级与 15:00 前干预指令总档位</h4>
+<p>根据 <code>daily-decision-engine</code> 核心算法计算，今日六维确定性信号综合评分： Σ = -0.285  (有效权重  1.00)</p>
+<p>依据评级驱动规则（Σ  [-0.50, -0.15] 对应【防守】档），<b>今日 15:00 前干预指令总档位为：【防守】档</b>。</p>
+<h4 data-sb-h="rendered">15:00 前干预指令清单（分层执行，禁止套话）</h4>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>业务维度</th><th>决策档位</th><th>15:00 前具体执行指令</th><th>涉及标的与量化金额</th></tr></thead><tbody><tr><td><b>定投额度</b></td><td><b>防守下调</b></td><td>本期/在途定投扣款额度下调至基准的 <b>70%~80%</b> 执行，放量破位期间严格保护现金流，拒绝过早耗尽子弹</td><td>① 汇添富全球移动互联（001668）下调至 210~240 元/期（基准300元）&lt;br&gt;② 景顺长城沪港深（000979）单笔买入下调至 67~76 元（基准96元）&lt;br&gt;③ 景顺长城品质长青（010350）单笔买入下调至 22~25 元（基准32元）&lt;br&gt;④ 标普500/纳指100 各下调至 70~80 元/期（基准100元）</td></tr><tr><td><b>主动追加</b></td><td><b>全面暂停</b></td><td><b>15:00 前暂停一切场外基金手动追加与逆势补仓</b></td><td>创业板指今日大跌 -3.51%，创业板AI（024663）预估跌超 -3.6%，永赢科技（022364）预估跌超 -3.2%，全市场超5000只个股下跌，未出现右侧量价企稳信号，禁止盲目接飞刀</td></tr><tr><td><b>网格委托</b></td><td><b>除息到线</b></td><td>严格仅执行触及网格触发线的委托；未到线标的挂单守候，禁止市价追单</td><td>① <b>平高电气（600312）</b>：今日除权除息（10派2.42元），昨收参考价 19.89 元，盘中最低 19.47 元触及 19.60~19.70 元买一档区间，可按计划在 19.65 元挂买 100 股（持仓由 500 股增至 600 股，符合 1,000 股顶仓红线）&lt;br&gt;② <b>粤高速A（000429）</b>：现价 13.56 元，昨日高位 13.75~13.80 元已完成卖一档减仓；今日回落未达 13.15~13.20 元回补线，守候观望&lt;br&gt;③ <b>甘肃能源（000791）</b>：现价 6.85 元，回踩 6.80~6.85 元区间，未破 6.70 元强买线，观望暂不手动增持</td></tr><tr><td><b>底仓红线</b></td><td><b>严控锁定</b></td><td>触及底仓红线品种一律锁仓停卖</td><td>① <b>华能蒙电（600863）</b>：现价 5.28 元，持仓 1000 股触及底仓红线，严格执行“触及底仓停卖”，一股不卖&lt;br&gt;② <b>江苏银行（600919）</b> / <b>中国广核（003816）</b>：底仓各 100 股长线收息，锁定不动</td></tr></tbody></table></div>
+<hr>
+<h4 class="verdict-card" data-sb-h="rendered">核心决策卡（Decision Cards）</h4>
+<h4 class="verdict-card" data-sb-h="rendered">决策卡 1 | 纯基金组合配置卡 | 2026-10-15</h4>
+<ol><li><b>方向</b>：防守（Σ = -0.285，代码确定性输出，LLM禁改）</li><li><b>偏离幅度</b>：相对沪深300 +0.58 pct（组合预估加权日收益 -1.27% vs 沪深300 -1.85%）</li><li><b>持有期</b>：5 个交易日（有效至 2026-10-22，覆盖三季报密集披露期）</li><li><b>触发条件</b>：若沪指收盘跌破 3650 点且成交额进一步缩至 1.1 万亿元以下，则将定投扣款档位进一步收缩至基准的 50%</li><li><b>失效条件</b>：若全市场放量突破 1.8 万亿元且沪深300收盘涨幅超过 1.0%，全市场上涨家数重回 2500 家以上，则撤销防守档，转入均衡档恢复基准定投</li><li><b>赔率区间</b>：前瞻赔率样本积累中（历史样本 &lt; 20）</li><li><b>数据日历</b>：明日关注中国三季度 GDP 及 9 月经济数据发布，关注隔夜美股科技巨头走势；本卡有效期至 2026-10-22</li></ol>
+<h4 class="verdict-card" data-sb-h="rendered">决策卡 2 | 平高电气（600312）除息网格低吸卡 | 2026-10-15</h4>
+<ol><li><b>方向</b>：网格到线买入（除息后现价 19.65 元，触发 19.60~19.70 元买一档）</li><li><b>偏离幅度</b>：相对沪深300 +0.64 pct（日跌幅 -1.21% vs 沪深300 -1.85%）</li><li><b>持有期</b>：3 个交易日（有效至 2026-10-20）</li><li><b>触发条件</b>：除权除息（10派2.42元）后股价回踩 19.65 元，触及买一档线，限价 19.65 元挂买 100 股，买入后可用资金与仓位仍符合上限</li><li><b>失效条件</b>：若股价破位跌穿 19.20 元支撑线，则暂停后续买档，等待新底部结构</li><li><b>赔率区间</b>：前瞻赔率样本积累中</li><li><b>数据日历</b>：公司预约 10 月 22 日披露三季报；有效期至 2026-10-15 15:00</li></ol>
+<h4 class="verdict-card" data-sb-h="rendered">决策卡 3 | 创业板人工智能ETF联接（024663）暂停补仓卡 | 2026-10-15</h4>
+<ol><li><b>方向</b>：全面暂停追加/静默防守（日预估跌幅 -3.65%）</li><li><b>偏离幅度</b>：相对沪深300 -1.80 pct</li><li><b>持有期</b>：5 个交易日（有效至 2026-10-22）</li><li><b>触发条件</b>：若创业板指在 2700 点整数关口获得放量右侧阳线支撑且日内反弹突破 5 日均线，方可考虑恢复智慧定投首笔补仓</li><li><b>失效条件</b>：若创业板指加速跌破 2700 点进入流动性折价区，则继续维持绝对静默，禁止左侧抄底</li><li><b>赔率区间</b>：前瞻赔率样本积累中</li><li><b>数据日历</b>：关注北美芯片大厂财报及资本开支预警；有效期至 2026-10-22</li></ol>
+<hr>
+<h4 data-sb-h="rendered">一、全市场六维确定性信号硬校验结果</h4>
+<p>今日信号由 <code>compute_signals.py</code> 严格按照公式自动计算，经 <code>validate_market_data.py</code> 全部硬断言核验通过：</p>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>信号维度</th><th>权重</th><th>得分</th><th>量化输入指标与事实来源（时点：2026-10-15 14:30）</th><th>方向与盘面研判</th></tr></thead><tbody><tr><td><b>S1 量能</b></td><td>0.20</td><td><b>+0.187</b></td><td>沪指量比 <code>1.15</code>，成交额 <code>6,800 亿元</code>，两市+北交所总成交额 <code>17,146 亿元</code>（较前日显著放量）</td><td>市场放量下跌，恐慌性抛盘涌出，属于流动性集中释放但承接盘不足阶段</td></tr><tr><td><b>S2 宽度</b></td><td>0.20</td><td><b>-0.628</b></td><td>上涨 466 家，下跌 5060 家，平盘 74 家（上涨占比 <code>8.4%</code>）；涨停 33 家，跌停 21 家</td><td>极度普跌格局，全市场超5000只个股下跌，弱势盘面情绪触及冰点</td></tr><tr><td><b>S3 动量</b></td><td>0.15</td><td><b>-0.667</b></td><td>沪指现价 <code>3683.82</code>，价格/MA5 = <code>-3.01%</code>，价格/MA20 = <code>-4.83%</code>，近20日跌幅 <code>-6.52%</code></td><td>沪指跌破 3700 整数关口，价格运行于 5 日与 20 日均线下方，技术破位特征明显</td></tr><tr><td><b>S4 分化</b></td><td>0.15</td><td><b>-0.732</b></td><td>成长均值（创业板 -3.51% + 科创50 -3.12%）= <code>-3.31%</code> vs 沪深300 <code>-1.85%</code>，价差 <code>-1.46 pct</code></td><td>科技成长遭机构集中调仓与抛售，成长跑输大盘蓝筹，风格撕裂明显</td></tr><tr><td><b>S5 资金</b></td><td>0.15</td><td><b>-0.914</b></td><td>主力净流入 TOP1（白酒）<code>+12.50 亿元</code>，净流出 TOP1（半导体）<code>-58.20 亿元</code>，净差 <code>-45.70 亿元</code></td><td>资金大幅从高风险偏好硬科技板块流出，涌入传统消费避险，整体资金净流出严重</td></tr><tr><td><b>S6 估值</b></td><td>0.15</td><td><b>+1.000</b></td><td>沪深300 PE(TTM) <code>12.85</code>（低于中性基准15），近60日涨跌幅 <code>-13.64%</code></td><td>蓝筹估值安全边际较高，超跌加分项打满，中长期估值底提供底部托底支撑</td></tr><tr><td><b>综合评分</b></td><td><b>1.00</b></td><td><b>-0.285</b></td><td><b>评级结果：【防守】（Defensive）</b></td><td><b>指令：收缩定投比例至 70-80%，暂停手动追加，严格按线执行网格</b></td></tr></tbody></table></div>
+<hr>
+<h4 data-sb-h="rendered">二、基金组合持仓诊断与加权归因（11只纯基金）</h4>
+<p>所有持仓金额与占比唯一来源于 <code>MEMORY.md</code> 动态解析结果（纯基金规模 <code>59,415.24 元</code>，实物黄金 <code>3,907.41 元</code>，总资产规模 <code>63,322.65 元</code>）。</p>
+<blockquote><b>基金估值合规说明</b>：因第三方官方实时估值接口存在数据缺口，本报告严格遵循底线，<b>禁止用指数涨跌冒充基金估值</b>；下列预估变动均基于底层重仓穿透与对应指数联动测算。</blockquote>
+<h4 data-sb-h="rendered">1. 组合收益加权归因（预估日收益率：-1.27%）</h4>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>基金简称</th><th>基金代码</th><th>持仓金额(元)</th><th>仓位占比</th><th>预估日变动</th><th>预估收益贡献</th><th>穿透底层与减震机制分析</th></tr></thead><tbody><tr><td><b>景顺长城沪港深精选A</b></td><td>000979</td><td>15,080.21</td><td>25.38%</td><td><b>-1.85%</b></td><td>-0.470 pct</td><td>恒生科技与港股金融承压，但重仓高股息蓝筹部分对冲杀跌</td></tr><tr><td><b>景顺长城品质长青A</b></td><td>010350</td><td>8,313.80</td><td>13.99%</td><td><b>+0.35%</b></td><td><b>+0.049 pct</b></td><td><b>逆势抗跌核心</b>：重仓白酒与食品饮料今日全市场领涨（皇台酒业涨停、汾酒大涨），形成有效正贡献</td></tr><tr><td><b>汇添富全球移动互联QDII</b></td><td>001668</td><td>7,596.86</td><td>12.79%</td><td><b>-1.95%</b></td><td>-0.249 pct</td><td>隔夜美股纳指重挫 -1.88%，英伟达、博通等芯片股普遍走弱，海外持仓净值补跌</td></tr><tr><td><b>摩根标普500指数QDII</b></td><td>017641</td><td>5,562.90</td><td>9.36%</td><td><b>-0.65%</b></td><td>-0.061 pct</td><td>标普500隔夜回调 -0.65%，医疗保健及必需消费相对抗跌，跌幅可控</td></tr><tr><td><b>华安国际龙头DAX联接A</b></td><td>016560</td><td>5,111.86</td><td>8.60%</td><td><b>-0.40%</b></td><td>-0.034 pct</td><td>欧洲主要股指窄幅震荡，提供跨市场多元对冲功能</td></tr><tr><td><b>富国港股通红利精选A</b></td><td>021513</td><td>4,718.40</td><td>7.94%</td><td><b>-0.55%</b></td><td>-0.044 pct</td><td>港股央国企红利股受资金青睐，股息率支撑强劲，跌幅显著窄于宽基</td></tr><tr><td><b>富国创业板人工智能联接C</b></td><td>024663</td><td>4,357.50</td><td>7.33%</td><td><b>-3.65%</b></td><td>-0.268 pct</td><td>创业板指与CPO算力硬件遭受重击，智慧止盈定投进入深回撤承压期，严禁手动补仓</td></tr><tr><td><b>华泰柏瑞中证红利低波联接C</b></td><td>007466</td><td>4,000.16</td><td>6.73%</td><td><b>-0.25%</b></td><td>-0.017 pct</td><td>红利低波全市场防守利器，波动极低，有效锚定净值波动底线</td></tr><tr><td><b>摩根纳斯达克100指数QDII</b></td><td>019173</td><td>3,176.83</td><td>5.35%</td><td><b>-1.85%</b></td><td>-0.099 pct</td><td>跟踪隔夜纳指100，美联储利率担忧导致高估值科技股回撤</td></tr><tr><td><b>永赢科技智选混合A</b></td><td>022364</td><td>1,496.62</td><td>2.52%</td><td><b>-3.20%</b></td><td>-0.081 pct</td><td>国内硬科技与芯片半导体大幅回撤，仓位较小，负面影响受限</td></tr><tr><td><b>天弘上海金ETF联接C</b></td><td>014662</td><td>0.10</td><td>0.00%</td><td>+0.54%</td><td>0.000 pct</td><td>近乎空仓状态，实物黄金在另表体现</td></tr><tr><td><b>黄金（非基金资产）</b></td><td>GOLD</td><td>3,907.41</td><td>-</td><td><b>+0.54%</b></td><td>+0.033 pct</td><td>国际地缘紧张局势升温，黄金现货与积存金逆势上涨避险</td></tr><tr><td><b>合计 / 加权总计</b></td><td>-</td><td><b>59,415.24</b></td><td><b>100.00%</b></td><td><b>-1.27%</b></td><td><b>-1.27 pct</b></td><td><b>相对沪深300（-1.85%）跑赢 +0.58 pct</b>，食品饮料、红利低波及海外多元配置显现极强抗风险韧性</td></tr></tbody></table></div>
+<hr>
+<h4 data-sb-h="rendered">三、观点台账昨日兑现结算（四态）</h4>
+<p>根据 <code>settle_viewpoints.py</code> 自动化结算器对 2026-10-14 观点台账的审计结果：</p>
+<pre><code>=== 昨日观点兑现结算（四态审计） ===
+  <span class="ic-wrap warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg></span> [V1] 若沪指单日跌幅超过1.5%，则技术破位风险显著加剧，暂停一切主动加仓
+      → UNEVALUABLE: 观点评估时点为 close，今日数据时点为 intraday，防盘中数据误触发
+  <span class="ic-wrap warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg></span> [V2] 若全市场成交额跌破12000亿元，则量能持续萎缩进入阴跌筑底期，防守档位延续
+      → UNEVALUABLE: 观点评估时点为 close，今日数据时点为 intraday，防盘中数据误触发
+  <span class="ic-wrap warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg></span> [V3] 若全市场上涨家数超过2500家，则个股出现广泛超跌反弹，可考虑恢复基准定投
+      → UNEVALUABLE: 观点评估时点为 close，今日数据时点为 intraday，防盘中数据误触发
+
+  结算结论：今日为盘中时点（14:30），昨日 3 条观点评估时点均为 close（收盘后），
+  系统严格遵循 v1.3 终验机制，标记为「无法评估（UNEVALUABLE）」，杜绝盘中假突破导致错误结算。
+  最终结算将在 15:30 每日总复盘中完成。</code></pre>
+<hr>
+<h4 data-sb-h="rendered">四、今日观点台账（Viewpoint Ledger）记录</h4>
+<p>今日决策生成的 3 项定量条件命题已 append-only 写入 <code>2026-10-15/viewpoint.json</code>，供次日自动化比对：</p>
+<ol><li><b>[V1] 沪指极限支撑命题</b>：若沪指收盘跌破 3650 点，则破位寻底动能加剧，防守档定投扣款比例进一步下调至 50%（<code>metric: idx:sh000001.price &lt; 3650.0</code>, <code>eval_at: close</code>）。</li><li><b>[V2] 恐慌出清企稳命题</b>：若全市场成交额突破 18,000 亿元且收盘出现放量长下影，则恐慌盘出清出现阶段性流动性企稳，评级转入均衡档（<code>metric: total_amount_yi &gt; 18000.0</code>, <code>eval_at: close</code>）。</li><li><b>[V3] 普跌修复轮动命题</b>：若全市场上涨家数超过 2,000 家，则极端普跌撕裂行情缓解，超跌成长出现流动性修复（<code>metric: mb:up &gt; 2000</code>, <code>eval_at: close</code>）。</li></ol>
+<hr>
+<h4 data-sb-h="rendered">五、股票与网格资产联动提示（华宝证券）</h4>
+<ul><li><b>平高电气（600312）</b>：除权除息（10派2.42元）落地，最新参考价 19.89 元，盘中价格跌至 19.65 元触及买一档（19.60~19.70 元），<b>可挂买 100 股网格单</b>，底仓由 500 股增至 600 股（可用 400 股），继续享受电网出海与特高压景气。</li><li><b>粤高速A（000429）</b>：现价 13.56 元，昨日冲高 13.80 元已完成减仓 200 股；今日随大盘回调，未触及 13.15~13.20 元回补区间，保持 700 股现有仓位吃息（高于 500 股底仓红线）。</li><li><b>华能蒙电（600863）</b>：现价 5.28 元，触及 1000 股底仓防御红线，<b>绝对停卖锁仓</b>。</li><li><b>甘肃能源（000791）</b>：现价 6.85 元，回踩但不破位，耐心守候 6.75 元以下网格买单触发。</li></ul>
+<hr>
+<blockquote><span class="ic-wrap warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg></span> <b>合规声明</b>：以上内容由 AI 结合量化信号决策协议（daily-decision-engine v1.3）与公开市场数据整理生成，仅供投资者个人操作纪律参考，不构成任何投资建议或基金销售推介。市场有风险，投资决策需基于独立判断与风险承受能力。</blockquote>
+<!-- icon-subsprite:v1 --><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="i-alert-triangle" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol><symbol id="i-arrow-down" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol><symbol id="i-sigma" viewBox="0 0 24 24"><path d="M18 7V5a1 1 0 0 0-1-1H6.5a.5.5 0 0 0-.4.8l4.5 6a2 2 0 0 1 0 2.4l-4.5 6a.5.5 0 0 0 .4.8H17a1 1 0 0 0 1-1v-2"/></symbol></defs></svg></body>
+</html>
