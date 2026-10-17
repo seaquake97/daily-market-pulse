@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
+<!-- PWA 三件套（P-3）：theme-color 双 meta + 清单/图标声明。
+     content 用字面量（P0-3 例外）：meta/清单文件不吃 CSS 变量，var(--token)
+     在浏览器外无解析环境。取值与 design-tokens.css 逐字同源——浅色画布
+     #ffffff（--ap-white）、深色画布 #000000（--ap-black，D-1 深色基准）、
+     交互蓝 #0071e3（--ap-blue，manifest theme_color）；改 token 须同步此处。 -->
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
 <link rel="alternate" type="application/rss+xml" title="每日市场脉搏 · Daily Market Pulse" href="./feed.xml">
 <title>每日市场脉搏 · Daily Market Pulse</title>
 <meta name="description" content="数据驱动的 A 股/基金每日研判档案 · Data-driven daily A-share &amp; fund research archive">
@@ -1229,6 +1238,29 @@ details[open] > summary .accordion-chevron{ transform:rotate(180deg); }
 .archive-list a::after{ content:"›"; color:var(--fg-3); font-size:var(--fs-title3); }
 .archive-list a:hover{ background:var(--surface-alt); color:var(--link); }
 @media (prefers-color-scheme:dark){ .archive-list a:hover{ background:var(--panel-bg); } }
+
+/* ---- 首页「今日研判」（产品债 P-1）----
+ * 定位：首页第一屏回答「今天该做什么」的仪表盘区块——桌面容器内纵排、
+ * 移动端单列。视觉语言与时间线同源：结论段落直接复用 .tl-sum（结论先行
+ * 三段式的唯一样式生产者，concl-head/action/fact/sep 与涨跌语义色全作用域
+ * 于该类），不复制第二套结论样式（双份即漂移）。徽章 / 芯片 / Σ 全部沿用
+ * 既有组件类，本块只新增排布类。 */
+.today-list{ list-style:none; margin:0; padding:0;
+  max-width:var(--container-prose); border-top:1px solid var(--border-soft); }
+.today-item{ padding:var(--space-5) 0; border-bottom:1px solid var(--border-soft); }
+.today-item:last-child{ border-bottom:none; }
+.today-head{ display:flex; align-items:center; gap:var(--space-3);
+  flex-wrap:wrap; margin-bottom:var(--space-2); }
+.today-time{ font-family:var(--font-mono); font-size:var(--fs-subhead);
+  font-weight:var(--fw-semibold); color:var(--tl-time-fg); white-space:nowrap; }
+/* 任务名标题复用 .tl-title（含链接 hover 与 .go 箭头），只改排布不改字色 */
+.today-item .tl-title{ flex:1 1 auto; min-width:0; margin-bottom:0; }
+.today-badges{ display:inline-flex; align-items:center; gap:var(--space-2);
+  flex:0 0 auto; flex-wrap:wrap; }
+@media (max-width:640px){
+  .today-item{ padding:var(--space-4) 0; }
+  .today-head{ gap:var(--space-2); }
+}
 </style>
 </head>
 <body>
@@ -1257,6 +1289,59 @@ details[open] > summary .accordion-chevron{ transform:rotate(180deg); }
       · 最近更新 2026-10-16（周五 · Fri）</p>
   </header>
   <dl class="archive-strip"><div><dt>已归档交易日</dt><dd>6<span class="u">期</span></dd></div><div><dt>研判产出</dt><dd>24<span class="u">篇</span></dd></div><div><dt>最近一期 Σ 评级</dt><dd><span class="rating rating-balanced"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg><span class="arrow">▲</span>均衡</span></dd></div><div><dt>最近一期 Σ 值</dt><dd>+0.180</dd></div><div><dt>数据源</dt><dd><span class="txt">腾讯自选股 MCP</span></dd></div></dl>
+  <section aria-labelledby="sec-today" style="margin-top:var(--space-16)">
+    <div class="sec-head">
+      <h2 class="t-title2" id="sec-today">今日研判</h2>
+      <span class="spacer"></span>
+      <span class="aside"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>2026-10-16 周五 · 5 项产出 · 收盘时点</span>
+    </div>
+    <p class="sec-note t-footnote"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-scale"/></svg>各任务的数据时点与统计口径可能不同：带「统计口径不同」标记的条目，请以当页「数据时点」标注为准阅读，不宜与其他任务或日期的数值直接横向比较。</p>
+    <ol class="today-list">
+    <li class="today-item">
+      <div class="today-head">
+        <span class="today-time">09:28</span>
+        <h3 class="tl-title"><a href="./daily/2026-10-16/stock-assistant.html">股票助手<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+        <span class="today-badges"><span class="tag tag-degraded"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg>数据降级</span><span class="tl-sigma">—</span></span>
+      </div>
+      <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据源降级 · 本轮结论不适用</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">取数非实时（详见正文数据源说明），标准动作暂不执行</span></span></p>
+    </li>
+    <li class="today-item">
+      <div class="today-head">
+        <span class="today-time">11:00</span>
+        <h3 class="tl-title"><a href="./daily/2026-10-16/fund-market.html">基金盘面<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+        <span class="today-badges"><span class="rating rating-offensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-trending-up"/></svg><span class="arrow">▲▲</span>进攻</span><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>+0.514</span></span>
+      </div>
+      <p class="tl-sum"><span class="conclusion"><span class="concl-head">进攻 · Σ+0.514</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">定投额度上浮 ≤<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>20%</span>，网格卖单档位可上移，单日新增买入 ≤ 总仓位 <span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>5%</span></span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：3,747.19 点（<span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+1.07%</span>）</span></span></p>
+    </li>
+    <li class="today-item">
+      <div class="today-head">
+        <span class="today-time">14:30</span>
+        <h3 class="tl-title"><a href="./daily/2026-10-16/fund-guide.html">基金操作指引<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+        <span class="today-badges"><span class="rating rating-conflict"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-shuffle"/></svg><span class="arrow">↔</span>信号矛盾</span><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.011</span></span>
+      </div>
+      <p class="tl-sum"><span class="conclusion"><span class="concl-head">信号矛盾 · Σ-0.011</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">暂停一切主动买入，可挂低于现价 ≥<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>2%</span> 的吸买单；只列多空证据，禁表述为均衡</span></span></p>
+    </li>
+    <li class="today-item">
+      <div class="today-head">
+        <span class="today-time">15:05</span>
+        <h3 class="tl-title"><a href="./daily/2026-10-16/stock-review.html">股票复盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+        <span class="today-badges"><span class="rating rating-balanced"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg><span class="arrow">▲</span>均衡</span><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>+0.180</span></span>
+      </div>
+      <p class="tl-sum"><span class="conclusion"><span class="concl-head">均衡 · Σ+0.180</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">定投按基准额度执行，网格按原参数运行，不主动加减仓</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：3716.28（<span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+0.24%</span>，探底 3678.96 点后长下影企稳回升，收复…</span></span></p>
+    </li>
+    <li class="today-item">
+      <div class="today-head">
+        <span class="today-time">15:30</span>
+        <h3 class="tl-title"><a href="./daily/2026-10-16/daily-review.html">每日总复盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+        <span class="today-badges"><span class="rating rating-balanced"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg><span class="arrow">▲</span>均衡</span><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>+0.180</span></span>
+      </div>
+      <p class="tl-sum"><span class="conclusion"><span class="concl-head">均衡 · Σ+0.180</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">定投按基准额度执行，网格按原参数运行，不主动加减仓</span></span></p>
+    </li>
+    </ol>
+    <div class="btn-row" style="margin-top:var(--space-6)">
+      <a class="btn btn-quiet" href="./daily/2026-10-16/">查看当日全部产出<svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+    </div>
+  </section>
   <section aria-labelledby="sec-timeline" style="margin-top:var(--space-16)">
     <div class="sec-head">
       <h2 class="t-title2" id="sec-timeline">判断轨迹</h2>

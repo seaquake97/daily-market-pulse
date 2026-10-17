@@ -244,6 +244,7 @@
   --container-wide:  1180px;   /* 归档页宽表 */
   --container-prose:  680px;   /* 长文行宽，中文约 34-38 字/行 */
   --container-narrow: 760px;   /* 日期页窄栏 */
+  --container-methodology: 920px; /* 方法论页：9 模块卡片 + 7 步网格 + 双列对比的桌面阅读宽 */
 
   --gutter-desktop: 32px;
   --gutter-tablet:  24px;
@@ -835,32 +836,67 @@ a:focus-visible{ outline-offset:3px; }
  * ========================================================================== */
 
 /* ============================== 时间线 ==================================== */
-/* Apple 做法：零卡片、零投影，靠 92px 刚性左槽 + hairline + 留白 */
-.issue{ margin-bottom:var(--space-16); }
-.issue:last-of-type{ margin-bottom:0; }
-.issue-head{
-  display:flex; align-items:baseline; gap:var(--space-3); flex-wrap:wrap;
-  padding-bottom:var(--space-3); margin-bottom:var(--space-2);
-  border-bottom:1px solid var(--border);
+/* 日期手风琴（Level 1）：最新期默认展开，历史期折叠收拢 */
+details.issue{ margin-bottom:var(--space-8); border-radius:var(--panel-radius); border:1px solid var(--border-soft); background:var(--surface); }
+details.issue:last-of-type{ margin-bottom:0; }
+@media (prefers-color-scheme:dark){ details.issue{ background:var(--surface-alt); border-color:var(--ap-dark-sep); } }
+.issue-head.day-summary{
+  display:flex; align-items:center; justify-content:space-between; gap:var(--space-3);
+  padding:var(--space-4) var(--space-5); margin-bottom:0;
+  border-bottom:1px solid transparent; cursor:pointer; user-select:none; list-style:none;
 }
+.issue-head.day-summary::-webkit-details-marker{ display:none; }
+details.issue[open] > .issue-head.day-summary{ border-bottom:1px solid var(--border-soft); }
+@media (prefers-color-scheme:dark){ details.issue[open] > .issue-head.day-summary{ border-bottom-color:var(--ap-dark-sep); } }
+.issue-date-group{ display:inline-flex; align-items:baseline; gap:var(--space-3); flex-wrap:wrap; }
 .issue-date{ font-size:var(--fs-title4); font-weight:var(--fw-semibold); color:var(--fg); }
 .issue-dow{ font-size:var(--fs-subhead); color:var(--fg-3); }
 .issue-head .spacer{ flex:1 1 auto; }
 .issue-summary{ display:inline-flex; align-items:center; gap:var(--space-2); flex-wrap:wrap; }
-
-.tl{ margin-top:var(--space-2); }
-.tl-item{
-  display:grid; grid-template-columns:var(--tl-gutter) 1fr auto; gap:var(--space-5);
-  padding:var(--tl-row-pad-y) 0; border-bottom:1px solid var(--tl-separator); align-items:start;
-}
-.tl-item:last-child{ border-bottom:none; }
-@media (max-width:900px){
-  .tl-item{ grid-template-columns:76px 1fr; gap:var(--space-4); }
-  .tl-meta{ grid-column:2; justify-self:start; }
-}
+.day-content{ padding:0 var(--space-5) var(--space-3); }
 @media (max-width:640px){
-  .tl-item{ grid-template-columns:1fr; gap:var(--space-3); padding:var(--space-5) 0; }
-  .tl-meta{ grid-column:1; }
+  .issue-head.day-summary{ padding:var(--space-3) var(--space-4); }
+  .day-content{ padding:0 var(--space-3) var(--space-2); }
+}
+
+/* 时点手风琴（Level 2）：二级折叠与展开 */
+.tl{ margin-top:var(--space-2); }
+.tl-item{ border-bottom:1px solid var(--tl-separator); padding:0; display:block; }
+.tl-item:last-child{ border-bottom:none; }
+details.slot-accordion{ width:100%; }
+.slot-head{
+  display:flex; align-items:center; justify-content:space-between; gap:var(--space-2);
+  min-height:48px; padding:var(--space-2) 0; cursor:pointer; user-select:none; list-style:none;
+}
+.slot-head::-webkit-details-marker{ display:none; }
+.slot-head-left{ display:inline-flex; align-items:center; gap:var(--space-2); min-width:0; flex:1 1 auto; }
+.slot-head-right{ display:inline-flex; align-items:center; gap:var(--space-2); flex:0 0 auto; }
+.slot-time{ font-family:var(--font-mono); font-size:var(--fs-subhead); font-weight:var(--fw-semibold); color:var(--tl-time-fg); display:inline-flex; align-items:center; gap:6px; white-space:nowrap; }
+.slot-time .dot{ width:6px; height:6px; border-radius:var(--radius-pill); background:var(--tl-dot); flex-shrink:0; }
+.slot-name{ font-size:var(--fs-subhead); font-weight:var(--fw-medium); color:var(--fg); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.slot-body{ padding:0 0 var(--space-3) var(--space-3); margin-left:3px; border-left:2px solid var(--border-soft); }
+@media (prefers-color-scheme:dark){ .slot-body{ border-left-color:var(--ap-dark-sep); } }
+.slot-foot{ display:flex; align-items:center; gap:var(--space-3); margin-top:var(--space-3); font-size:var(--fs-caption1); color:var(--fg-3); flex-wrap:wrap; }
+
+/* 展开指示箭头旋转 */
+.accordion-chevron{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:16px; height:16px; color:var(--fg-3);
+  transition:transform var(--motion-fast) var(--ease-out); flex-shrink:0;
+}
+details[open] > summary .accordion-chevron{ transform:rotate(180deg); }
+
+/* 单一降级状态药丸 */
+.tag-degraded{ color:var(--warn); border-color:var(--warn); background:var(--rating-balanced-wash); font-weight:var(--fw-semibold); }
+
+@media (max-width:640px){
+  .slot-name{ max-width:140px; }
+  .slot-head{ min-height:44px; }
+  .chip .chip-en{ display:none; }
+  .rating{ font-size:var(--fs-caption2); padding:2px 8px; }
+  .rating .ic{ width:12px; height:12px; }
+  .chip{ font-size:var(--fs-caption2); padding:2px 7px; }
+  .chip .ic{ width:11px; height:11px; }
 }
 
 .tl-time{ display:flex; flex-direction:column; gap:5px; padding-top:3px; }
@@ -923,7 +959,6 @@ a:focus-visible{ outline-offset:3px; }
 .tl-sum .has-gap{ display:inline-flex; align-items:center; gap:5px; }
 
 .tl-meta{ display:flex; flex-direction:column; align-items:flex-end; gap:var(--space-2); padding-top:3px; }
-@media (max-width:640px){ .tl-meta{ flex-direction:row; align-items:center; flex-wrap:wrap; } }
 .tl-sigma{ display:inline-flex; align-items:center; gap:5px; font-size:var(--fs-caption1); color:var(--fg-3); }
 .tl-sigma .ic{ width:12px; height:12px; stroke-width:2; opacity:.75; }
 
@@ -1161,17 +1196,15 @@ a:focus-visible{ outline-offset:3px; }
   .frame{ padding-top:var(--space-10); }
 }
 @media (max-width:640px){
-  .shell{ padding:0 var(--gutter-phone); }
-  .frame{ padding-top:var(--space-8); }
-  .page-head{ padding:var(--space-8) 0 var(--space-6); }
+  .shell{ padding:0 var(--gutter-phone) max(var(--space-16), calc(env(safe-area-inset-bottom, 24px) + var(--space-8))); }
+  .frame{ padding-top:var(--space-6); }
+  .page-head{ padding:var(--space-6) 0 var(--space-4); }
   .page-head h1 .sub{ font-size:var(--fs-title4); }
-  .issue{ margin-bottom:var(--space-10); }
+  .issue{ margin-bottom:var(--space-8); }
   .foot-in{ padding:var(--space-8) var(--gutter-phone) var(--space-10); }
   .foot-top{ gap:var(--space-6); }
   .foot-cols{ gap:var(--space-8); }
   .kpi dd{ font-size:var(--fs-title3); }
-  .tl-time{ flex-direction:row; align-items:center; gap:var(--space-3); flex-wrap:wrap; padding-top:0; }
-  .tl-time::after{ content:""; flex:1 1 auto; height:1px; background:var(--tl-separator); min-width:var(--space-6); }
 }
 
 /* 打印：Apple 官网同样提供干净打印样式。
@@ -1197,6 +1230,29 @@ a:focus-visible{ outline-offset:3px; }
 .archive-list a::after{ content:"›"; color:var(--fg-3); font-size:var(--fs-title3); }
 .archive-list a:hover{ background:var(--surface-alt); color:var(--link); }
 @media (prefers-color-scheme:dark){ .archive-list a:hover{ background:var(--panel-bg); } }
+
+/* ---- 首页「今日研判」（产品债 P-1）----
+ * 定位：首页第一屏回答「今天该做什么」的仪表盘区块——桌面容器内纵排、
+ * 移动端单列。视觉语言与时间线同源：结论段落直接复用 .tl-sum（结论先行
+ * 三段式的唯一样式生产者，concl-head/action/fact/sep 与涨跌语义色全作用域
+ * 于该类），不复制第二套结论样式（双份即漂移）。徽章 / 芯片 / Σ 全部沿用
+ * 既有组件类，本块只新增排布类。 */
+.today-list{ list-style:none; margin:0; padding:0;
+  max-width:var(--container-prose); border-top:1px solid var(--border-soft); }
+.today-item{ padding:var(--space-5) 0; border-bottom:1px solid var(--border-soft); }
+.today-item:last-child{ border-bottom:none; }
+.today-head{ display:flex; align-items:center; gap:var(--space-3);
+  flex-wrap:wrap; margin-bottom:var(--space-2); }
+.today-time{ font-family:var(--font-mono); font-size:var(--fs-subhead);
+  font-weight:var(--fw-semibold); color:var(--tl-time-fg); white-space:nowrap; }
+/* 任务名标题复用 .tl-title（含链接 hover 与 .go 箭头），只改排布不改字色 */
+.today-item .tl-title{ flex:1 1 auto; min-width:0; margin-bottom:0; }
+.today-badges{ display:inline-flex; align-items:center; gap:var(--space-2);
+  flex:0 0 auto; flex-wrap:wrap; }
+@media (max-width:640px){
+  .today-item{ padding:var(--space-4) 0; }
+  .today-head{ gap:var(--space-2); }
+}
 
 /* ============================================================================
  * detail-frame.css — 上游详情页阅读框架 · 扩展层（v1.0 · 2026-10-15）
@@ -1907,7 +1963,7 @@ body[data-df] nav.nav > .nav-in > .nav-links { display: flex; }
 </style>
 </head>
 <body data-sb-h data-df="v1" data-date="2026-10-15" data-slug="stock-review"><!-- detail-frame:v1 -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="i-activity" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></symbol><symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></symbol><symbol id="i-alert-triangle" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol><symbol id="i-archive" viewBox="0 0 24 24"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></symbol><symbol id="i-arrow-down" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></symbol><symbol id="i-arrow-left" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol><symbol id="i-arrow-up" viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></symbol><symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></symbol><symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></symbol><symbol id="i-bar-chart" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></symbol><symbol id="i-chevrons-down" viewBox="0 0 24 24"><polyline points="7 13 12 18 17 13"/><polyline points="7 6 12 11 17 6"/></symbol><symbol id="i-chevrons-up" viewBox="0 0 24 24"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></symbol><symbol id="i-circle-dot" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="12" x2="12.01" y2="12"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol><symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 -.696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><polyline points="14 2 14 8 20 8"/></symbol><symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></symbol><symbol id="i-git-branch" viewBox="0 0 24 24"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><polyline points="12 7 12 12 15 14"/></symbol><symbol id="i-inbox" viewBox="0 0 24 24"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="m6.08 9.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83L17.9 9.5"/><path d="m6.08 14.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83l-3.5-1.59"/></symbol><symbol id="i-lightbulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></symbol><symbol id="i-line-chart" viewBox="0 0 24 24"><line x1="3" y1="3" x2="3" y2="21"/><line x1="3" y1="21" x2="21" y2="21"/><polyline points="7 16 11 10 15 13 20 6"/></symbol><symbol id="i-minus" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></symbol><symbol id="i-radio" viewBox="0 0 24 24"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2a6 6 0 0 1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8a6 6 0 0 1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"/></symbol><symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></symbol><symbol id="i-rss" viewBox="0 0 24 24"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></symbol><symbol id="i-scale" viewBox="0 0 24 24"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></symbol><symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.7-1.1 2-1.7 3.3-1.7H22"/><path d="m18 2 4 4-4 4"/><path d="M2 6h1.9c1.5 0 2.9.9 3.6 2.2"/><path d="M22 18h-5.9c-1.3 0-2.6-.7-3.3-1.8l-.5-.8"/><path d="m18 14 4 4-4 4"/></symbol><symbol id="i-sigma" viewBox="0 0 24 24"><path d="M18 7V5a1 1 0 0 0-1-1H6.5a.5.5 0 0 0-.4.8l4.5 6a2 2 0 0 1 0 2.4l-4.5 6a.5.5 0 0 0 .4.8H17a1 1 0 0 0 1-1v-2"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.123 0 0 0 1.597-1.16z"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol><symbol id="i-thumbs-up" viewBox="0 0 24 24"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></symbol><symbol id="i-timer" viewBox="0 0 24 24"><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" y1="14" x2="15" y2="11"/><circle cx="12" cy="14" r="8"/></symbol><symbol id="i-trending-down" viewBox="0 0 24 24"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></symbol><symbol id="i-trending-up" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol></defs></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="i-activity" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></symbol><symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></symbol><symbol id="i-alert-triangle" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol><symbol id="i-archive" viewBox="0 0 24 24"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></symbol><symbol id="i-arrow-down" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></symbol><symbol id="i-arrow-left" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol><symbol id="i-arrow-up" viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></symbol><symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></symbol><symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></symbol><symbol id="i-bar-chart" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol><symbol id="i-chess-pawn" viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"/><path d="M10.2 10.2c0 1.5-.7 2.2-1.6 3.4-.8 1.1-1.3 2-1.7 2.9h10.2c-.4-.9-.9-1.8-1.7-2.9-.9-1.2-1.6-1.9-1.6-3.4"/></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></symbol><symbol id="i-chevrons-down" viewBox="0 0 24 24"><polyline points="7 13 12 18 17 13"/><polyline points="7 6 12 11 17 6"/></symbol><symbol id="i-chevrons-up" viewBox="0 0 24 24"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></symbol><symbol id="i-circle-dot" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="12" x2="12.01" y2="12"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol><symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 -.696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><polyline points="14 2 14 8 20 8"/></symbol><symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></symbol><symbol id="i-git-branch" viewBox="0 0 24 24"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><polyline points="12 7 12 12 15 14"/></symbol><symbol id="i-inbox" viewBox="0 0 24 24"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="m6.08 9.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83L17.9 9.5"/><path d="m6.08 14.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83l-3.5-1.59"/></symbol><symbol id="i-lightbulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></symbol><symbol id="i-line-chart" viewBox="0 0 24 24"><line x1="3" y1="3" x2="3" y2="21"/><line x1="3" y1="21" x2="21" y2="21"/><polyline points="7 16 11 10 15 13 20 6"/></symbol><symbol id="i-minus" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></symbol><symbol id="i-noodle-bowl" viewBox="0 0 24 24"><path d="M9 9.2c-1.2-1-1.2-2.2 0-3.2 1.2-1 1.2-2.2 0-3.2"/><path d="M15 9.2c-1.2-1-1.2-2.2 0-3.2 1.2-1 1.2-2.2 0-3.2"/><path d="M4 11.5h16a8 8 0 0 1-16 0"/></symbol><symbol id="i-radio" viewBox="0 0 24 24"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2a6 6 0 0 1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8a6 6 0 0 1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"/></symbol><symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></symbol><symbol id="i-rss" viewBox="0 0 24 24"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></symbol><symbol id="i-scale" viewBox="0 0 24 24"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></symbol><symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.7-1.1 2-1.7 3.3-1.7H22"/><path d="m18 2 4 4-4 4"/><path d="M2 6h1.9c1.5 0 2.9.9 3.6 2.2"/><path d="M22 18h-5.9c-1.3 0-2.6-.7-3.3-1.8l-.5-.8"/><path d="m18 14 4 4-4 4"/></symbol><symbol id="i-sigma" viewBox="0 0 24 24"><path d="M18 7V5a1 1 0 0 0-1-1H6.5a.5.5 0 0 0-.4.8l4.5 6a2 2 0 0 1 0 2.4l-4.5 6a.5.5 0 0 0 .4.8H17a1 1 0 0 0 1-1v-2"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.123 0 0 0 1.597-1.16z"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol><symbol id="i-thumbs-up" viewBox="0 0 24 24"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></symbol><symbol id="i-timer" viewBox="0 0 24 24"><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" y1="14" x2="15" y2="11"/><circle cx="12" cy="14" r="8"/></symbol><symbol id="i-trending-down" viewBox="0 0 24 24"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></symbol><symbol id="i-trending-up" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol></defs></svg>
 <a class="skip-link" href="#main">跳到主要内容</a>
 <nav class="nav" aria-label="全局导航">
   <div class="nav-in">
@@ -1925,7 +1981,7 @@ body[data-df] nav.nav > .nav-in > .nav-links { display: flex; }
 <p class="df-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-line-chart"/></svg>股票复盘</p>
 
 <h1 data-sb-h="rendered" class="doc-title" data-df-title="1">股票复盘 · 2026-10-15（周四）收盘</h1>
-      <div class="doc-meta"><span class="df-time"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>调度 <b>15:05</b></span><span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点 / Close</span><span class="rating rating-defensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg><span class="arrow">▼</span>防守</span><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.290</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span></div>
+      <div class="doc-meta"><span class="df-time"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>调度 <b>15:05</b></span><span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点<span class="chip-en"> / Close</span></span><span class="rating rating-defensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg><span class="arrow">▼</span>防守</span><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.290</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span></div>
 <h4 data-sb-h="rendered">01 结论卡</h4><div class="verdict-card"><h4 data-sb-h="rendered">YOU ASKED</h4><blockquote><p>2026年10月15日 A股收盘全景研判与投资策略组合复盘</p></blockquote><h4 data-sb-h="rendered">当前关键数据快照</h4><ul><li><b>上证指数</b>：3707.48（-1.59%，盘中探底 3674.82 点，失守 3740 年线颈线）</li></ul><ul><li><b>深证成指</b>：11816.79（-2.43%）</li></ul><ul><li><b>创业板指</b>：2783.17（-2.92%，跌破 2800 点大关）</li></ul><ul><li><b>科创50</b>：1359.52（-1.50%）</li></ul><ul><li><b>沪深300</b>：4166.01（-1.23%）</li></ul><ul><li><b>北证50</b>：967.51（-3.44%）</li></ul><ul><li><b>两市+北交所成交额</b>：16,460.60 亿元（较前日放量 2194.59 亿元，呈现放量破位出清）</li></ul><ul><li><b>市场涨跌比</b>：433 涨 : 4900 跌 : 45 平（涨停 31 家 / 跌停 24 家，全市场红盘率仅 8.1%）</li></ul><ul><li><b>资金风向</b>：主力净流入半导体设备 +14.44 亿元、白酒 +7.76 亿元；主力净流出电子 -135.33 亿元、通信设备 -86.83 亿元、半导体 -66.23 亿元</li></ul><h4 data-sb-h="rendered">圆桌综合视角</h4><blockquote><p>今日大盘放量重挫破位下行，上证指数收报 3707.48 点（-1.59%），失守 3740 点中枢支撑，创业板深挫 -2.92%，全市场超 4900 只个股普跌。确定性信号评分由代码硬规则裁定为&lt;strong&gt;【防守】&lt;/strong&gt;（Σ = -0.290）。操作策略&lt;em&gt;全面转入被动防守与风险规避&lt;/em&gt;：严格暂停主动追高买入，坚守高股息底仓一股不卖，仅允许按网格预设步长在超跌档位被动低吸做T，依靠高股息与特高压护城河防御市场震荡出清。</p></blockquote><h4 data-sb-h="rendered">核心分析观点</h4><ol><li>产业卡位：科技成长赛道全线重挫，通信设备（-4.39%）、半导体（-3.74%）遭遇资金集中抽水；仅半导体设备（+14.44亿元流入）微幅反抗，电力特高压与高股息资产在除权与调整中显现强抗跌分化。</li></ol><ol><li>估值水位：沪深300 PE 回落至 13.00 倍，60日累计跌幅 -13.14% 带来深度超跌估值保护，S6 估值项给出满分 +1.000，但科技成长股估值杀跌动能尚未完全衰竭。</li></ol><ol><li>信号面硬裁定：确定性评分 Σ = -0.290（有效权重 1.00），市场宽度极度恶化（S2=-0.658，红盘率仅8.1%），主力资金净流出差距悬殊（S5=-1.000），动量指标跌破均线（S3=-0.667），硬规则触发【防守】评级。</li></ol><ol><li>逆向与底仓：持仓 XD平高电气除权日逆市大涨 +1.71%（收报 20.23 元，走出独立填权行情），中国广核（4.55元）平盘收官；虽然华能蒙电（5.15元）与甘肃能源（6.79元）随大盘调整，但整体组合回撤显著小于指数跌幅。</li></ol><ol><li>短线盘面：两市成交放量至 1.64 万亿，呈现恐慌盘涌出的放量破位特征，跌停个股扩大至 24 家，短期情绪处于退潮去杠杆阶段，严守停买与止损纪律。</li></ol><h4 data-sb-h="rendered">圆桌立场分布</h4><ul><li>偏多 1 票（估值分析师关注沪深300回落至13倍PE历史估值底）</li></ul><ul><li>偏空 3 票（信号派首席、短线冲浪手、产业策略师）</li></ul><ul><li>观望 2 票（逆向投资人、财报研究员）</li></ul></div>
 <hr>
 <h4 data-sb-h="rendered">02 子专家观点</h4><h4 data-sb-h="rendered">星望远 · 产业策略师</h4><blockquote><p>&quot;高贝塔成长板块流动性踩踏加剧，电力特高压与电网基建展现强抗震防御。&quot;</p></blockquote><ul><li><b>产业景气度跟踪</b>：高位科技股面临流动性与估值双杀，通信设备板块重挫 -4.39%，半导体下跌 -3.74%，电子板块主力净流出达 135.33 亿元。资金避险向以特高压设备、白酒为代表的防御方向收缩，XD平高电气逆势飘红 +1.71%，印证电网设备景气度独立于大盘贝塔。</li></ul><ul><li><b>配置结论</b>：科技主线短期进入退潮杀跌阶段，严禁盲目抄底高位算力股；坚持“电网基建+清洁能源”确定性主线，让时间消化高估值筹码。</li></ul><h4 data-sb-h="rendered">洲四方 · 信号派首席</h4><blockquote><p>&quot;宽度指标触及极度冰点，动量指标跌破双均线，防守信号全线亮起。&quot;</p></blockquote><ul><li><b>四层信号矩阵</b>：<ul><li>政策面：流动性格局中性，尚无强对冲政策落地。</li></ul><ul><li>资金面：主力资金主力净流出前三行业（电子/通信/半导体）合计失血近 290 亿元，而净流入第一的半导体设备仅 14.44 亿元，资金面处于极度不对称失血状态（S5=-1.000）。</li></ul><ul><li>情绪面：全市场上涨仅 433 家，下跌 4900 家，跌停家数激增至 24 家，亏钱效应蔓延。</li></ul><ul><li>技术面：沪指收于 3707.48 点，价格相对 MA5 偏离 -2.39%，相对 MA20 偏离 -4.22%，S3 动量指标给出 -0.667。</li></ul></li></ul><ul><li><b>纪律建议</b>：Σ 评级 -0.290 严禁违背，取消一切顺势交易与手动加仓，只保留网格预设单挂单。</li></ul><h4 data-sb-h="rendered">文衡价 · 估值分析师</h4><blockquote><p>&quot;沪深300逼近13倍估值黄金底，以高股息与大盘蓝筹构筑防波堤。&quot;</p></blockquote><ul><li><b>估值水位剖析</b>：<ul><li>沪深300 当前 PE 降至 13.00 倍，60日累计跌幅 -13.14%，处于历史估值低分位区间，估值信号 S6 给出满分 +1.000。</li></ul><ul><li>但科创50 当前 PE 仍高达 111.15 倍，创业板指 PE 达 48.21 倍，结构性高估值赛道仍存在挤泡沫风险。</li></ul></li></ul><ul><li><b>配置模型</b>：维持“70%高息公用事业底仓 + 30%智能网格弹性仓位”的杠铃结构，坚守江苏银行（PE 6.22倍）与中国广核（PE 23.15倍）的资产负债表安全。</li></ul><h4 data-sb-h="rendered">坤候底 · 逆向投资人</h4><blockquote><p>&quot;极端恐慌正是检验底仓之时，平高电气逆势走强，甘肃能源回落至低吸观察区。&quot;</p></blockquote><ul><li><b>持仓与支撑位诊断</b>：<ul><li><b>XD平高电（sh600312）</b>：收报 20.23 元 (+1.71%)，分红除权后放量反抽，站稳 20.00 元强支撑，持仓 500 股（可用 400 股），浮盈达 +11.4%，展现特高压龙头极强韧性。</li></ul><ul><li><b>中国广核（sz003816）</b>：收报 4.55 元 (0.00%)，逆势收平，持仓 100 股底仓锁死，现金流防御极佳。</li></ul><ul><li><b>华能蒙电（sh600863）</b>：收报 5.15 元 (-3.56%)，从前期 5.34 元回落，触及 1000 股最小底仓红线，严格锁死停卖。</li></ul><ul><li><b>甘肃能源（sz000791）</b>：收报 6.79 元 (-3.55%)，跌破 6.936 元成本线，现价逼近 6.70 元支撑位，持仓 2300 股进入网格低吸监控区。</li></ul><ul><li><b>卫星ETF富国（sh563230）</b>：收报 0.926 元 (-3.84%)，持仓 20,000 份，跌破 0.950 元档位，最小底仓 15,000 份锁死，等待 0.900 元强支撑做T。</li></ul></li></ul><ul><li><b>心态建议</b>：放量大跌属于空头筹码加速出清，严守底仓边界，切勿因恐慌在低位割肉。</li></ul><h4 data-sb-h="rendered">钊审财 · 财报研究员</h4><blockquote><p>&quot;三季报业绩披露窗口，坚守高自由现金流与电网核电公用事业基本盘。&quot;</p></blockquote><ul><li><b>基本面质量研判</b>：<ul><li>江苏银行（sh600919）收报 12.24 元 (-1.37%)，股息率高达 4.58%，动态 PE 仅 6.22 倍，资产质量与坏账拨备充足。</li></ul><ul><li>中国广核（sz003816）收报 4.55 元，核电机组发电量与上网电价稳定，不受宏观经济波动扰动。</li></ul><ul><li>平高电气（sh600312）特高压在手订单饱满，除权后现金分红到账增厚安全垫。</li></ul></li></ul><ul><li><b>基本面策略</b>：远离三季报可能暴雷的无利润概念题材，聚焦股息率大于 4% 且盈利确定性高的核心龙头。</li></ul><h4 data-sb-h="rendered">磊追浪 · 短线冲浪手</h4><blockquote><p>&quot;沪指失守 3740 点年线颈线，两市放量破位踩踏，短线全面转入空头防守。&quot;</p></blockquote><ul><li><b>盘面结构观察</b>：<ul><li>两市成交放量至 16,460.60 亿元，属于放量下杀，恐慌盘被动涌出。</li></ul><ul><li>跌停个股从昨日 13 家猛增至 24 家，全市场仅 433 家翻红，高贝塔科技品种毫无承接力。</li></ul></li></ul><ul><li><b>技术止损与止盈点</b>：上证指数跌破 3740 点支撑，下方关键防线移至 3680-3700 点整数关口；短线弱势未扭转前，所有手动追涨操作一律冻结。</li></ul>
@@ -1936,7 +1992,7 @@ body[data-df] nav.nav > .nav-in > .nav-links { display: flex; }
 <hr>
 <h4 data-sb-h="rendered">05 决策卡（Decision Cards）</h4><h4 data-sb-h="rendered">组合决策卡 | A股总览 | 2026-10-15</h4><ol><li><b>方向</b>：【防守】（Σ = -0.290，代码硬规则计算，禁改）</li></ol><ol><li><b>偏离幅度</b>：上证指数相对沪深300偏离 -0.36 pct（-1.59% vs -1.23%）</li></ol><ol><li><b>持有期</b>：5 个交易日（2026-10-22 前有效，覆盖本周五及下周初三季报窗口）</li></ol><ol><li><b>触发条件</b>：若两市成交额跌破 1.40 万亿或沪指击穿 3680 点，全面启动防守仓位再平衡，暂停一切新增定投和手动买入。</li></ol><ol><li><b>失效条件</b>：若上证指数放量收复 3760 点且两市成交突破 1.80 万亿，撤销防守判断，恢复均衡仓位。</li></ol><ol><li><b>赔率区间</b>：样本积累中（代码计算）</li></ol><ol><li><b>数据日历</b>：明日关注三季度宏观经济金融数据及外盘隔夜美股走势；有效期至 2026-10-22</li></ol><h4 data-sb-h="rendered">持仓动作卡 | XD平高电（sh600312） | 2026-10-15</h4><ol><li><b>状态</b>：现价 20.23 元，较昨收除权价上涨 +1.71%，持仓 500 股（可用 400 股）</li></ol><ol><li><b>底仓红线</b>：最小底仓 300 股严格锁定，当前持有 200 股弹性波段浮仓</li></ol><ol><li><b>当日委托</b>：若冲高至 21.00 元以上挂卖 100 股止盈浮仓；回调至 19.50 元以下挂买 100 股做T</li></ol><h4 data-sb-h="rendered">持仓观察卡 | 华能蒙电（sh600863） | 2026-10-15</h4><ol><li><b>状态</b>：现价 5.15 元，较基准价 5.15 元持平，单日下跌 -3.56%，持仓 1,000 股</li></ol><ol><li><b>底仓红线</b>：1,000 股严格处于最小底仓保护状态，触及底仓红线，坚决停卖</li></ol><ol><li><b>当日委托</b>：当前价位不买不卖，若极端脉冲至 4.90 元以下挂限价单承接，冲高 5.50 元以上方考虑做T</li></ol><h4 data-sb-h="rendered">持仓观察卡 | 甘肃能源（sz000791） | 2026-10-15</h4><ol><li><b>状态</b>：现价 6.79 元，较基准价 7.05 元偏离 -3.69%，持仓 2,300 股（可用 1,800 股）</li></ol><ol><li><b>底仓红线</b>：最小底仓 1,000 股，最大顶仓 3,500 股</li></ol><ol><li><b>当日委托</b>：若进一步回踩 6.70 元以下，触发网格低吸买入 500 股；冲高至 7.20 元以上分批减仓 500 股</li></ol><h4 data-sb-h="rendered">持仓观察卡 | 卫星ETF富国（sh563230） | 2026-10-15</h4><ol><li><b>状态</b>：现价 0.926 元，较基准价 0.980 元偏离 -5.51%，持仓 20,000 份</li></ol><ol><li><b>底仓红线</b>：最小底仓 15,000 份锁定不动，拥有 5,000 份弹性波段空间</li></ol><ol><li><b>当日委托</b>：0.900-0.910 元区间挂买 1,000 份低吸单；反弹至 0.980 元以上挂卖 1,000 份减浮仓</li></ol>
 <hr>
-<h4 data-sb-h="rendered">06 昨日观点兑现（Viewpoint Settlement）</h4><p>依据 <code>…/WorkBuddy/股票复盘/2026-10-15/settlement.json</code> 自动结算结果：</p><ul><li><b>V1 观点（两市成交维持在 1.4 万亿以上且沪指守住支撑）</b>：<span class="ic-wrap up"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span> <b><span class="tag"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>TRIGGERED</span>（命中）</b>，今日两市+北交所实际成交额 16,460.60 亿元，满足 <code>&gt;= 14,000.0</code> 亿元条件。</li></ul><ul><li><b>V2 观点（若两市成交跌破 1.3 万亿防守升级）</b>：<span class="ic-wrap down"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-ban"/></svg></span> <b><span class="tag"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-x"/></svg>NOT_TRIGGERED</span>（未触发）</b>，成交额 16,460.60 亿元未满足 <code>&lt; 13,000.0</code> 亿元条件。</li></ul><ul><li><b>昨日结算统计</b>：命中 1/2，命中率 <b>50%</b>，条件未触发 1 项，无法评估 0 项，漏报 0 项。策略引擎保持正常校准状态。</li></ul><hr><blockquote><p><span class="ic-wrap warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg></span> 以上内容由 AI 基于公开信息整理生成，仅供参考，不构成任何投资建议或个股推荐。投资有风险，决策需谨慎。</p></blockquote>
+<h4 data-sb-h="rendered">06 昨日观点兑现（Viewpoint Settlement）</h4><p>依据引擎自动结算结果：</p><ul><li><b>V1 观点（两市成交维持在 1.4 万亿以上且沪指守住支撑）</b>：<span class="ic-wrap up"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span> <b><span class="tag"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>TRIGGERED</span>（命中）</b>，今日两市+北交所实际成交额 16,460.60 亿元，满足 <code>&gt;= 14,000.0</code> 亿元条件。</li></ul><ul><li><b>V2 观点（若两市成交跌破 1.3 万亿防守升级）</b>：<span class="ic-wrap down"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-ban"/></svg></span> <b><span class="tag"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-x"/></svg>NOT_TRIGGERED</span>（未触发）</b>，成交额 16,460.60 亿元未满足 <code>&lt; 13,000.0</code> 亿元条件。</li></ul><ul><li><b>昨日结算统计</b>：命中 1/2，命中率 <b>50%</b>，条件未触发 1 项，无法评估 0 项，漏报 0 项。策略引擎保持正常校准状态。</li></ul><hr><blockquote><p><span class="ic-wrap warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg></span> 以上内容由 AI 基于公开信息整理生成，仅供参考，不构成任何投资建议或个股推荐。投资有风险，决策需谨慎。</p></blockquote>
 
 </div>
 </main>

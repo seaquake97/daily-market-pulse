@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
+<!-- PWA 三件套（P-3）：theme-color 双 meta + 清单/图标声明。
+     content 用字面量（P0-3 例外）：meta/清单文件不吃 CSS 变量，var(--token)
+     在浏览器外无解析环境。取值与 design-tokens.css 逐字同源——浅色画布
+     #ffffff（--ap-white）、深色画布 #000000（--ap-black，D-1 深色基准）、
+     交互蓝 #0071e3（--ap-blue，manifest theme_color）；改 token 须同步此处。 -->
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
 <link rel="alternate" type="application/rss+xml" title="每日市场脉搏 · Daily Market Pulse" href="../../feed.xml">
 <title>2026-10-14 每日市场脉搏 · Daily Market Pulse</title>
 <meta name="description" content="Σ 评级【防守】（-0.339），覆盖 5 项任务产出，数据时点 收盘时点。">
@@ -1229,6 +1238,29 @@ details[open] > summary .accordion-chevron{ transform:rotate(180deg); }
 .archive-list a::after{ content:"›"; color:var(--fg-3); font-size:var(--fs-title3); }
 .archive-list a:hover{ background:var(--surface-alt); color:var(--link); }
 @media (prefers-color-scheme:dark){ .archive-list a:hover{ background:var(--panel-bg); } }
+
+/* ---- 首页「今日研判」（产品债 P-1）----
+ * 定位：首页第一屏回答「今天该做什么」的仪表盘区块——桌面容器内纵排、
+ * 移动端单列。视觉语言与时间线同源：结论段落直接复用 .tl-sum（结论先行
+ * 三段式的唯一样式生产者，concl-head/action/fact/sep 与涨跌语义色全作用域
+ * 于该类），不复制第二套结论样式（双份即漂移）。徽章 / 芯片 / Σ 全部沿用
+ * 既有组件类，本块只新增排布类。 */
+.today-list{ list-style:none; margin:0; padding:0;
+  max-width:var(--container-prose); border-top:1px solid var(--border-soft); }
+.today-item{ padding:var(--space-5) 0; border-bottom:1px solid var(--border-soft); }
+.today-item:last-child{ border-bottom:none; }
+.today-head{ display:flex; align-items:center; gap:var(--space-3);
+  flex-wrap:wrap; margin-bottom:var(--space-2); }
+.today-time{ font-family:var(--font-mono); font-size:var(--fs-subhead);
+  font-weight:var(--fw-semibold); color:var(--tl-time-fg); white-space:nowrap; }
+/* 任务名标题复用 .tl-title（含链接 hover 与 .go 箭头），只改排布不改字色 */
+.today-item .tl-title{ flex:1 1 auto; min-width:0; margin-bottom:0; }
+.today-badges{ display:inline-flex; align-items:center; gap:var(--space-2);
+  flex:0 0 auto; flex-wrap:wrap; }
+@media (max-width:640px){
+  .today-item{ padding:var(--space-4) 0; }
+  .today-head{ gap:var(--space-2); }
+}
 </style>
 </head>
 <body>

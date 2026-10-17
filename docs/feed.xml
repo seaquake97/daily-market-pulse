@@ -6,46 +6,172 @@
   <description>数据驱动的 A 股/基金每日研判档案 / Data-driven daily research archive</description>
   <language>zh-CN</language>
   <item>
-    <title>股票助手 · 2026-10-16（周五）早盘集合竞价研判</title>
-    <link>https://seaquake97.github.io/daily-market-pulse/daily/2026-10-16/</link>
-    <guid isPermaLink="true">https://seaquake97.github.io/daily-market-pulse/daily/2026-10-16/</guid>
-    <description>Σ 评级【均衡】（+0.180），覆盖 5 项任务产出。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
-    <pubDate>Fri, 16 Oct 2026 00:00:00 +0000</pubDate>
+    <title>股票助手 · 2026-10-16</title>
+    <link>daily/2026-10-16/stock-assistant.html</link>
+    <guid isPermaLink="false">2026-10-16/stock-assistant</guid>
+    <description>数据源降级 · 本轮结论不适用｜取数非实时（详见正文数据源说明），标准动作暂不执行。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
+    <pubDate>Fri, 16 Oct 2026 00:00:00 +0800</pubDate>
   </item>
   <item>
-    <title>股票助手 · 2026-10-15（周四）早盘集合竞价研判</title>
-    <link>https://seaquake97.github.io/daily-market-pulse/daily/2026-10-15/</link>
-    <guid isPermaLink="true">https://seaquake97.github.io/daily-market-pulse/daily/2026-10-15/</guid>
-    <description>Σ 评级【防守】（-0.290），覆盖 5 项任务产出。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
-    <pubDate>Thu, 15 Oct 2026 00:00:00 +0000</pubDate>
+    <title>基金盘面 · 2026-10-16</title>
+    <link>daily/2026-10-16/fund-market.html</link>
+    <guid isPermaLink="false">2026-10-16/fund-market</guid>
+    <description>进攻 · Σ+0.514｜定投额度上浮 ≤20%，网格卖单档位可上移，单日新增买入 ≤ 总仓位 5%｜上证指数：3,747.19 点（+1.07%）。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
+    <pubDate>Fri, 16 Oct 2026 00:00:00 +0800</pubDate>
   </item>
   <item>
-    <title>股票助手 · 2026-10-14（周三）盘中研判</title>
-    <link>https://seaquake97.github.io/daily-market-pulse/daily/2026-10-14/</link>
-    <guid isPermaLink="true">https://seaquake97.github.io/daily-market-pulse/daily/2026-10-14/</guid>
-    <description>Σ 评级【防守】（-0.339），覆盖 5 项任务产出。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
-    <pubDate>Wed, 14 Oct 2026 00:00:00 +0000</pubDate>
+    <title>基金操作指引 · 2026-10-16</title>
+    <link>daily/2026-10-16/fund-guide.html</link>
+    <guid isPermaLink="false">2026-10-16/fund-guide</guid>
+    <description>信号矛盾 · Σ-0.011｜暂停一切主动买入，可挂低于现价 ≥2% 的吸买单；只列多空证据，禁表述为均衡。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
+    <pubDate>Fri, 16 Oct 2026 00:00:00 +0800</pubDate>
   </item>
   <item>
-    <title>A股持仓每日投研诊断与网格交易操作指南（2026-10-13 周二 午后补跑全景研判）</title>
-    <link>https://seaquake97.github.io/daily-market-pulse/daily/2026-10-13/</link>
-    <guid isPermaLink="true">https://seaquake97.github.io/daily-market-pulse/daily/2026-10-13/</guid>
-    <description>Σ 评级未标注（数据缺口），覆盖 5 项任务产出。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
-    <pubDate>Tue, 13 Oct 2026 00:00:00 +0000</pubDate>
+    <title>股票复盘 · 2026-10-16</title>
+    <link>daily/2026-10-16/stock-review.html</link>
+    <guid isPermaLink="false">2026-10-16/stock-review</guid>
+    <description>均衡 · Σ+0.180｜定投按基准额度执行，网格按原参数运行，不主动加减仓｜上证指数：3716.28（+0.24%，探底 3678.96 点后长下影企稳回升，收复…。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
+    <pubDate>Fri, 16 Oct 2026 00:00:00 +0800</pubDate>
   </item>
   <item>
-    <title>基金每日盘面分析与加权预估报告（11:00午盘版）</title>
-    <link>https://seaquake97.github.io/daily-market-pulse/daily/2026-10-12/</link>
-    <guid isPermaLink="true">https://seaquake97.github.io/daily-market-pulse/daily/2026-10-12/</guid>
-    <description>Σ 评级未标注（数据缺口），覆盖 2 项任务产出。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
-    <pubDate>Mon, 12 Oct 2026 00:00:00 +0000</pubDate>
+    <title>每日总复盘 · 2026-10-16</title>
+    <link>daily/2026-10-16/daily-review.html</link>
+    <guid isPermaLink="false">2026-10-16/daily-review</guid>
+    <description>均衡 · Σ+0.180｜定投按基准额度执行，网格按原参数运行，不主动加减仓。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
+    <pubDate>Fri, 16 Oct 2026 00:00:00 +0800</pubDate>
   </item>
   <item>
-    <title>基金每日盘面分析与加权预估报告（11:00午盘版）</title>
-    <link>https://seaquake97.github.io/daily-market-pulse/daily/2026-10-11/</link>
-    <guid isPermaLink="true">https://seaquake97.github.io/daily-market-pulse/daily/2026-10-11/</guid>
-    <description>Σ 评级未标注（数据缺口），覆盖 2 项任务产出。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
-    <pubDate>Sun, 11 Oct 2026 00:00:00 +0000</pubDate>
+    <title>股票助手 · 2026-10-15</title>
+    <link>daily/2026-10-15/stock-assistant.html</link>
+    <guid isPermaLink="false">2026-10-15/stock-assistant</guid>
+    <description>数据源降级 · 本轮结论不适用｜取数非实时（详见正文数据源说明），标准动作暂不执行。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
+    <pubDate>Thu, 15 Oct 2026 00:00:00 +0800</pubDate>
+  </item>
+  <item>
+    <title>基金盘面 · 2026-10-15</title>
+    <link>daily/2026-10-15/fund-market.html</link>
+    <guid isPermaLink="false">2026-10-15/fund-market</guid>
+    <description>防守 · Σ-0.200｜暂停主动买入（含手动追加），定投可降档 ≤30%，卖出仅在触发线执行｜上证指数：3,703.93 点（-1.68%）。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
+    <pubDate>Thu, 15 Oct 2026 00:00:00 +0800</pubDate>
+  </item>
+  <item>
+    <title>基金操作指引 · 2026-10-15</title>
+    <link>daily/2026-10-15/fund-guide.html</link>
+    <guid isPermaLink="false">2026-10-15/fund-guide</guid>
+    <description>防守 · Σ-0.285｜暂停主动买入（含手动追加），定投可降档 ≤30%，卖出仅在触发线执行。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
+    <pubDate>Thu, 15 Oct 2026 00:00:00 +0800</pubDate>
+  </item>
+  <item>
+    <title>股票复盘 · 2026-10-15</title>
+    <link>daily/2026-10-15/stock-review.html</link>
+    <guid isPermaLink="false">2026-10-15/stock-review</guid>
+    <description>防守 · Σ-0.290｜暂停主动买入（含手动追加），定投可降档 ≤30%，卖出仅在触发线执行｜上证指数：3707.48（-1.59%，盘中探底 3674.82 点，失守 3740…。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
+    <pubDate>Thu, 15 Oct 2026 00:00:00 +0800</pubDate>
+  </item>
+  <item>
+    <title>每日总复盘 · 2026-10-15</title>
+    <link>daily/2026-10-15/daily-review.html</link>
+    <guid isPermaLink="false">2026-10-15/daily-review</guid>
+    <description>防守 · Σ-0.290｜暂停主动买入（含手动追加），定投可降档 ≤30%，卖出仅在触发线执行。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
+    <pubDate>Thu, 15 Oct 2026 00:00:00 +0800</pubDate>
+  </item>
+  <item>
+    <title>股票助手 · 2026-10-14</title>
+    <link>daily/2026-10-14/stock-assistant.html</link>
+    <guid isPermaLink="false">2026-10-14/stock-assistant</guid>
+    <description>数据源降级 · 本轮结论不适用｜取数非实时（详见正文数据源说明），标准动作暂不执行。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
+    <pubDate>Wed, 14 Oct 2026 00:00:00 +0800</pubDate>
+  </item>
+  <item>
+    <title>基金盘面 · 2026-10-14</title>
+    <link>daily/2026-10-14/fund-market.html</link>
+    <guid isPermaLink="false">2026-10-14/fund-market</guid>
+    <description>数据缺口 · 未评级｜本任务无可用评级，详见正文说明｜上证指数：3,807.50 点（+0.17%）。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
+    <pubDate>Wed, 14 Oct 2026 00:00:00 +0800</pubDate>
+  </item>
+  <item>
+    <title>基金操作指引 · 2026-10-14</title>
+    <link>daily/2026-10-14/fund-guide.html</link>
+    <guid isPermaLink="false">2026-10-14/fund-guide</guid>
+    <description>防守 · Σ-0.263｜暂停主动买入（含手动追加），定投可降档 ≤30%，卖出仅在触发线执行｜纯基金组合预估日收益：-0.14%（跑赢沪深300大盘约 +1.16 pct）。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
+    <pubDate>Wed, 14 Oct 2026 00:00:00 +0800</pubDate>
+  </item>
+  <item>
+    <title>股票复盘 · 2026-10-14</title>
+    <link>daily/2026-10-14/stock-review.html</link>
+    <guid isPermaLink="false">2026-10-14/stock-review</guid>
+    <description>数据缺口 · 未评级｜本任务无可用评级，详见正文说明｜上证指数：3767.23（-0.88%，跌破3800关口）。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
+    <pubDate>Wed, 14 Oct 2026 00:00:00 +0800</pubDate>
+  </item>
+  <item>
+    <title>每日总复盘 · 2026-10-14</title>
+    <link>daily/2026-10-14/daily-review.html</link>
+    <guid isPermaLink="false">2026-10-14/daily-review</guid>
+    <description>防守 · Σ-0.339｜暂停主动买入（含手动追加），定投可降档 ≤30%，卖出仅在触发线执行。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
+    <pubDate>Wed, 14 Oct 2026 00:00:00 +0800</pubDate>
+  </item>
+  <item>
+    <title>股票助手 · 2026-10-13</title>
+    <link>daily/2026-10-13/stock-assistant.html</link>
+    <guid isPermaLink="false">2026-10-13/stock-assistant</guid>
+    <description>数据缺口 · 未评级｜本任务无可用评级，详见正文说明｜上证指数 (sh000001)：3807.15 点 (+0.26%) | 竞价大幅低开…。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
+    <pubDate>Tue, 13 Oct 2026 00:00:00 +0800</pubDate>
+  </item>
+  <item>
+    <title>基金盘面 · 2026-10-13</title>
+    <link>daily/2026-10-13/fund-market.html</link>
+    <guid isPermaLink="false">2026-10-13/fund-market</guid>
+    <description>数据缺口 · 未评级｜本任务无可用评级，详见正文说明｜上证指数：3,807.93 点（+0.28%）。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
+    <pubDate>Tue, 13 Oct 2026 00:00:00 +0800</pubDate>
+  </item>
+  <item>
+    <title>基金操作指引 · 2026-10-13</title>
+    <link>daily/2026-10-13/fund-guide.html</link>
+    <guid isPermaLink="false">2026-10-13/fund-guide</guid>
+    <description>数据缺口 · 未评级｜本任务无可用评级，详见正文说明｜涨停板数：72 家 （主板≥10%、创业/科创≥20%、北交所≥30%）。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
+    <pubDate>Tue, 13 Oct 2026 00:00:00 +0800</pubDate>
+  </item>
+  <item>
+    <title>股票复盘 · 2026-10-13</title>
+    <link>daily/2026-10-13/stock-review.html</link>
+    <guid isPermaLink="false">2026-10-13/stock-review</guid>
+    <description>数据缺口 · 未评级｜本任务无可用评级，详见正文说明｜上证指数：3800.86  +0.10% (+3.62点，探底3741点回升…。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
+    <pubDate>Tue, 13 Oct 2026 00:00:00 +0800</pubDate>
+  </item>
+  <item>
+    <title>每日总复盘 · 2026-10-13</title>
+    <link>daily/2026-10-13/daily-review.html</link>
+    <guid isPermaLink="false">2026-10-13/daily-review</guid>
+    <description>数据缺口 · 未评级｜本任务无可用评级，详见正文说明。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
+    <pubDate>Tue, 13 Oct 2026 00:00:00 +0800</pubDate>
+  </item>
+  <item>
+    <title>基金盘面 · 2026-10-12</title>
+    <link>daily/2026-10-12/fund-market.html</link>
+    <guid isPermaLink="false">2026-10-12/fund-market</guid>
+    <description>数据缺口 · 未评级｜本任务无可用评级，详见正文说明｜上证指数：3,808.04 点（-0.15%）。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
+    <pubDate>Mon, 12 Oct 2026 00:00:00 +0800</pubDate>
+  </item>
+  <item>
+    <title>基金操作指引 · 2026-10-12</title>
+    <link>daily/2026-10-12/fund-guide.html</link>
+    <guid isPermaLink="false">2026-10-12/fund-guide</guid>
+    <description>数据缺口 · 未评级｜本任务无可用评级，详见正文说明｜涨停板数：50 家 （主板≥10%、创业/科创≥20%、北交所≥30%）。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
+    <pubDate>Mon, 12 Oct 2026 00:00:00 +0800</pubDate>
+  </item>
+  <item>
+    <title>基金盘面 · 2026-10-11</title>
+    <link>daily/2026-10-11/fund-market.html</link>
+    <guid isPermaLink="false">2026-10-11/fund-market</guid>
+    <description>数据缺口 · 未评级｜本任务无可用评级，详见正文说明｜上证指数：3,813.79 点（+0.05%）。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
+    <pubDate>Sun, 11 Oct 2026 00:00:00 +0800</pubDate>
+  </item>
+  <item>
+    <title>基金操作指引 · 2026-10-11</title>
+    <link>daily/2026-10-11/fund-guide.html</link>
+    <guid isPermaLink="false">2026-10-11/fund-guide</guid>
+    <description>数据缺口 · 未评级｜本任务无可用评级，详见正文说明｜涨停板数：73 家 （主板≥10%、创业/科创≥20%、北交所≥30%）。本站研判内容由 AI 自动生成，非持牌机构发布，不提供投资咨询。</description>
+    <pubDate>Sun, 11 Oct 2026 00:00:00 +0800</pubDate>
   </item>
 </channel>
 </rss>
