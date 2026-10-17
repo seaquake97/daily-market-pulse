@@ -858,8 +858,24 @@ a:focus-visible{ outline-offset:3px; }
   .tl-meta{ grid-column:2; justify-self:start; }
 }
 @media (max-width:640px){
-  .tl-item{ grid-template-columns:1fr; gap:var(--space-3); padding:var(--space-5) 0; }
-  .tl-meta{ grid-column:1; }
+  .tl-item{
+    display:grid; grid-template-columns:auto 1fr;
+    grid-template-areas:"time meta" "body body";
+    gap:var(--space-2) var(--space-3); padding:var(--space-3) 0;
+  }
+  .tl-time{ grid-area:time; flex-direction:row; align-items:center; padding-top:0; }
+  .tl-time::after{ display:none; }
+  .tl-run{ display:none; }
+  .tl-meta{ grid-area:meta; flex-direction:row; justify-content:flex-end; align-items:center; gap:var(--space-2); padding-top:0; }
+  .tl-body{ grid-area:body; min-width:0; }
+  .tl-kicker{ display:none; }
+  .tl-title{ font-size:var(--fs-subhead); line-height:var(--lh-subhead); margin-bottom:var(--space-1); }
+  .tl-sum .concl-fact{ display:none; }
+  .rating{ font-size:var(--fs-caption2); padding:2px 8px; }
+  .rating .ic{ width:12px; height:12px; }
+  .chip{ font-size:var(--fs-caption2); padding:2px 7px; }
+  .chip .ic{ width:11px; height:11px; }
+  .chip .chip-en{ display:none; }
 }
 
 .tl-time{ display:flex; flex-direction:column; gap:5px; padding-top:3px; }
@@ -922,7 +938,6 @@ a:focus-visible{ outline-offset:3px; }
 .tl-sum .has-gap{ display:inline-flex; align-items:center; gap:5px; }
 
 .tl-meta{ display:flex; flex-direction:column; align-items:flex-end; gap:var(--space-2); padding-top:3px; }
-@media (max-width:640px){ .tl-meta{ flex-direction:row; align-items:center; flex-wrap:wrap; } }
 .tl-sigma{ display:inline-flex; align-items:center; gap:5px; font-size:var(--fs-caption1); color:var(--fg-3); }
 .tl-sigma .ic{ width:12px; height:12px; stroke-width:2; opacity:.75; }
 
@@ -1161,16 +1176,14 @@ a:focus-visible{ outline-offset:3px; }
 }
 @media (max-width:640px){
   .shell{ padding:0 var(--gutter-phone); }
-  .frame{ padding-top:var(--space-8); }
-  .page-head{ padding:var(--space-8) 0 var(--space-6); }
+  .frame{ padding-top:var(--space-6); }
+  .page-head{ padding:var(--space-6) 0 var(--space-4); }
   .page-head h1 .sub{ font-size:var(--fs-title4); }
-  .issue{ margin-bottom:var(--space-10); }
+  .issue{ margin-bottom:var(--space-8); }
   .foot-in{ padding:var(--space-8) var(--gutter-phone) var(--space-10); }
   .foot-top{ gap:var(--space-6); }
   .foot-cols{ gap:var(--space-8); }
   .kpi dd{ font-size:var(--fs-title3); }
-  .tl-time{ flex-direction:row; align-items:center; gap:var(--space-3); flex-wrap:wrap; padding-top:0; }
-  .tl-time::after{ content:""; flex:1 1 auto; height:1px; background:var(--tl-separator); min-width:var(--space-6); }
 }
 
 /* 打印：Apple 官网同样提供干净打印样式。
@@ -1262,7 +1275,7 @@ a:focus-visible{ outline-offset:3px; }
         <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据源降级 · 本轮结论不适用</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">取数非实时（详见正文数据源说明），标准动作暂不执行</span></span></p>
       </div>
       <div class="tl-meta">
-        <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>竞价时点 / Pre-open</span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg>数据源降级</span>
+        <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>竞价时点<span class="chip-en"> / Pre-open</span></span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg>数据源降级</span>
         <span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg>数据不可信·Σ 不作参考</span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>评级未标注</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
       </div>
     </li>
@@ -1277,7 +1290,7 @@ a:focus-visible{ outline-offset:3px; }
         <p class="tl-sum"><span class="conclusion"><span class="concl-head">进攻 · Σ+0.514</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">定投额度上浮 ≤<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>20%</span>，网格卖单档位可上移，单日新增买入 ≤ 总仓位 <span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>5%</span></span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：3,747.19 点（<span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+1.07%</span>）</span></span></p>
       </div>
       <div class="tl-meta">
-        <span class="rating rating-offensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-trending-up"/></svg><span class="arrow">▲▲</span>进攻</span><span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点 / Intraday</span>
+        <span class="rating rating-offensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-trending-up"/></svg><span class="arrow">▲▲</span>进攻</span><span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点<span class="chip-en"> / Intraday</span></span>
         <span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>+0.514</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
       </div>
     </li>
@@ -1292,7 +1305,7 @@ a:focus-visible{ outline-offset:3px; }
         <p class="tl-sum"><span class="conclusion"><span class="concl-head">信号矛盾 · Σ-0.011</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">暂停一切主动买入，可挂低于现价 ≥<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>2%</span> 的吸买单；只列多空证据，禁表述为均衡</span></span></p>
       </div>
       <div class="tl-meta">
-        <span class="rating rating-conflict"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-shuffle"/></svg><span class="arrow">↔</span>信号矛盾</span><span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点 / Intraday</span>
+        <span class="rating rating-conflict"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-shuffle"/></svg><span class="arrow">↔</span>信号矛盾</span><span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点<span class="chip-en"> / Intraday</span></span>
         <span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.011</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
       </div>
     </li>
@@ -1307,7 +1320,7 @@ a:focus-visible{ outline-offset:3px; }
         <p class="tl-sum"><span class="conclusion"><span class="concl-head">均衡 · Σ+0.180</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">定投按基准额度执行，网格按原参数运行，不主动加减仓</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：3716.28（<span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+0.24%</span>，探底 3678.96 点后长下影企稳回升，收复…</span></span></p>
       </div>
       <div class="tl-meta">
-        <span class="rating rating-balanced"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg><span class="arrow">▲</span>均衡</span><span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点 / Close</span>
+        <span class="rating rating-balanced"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg><span class="arrow">▲</span>均衡</span><span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点<span class="chip-en"> / Close</span></span>
         <span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>+0.180</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
       </div>
     </li>
@@ -1322,7 +1335,7 @@ a:focus-visible{ outline-offset:3px; }
         <p class="tl-sum"><span class="conclusion"><span class="concl-head">均衡 · Σ+0.180</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">定投按基准额度执行，网格按原参数运行，不主动加减仓</span></span></p>
       </div>
       <div class="tl-meta">
-        <span class="rating rating-balanced"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg><span class="arrow">▲</span>均衡</span><span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点 / Close</span>
+        <span class="rating rating-balanced"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg><span class="arrow">▲</span>均衡</span><span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点<span class="chip-en"> / Close</span></span>
         <span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>+0.180</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
       </div>
     </li>
