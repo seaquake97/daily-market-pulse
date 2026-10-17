@@ -1234,6 +1234,51 @@ a:focus-visible{ outline-offset:3px; }
   .mp-sec{ padding:var(--space-6) var(--space-5); }
 }
 </style>
+<style data-origin="strategies">
+.strat-group + .strat-group{ margin-top:var(--space-6); }
+.strat-group-label{ font-size:var(--fs-caption1); letter-spacing:var(--tracking-caption);
+  color:var(--fg-3); margin-bottom:var(--space-2); }
+.strat-card{ border:1px solid var(--border-soft); border-radius:var(--radius-sm);
+  background:var(--surface-alt); padding:var(--space-4) var(--space-5);
+  corner-shape:var(--corner-shape,squircle); }
+.strat-card + .strat-card{ margin-top:var(--space-4); }
+.strat-head{ display:flex; align-items:baseline; gap:var(--space-3); flex-wrap:wrap; }
+.strat-card .strat-title{ margin:0; font-family:var(--font-display);
+  font-size:var(--fs-title4); line-height:var(--lh-title4);
+  letter-spacing:var(--tracking-title4); font-weight:var(--fw-semibold); color:var(--fg); }
+.strat-cat{ flex:0 0 auto; }
+.strat-cat-strategic{ background:transparent; color:var(--accent); border-color:var(--accent); }
+.strat-cat-execution{ background:transparent; color:var(--link); border-color:var(--link); }
+.strat-cat-defensive{ background:var(--rating-defensive-bg); color:var(--rating-defensive-fg);
+  border-color:var(--rating-defensive-ring); }
+.strat-desc{ margin:var(--space-2) 0 0; font-size:var(--fs-callout);
+  line-height:var(--lh-callout); color:var(--fg-2); max-width:70ch; }
+.strat-facts{ display:flex; flex-wrap:wrap; gap:var(--space-2) var(--space-5);
+  margin:var(--space-3) 0 0; }
+.strat-fact{ display:flex; align-items:baseline; gap:6px; }
+.strat-fact dt{ font-size:var(--fs-caption1); letter-spacing:var(--tracking-caption); color:var(--fg-3); }
+.strat-fact dd{ margin:0; font-family:var(--font-mono); font-variant-numeric:var(--numeric);
+  font-size:var(--fs-footnote); color:var(--fg); }
+.strat-block{ margin-top:var(--space-4); }
+.strat-card .strat-h{ margin:0 0 var(--space-2); font-size:var(--fs-caption1);
+  letter-spacing:var(--tracking-caption); font-weight:var(--fw-semibold); color:var(--fg-2); }
+.strat-card .strat-list{ margin:0; padding-left:20px; }
+.strat-card .strat-list li{ font-size:var(--fs-callout); line-height:var(--lh-callout);
+  color:var(--fg-2); margin:var(--space-1) 0; }
+.strat-tags{ display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-top:var(--space-4); }
+.strat-tags .strat-h{ margin:0; }
+.strat-code{ font-family:var(--font-mono); font-variant-numeric:var(--numeric);
+  font-size:var(--fs-caption1); color:var(--fg); background:var(--bg);
+  border:1px solid var(--border-soft); border-radius:var(--radius-sm); padding:2px 7px; }
+@media (prefers-color-scheme:dark){
+  .strat-card{ background:var(--panel-bg); border-color:var(--ap-dark-sep); }
+  .strat-code{ background:var(--ap-dark-2); border-color:var(--ap-dark-sep); }
+}
+@media (max-width:640px){
+  .strat-card{ padding:var(--space-4); }
+}
+@media (prefers-reduced-motion:reduce){ .strat-card{ transition:none; } }
+</style>
 </head>
 <body>
 <!-- SVG 图标符号库：与全站同一套 Lucide 描边图标（viewBox 24 / stroke 1.75） -->
@@ -1369,6 +1414,101 @@ a:focus-visible{ outline-offset:3px; }
     <p class="mp-note"><b>行情颜色惯例</b>：本站行情数字遵循中国市场惯例 <span style="color:var(--quote-up);font-weight:var(--fw-semibold)">红涨</span> / <span style="color:var(--quote-down);font-weight:var(--fw-semibold)">绿跌</span>，仅用于行情数值呈现；评级档位不用红绿表方向。</p>
   </section>
 
+  <section class="mp-sec" aria-labelledby="mp-strategy">
+    <h2 id="mp-strategy">持仓级策略体系 / Position Strategy System</h2>
+    <p>六信号 Σ 回答「市场处于什么状态」，策略体系回答「这个状态下具体怎么做」。全部策略以声明式 YAML 固化于引擎配置层（framework/config/strategies/），可复用、可审计、不随单次生成漂移。以下卡片由策略 YAML 自动生成，与引擎实际执行的口径同源；策略调整后本页内容随之更新，不手工改写。</p>
+<!--__STRATEGIES__-->
+<div class="strat">
+<p class="strat-group-label">以下 3 项策略由决策引擎策略配置层声明式定义，按类别与名称排序自动呈现。</p>
+<div class="strat-group" data-category="strategic">
+<p class="strat-group-label">战略配置 · 1 项</p>
+<article class="strat-card" id="strat-six_networks">
+<div class="strat-head">
+<h3 class="strat-title">十五五六张网战略配置</h3>
+<span class="chip strat-cat strat-cat-strategic">战略</span>
+</div>
+<p class="strat-desc">聚焦新型电网、算力网、通信网、水网、管网与物流网核心基础设施资产。</p>
+<div class="strat-block"><h4 class="strat-h">核心原则</h4><ul class="strat-list">
+<li>产业逻辑：聚焦国家十五五规划核心基础设施导向，布局新型电网、算力网、通信网、水网、地下管网与物流网六张网骨干资产。</li>
+<li>算电协同：强化东数西算庆阳枢纽与和林格尔绿色数据中心集群的绿电消纳一体化绑定，把握算力与能源协同红利。</li>
+<li>底仓与做T分工：公用事业与电力底仓提供稳健现金流与安全垫，特高压设备龙头与卫星ETF成长弹性品种负责网格做T增厚超额收益。</li>
+</ul></div>
+<div class="strat-block"><h4 class="strat-h">执行规则（4 条）</h4><ol class="strat-list">
+<li>入场纪律：在产业政策催化初期或大盘深度调整回踩中长期均线支撑位时分批建仓，严禁追高建仓。</li>
+<li>加仓纪律：当标的出现技术支撑确认且算电负荷协同或装备招标排产订单超预期时分档加仓，单次加仓不超过规划仓位三分之一。</li>
+<li>止盈纪律：当单品种阶段涨幅过大、技术指标严重超买或浮盈达标时执行阶梯止盈，收益兑现后回流高股息防御底仓。</li>
+<li>跟踪纪律：持续跟踪庆阳与和林格尔算力节点绿电消纳率、国网特高压交直流排产进度以及低轨卫星星座发射计划。</li>
+</ol></div>
+<div class="strat-tags"><span class="strat-h">映射标的</span><code class="strat-code">sh600312</code><code class="strat-code">sz000791</code><code class="strat-code">sz563230</code><code class="strat-code">sz159611</code><code class="strat-code">sh600863</code></div>
+</article>
+</div>
+<div class="strat-group" data-category="execution">
+<p class="strat-group-label">执行战术 · 1 项</p>
+<article class="strat-card" id="strat-grid_trading">
+<div class="strat-head">
+<h3 class="strat-title">条件单智能网格做T</h3>
+<span class="chip strat-cat strat-cat-execution">执行</span>
+</div>
+<p class="strat-desc">适用于高波动弹性品种的底仓留存与日内/波段网格做T。</p>
+<dl class="strat-facts">
+<div class="strat-fact"><dt>默认步长</dt><dd>2.5%</dd></div>
+</dl>
+<div class="strat-block"><h4 class="strat-h">执行规则（5 条）</h4><ol class="strat-list">
+<li>基准价设定：以近期箱体中枢、前收盘价或重要均线支撑位（如MA20）作为初始基准价，每完成完整买卖闭环或出现趋势突破时动态更新校准。</li>
+<li>步长阶梯：默认步长设为2.5%（step_ratio_default 0.025），结合标的历史振幅与ATR动态调节，低波动期可收敛至2.0%，高波动期可放宽至3.0%至3.5%。</li>
+<li>最小底仓红线停卖：严格设定每个网格标的的底仓硬约束红线（如华能蒙电底仓1000股、平高电气底仓300股），触及底仓红线时系统强制锁定卖单权限，绝对禁止击穿底仓。</li>
+<li>挂单撤单纪律：严格依托券商条件单执行预设网格，盘中价格未触发时不作人工情绪化干预；遇大盘极端单边下跌或突发黑天鹅时及时暂停网格并撤除未成交买单。</li>
+<li>仓位管理纪律：单笔做T数量受限于可用流动资金与持仓上限，逢低分档买入、逢高分档卖出，做T仓位与长线底仓保持账户级逻辑隔离。</li>
+</ol></div>
+<div class="strat-tags"><span class="strat-h">委托档位</span><code class="strat-code">卖二买二</code><code class="strat-code">卖三买三</code></div>
+</article>
+</div>
+<div class="strat-group" data-category="defensive">
+<p class="strat-group-label">防御底仓 · 1 项</p>
+<article class="strat-card" id="strat-dividend_defensive">
+<div class="strat-head">
+<h3 class="strat-title">高股息防御与收息底仓</h3>
+<span class="chip strat-cat strat-cat-defensive">防御</span>
+</div>
+<p class="strat-desc">深度破净、股息率&gt;4%、现金流充沛的防御收息压舱石。</p>
+<div class="strat-block"><h4 class="strat-h">执行规则（5 条）</h4><ol class="strat-list">
+<li>股息率门槛：标的近12个月股息率或最新分红预案倒推股息率原则上不低于4.0%，且企业近三年经营性现金流净额需持续覆盖分红现金支出。</li>
+<li>深度破净安全垫：金融及重资产公用事业标的优先选取市净率PB长期处于历史低位或深度破净标的，构筑充沛的下行安全边际。</li>
+<li>底仓锁定不抛：将防御性底仓视为产生持续分红现金流的长期生产资料，坚决执行锁仓原则，不参与短线博弈与日内做T。</li>
+<li>深踩回补观察区间：当标的因系统性恐慌出现非理性下挫，进入超跌高赔率观察区间（如股息率攀升至5.5%以上或技术指标深度超卖）时，启动长线分批回补计划。</li>
+<li>宏观对冲与再平衡：将上海金作为对抗信用货币贬值与地缘宏观波动的压舱资产，年度结算时将分红与溢价收益适度再平衡至低估值防御标的。</li>
+</ol></div>
+<div class="strat-tags"><span class="strat-h">映射标的</span><code class="strat-code">sz000429</code><code class="strat-code">sh600919</code><code class="strat-code">sz003816</code><code class="strat-code">sh518600</code></div>
+</article>
+</div>
+</div>
+<!--/__STRATEGIES__-->
+  </section>
+
+  <section class="mp-sec" aria-labelledby="mp-indicators">
+    <h2 id="mp-indicators">个股技术指标体系 / Technical Indicator System</h2>
+    <p>指标计算为纯确定性算法（纯标准库实现、零第三方依赖），结果可复现、可回归，不随模型推理变化。</p>
+    <ul>
+      <li><b>均线系统（MA）</b>：MA5 / MA10 / MA20 / MA60 滑动平均，用于趋势状态判定与动态支撑阻力识别。</li>
+      <li><b>乖离率与强势补偿（BIAS）</b>：BIAS = 现价 / MA − 1。基础阈值 5%（严进纪律，抑制追高）。<b>强势趋势补偿机制</b>：当标的处于确认的强势趋势（STRONG_BULL）时，有效阈值自动放宽 1.5 倍至 7.5%，允许在主升浪中顺势追踪、避免机械踏空；但乖离率超过放宽后阈值仍一律判定追高风险，纪律底线不让步。</li>
+      <li><b>平滑相对强弱（RSI）</b>：采用 Wilder 平滑口径（SMMA）计算 6 / 12 / 24 日三档，规避简单平均导致的数值跳变；超买超卖与背离用于动量确认。</li>
+      <li><b>指数平滑异同（MACD）</b>：DIF = EMA(12) − EMA(26)，DEA = EMA(DIF, 9)，BAR = (DIF − DEA) × 2；金叉死叉与零轴位置、顶底背离共同参与结构判定。</li>
+      <li><b>与 Σ 的分工</b>：指标不替代六信号 Σ，而是在 S4 动量项中作为可选增强项介入（缺失时 S4 回退为纯成长/蓝筹分化口径，行为与基线一致）。</li>
+    </ul>
+  </section>
+
+  <section class="mp-sec" aria-labelledby="mp-fund">
+    <h2 id="mp-fund">基金分析方法论 / Fund Analysis Methodology</h2>
+    <p>基金侧不复用个股技术指标，而采用「持仓穿透 + 加权归因 + 缺口披露」三段式口径，与股票侧的 Σ 体系相互独立、互不串用。</p>
+    <ul>
+      <li><b>持仓穿透（look-through）</b>：把基金净值拆解到十大重仓个股权重，再逐只采集实时行情，得到穿透后的实时行业暴露与集中度，而非仅看基金自身净值曲线。</li>
+      <li><b>加权涨跌归因</b>：组合加权涨跌 = Σ（个股权重 × 该股实时涨跌幅）。<b>缺口披露纪律</b>：估值覆盖率不足时，未覆盖部分一律剔除并显式标注覆盖率与缺口标的，严禁以指数涨跌或板块均值代理冒充真实持仓表现。</li>
+      <li><b>板块集中度</b>：对穿透后的行业分布计算集中度指标；主题型基金（如 CPO 主题）按实际持仓比例参与板块归并，比例缺失时全额计入「其它」并列出缺口基金清单，不用历史默认比例兜底。</li>
+      <li><b>资产分层</b>：主动权益、QDII 指数、红利低波与黄金防御四类资产分开评估，避免跨风格直接比较；QDII 需额外标注汇率与海外市场时滞影响。</li>
+      <li><b>黄金处理</b>：上海金等贵金属按宏观对冲资产单独列示，其涨跌与 A 股权益相关性低，不并入权益类加权归因。</li>
+    </ul>
+  </section>
+
   <section class="mp-sec" aria-labelledby="mp-antiabuse">
     <h2 id="mp-antiabuse">反滥用设计 / Anti-Abuse Design</h2>
     <ul>
@@ -1383,7 +1523,8 @@ a:focus-visible{ outline-offset:3px; }
   <section class="mp-sec" aria-labelledby="mp-privacy">
     <h2 id="mp-privacy">数据来源与隐私 / Data &amp; Privacy</h2>
     <ul>
-      <li>数据来源：腾讯自选股 MCP（westock-mcp）实时采集的行情、板块资金、涨跌分布与估值数据。</li>
+      <li>数据来源：主源为腾讯自选股 MCP（westock-mcp）实时采集行情、板块资金、涨跌分布与估值数据；主源不可用时按多源容灾链路降级至公开行情接口（腾讯财经、新浪财经）进行只读兜底，并在报告中显式标注数据来源状态与缺口清单。</li>
+      <li>容灾纪律：备用源仅提供指数与个股基础行情（现价、涨跌幅、成交额、成交量），不虚构板块资金流与估值字段；任一字段缺失一律标注数据缺口，不以估算值填充。</li>
       <li>数据时点：每期报告头部标注（竞价 / 盘中 / 收盘），不同时点的结论不可直接对比；缺少宽度口径标注时，Σ 值旁会显式提示不可跨时点比较。</li>
       <li>隐私边界：公开版本报告仅包含市场数据、信号评分与方法论；个人持仓金额、成本、盈亏与账户信息在发布前经自动化脱敏流水线移除，并经红线门禁校验（零命中方可发布）。</li>
     </ul>
