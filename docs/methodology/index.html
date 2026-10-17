@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <title>研判方法论 · Methodology | 每日市场脉搏</title>
-<meta name="description" content="每日市场脉搏的研判方法论：daily-decision-engine 决策引擎七步流水线、S1-S6 确定性信号评分与五档 Σ 评级规则。">
+<meta name="description" content="每日市场脉搏的研判方法论：daily-decision-engine 决策引擎七步流水线、S1-S6 确定性信号评分、五档 Σ 评级、双重金融护栏、多源容灾与声明式策略体系。">
 <!-- 本文件为静态方法论页，样式由 scripts/build_site.py 注入 Token 层 + 组件层 -->
 <style>/* ============================================================================
  * 每日市场脉搏 · Daily Market Pulse
@@ -239,6 +239,7 @@
   --container-wide:  1180px;   /* 归档页宽表 */
   --container-prose:  680px;   /* 长文行宽，中文约 34-38 字/行 */
   --container-narrow: 760px;   /* 日期页窄栏 */
+  --container-methodology: 920px; /* 方法论页：9 模块卡片 + 7 步网格 + 双列对比的桌面阅读宽 */
 
   --gutter-desktop: 32px;
   --gutter-tablet:  24px;
@@ -1226,45 +1227,107 @@ details[open] > summary .accordion-chevron{ transform:rotate(180deg); }
 @media (prefers-color-scheme:dark){ .archive-list a:hover{ background:var(--panel-bg); } }
 </style>
 <style>
-/* 页面专属版式：只写布局，颜色 / 字号 / 间距全部引用 Token */
-.mp-shell{ max-width:var(--container-prose); margin:0 auto; padding:0 var(--gutter-tablet); }
-.mp-nav{ padding:var(--space-8) 0 0; font-size:var(--fs-footnote); }
-.mp-nav a{ color:var(--link); display:inline-flex; align-items:center; gap:5px; transition:color var(--motion-fast) var(--ease-out); }
+/* 页面专属版式：只写布局，颜色 / 字号 / 间距全部引用 Token（P0-3） */
+.mp-shell{ max-width:var(--container-methodology); margin:0 auto;
+  padding:0 var(--gutter-tablet);
+  padding-bottom:max(var(--space-16), calc(env(safe-area-inset-bottom, 24px) + var(--space-8))); }
+.mp-nav{ padding:var(--space-6) 0 0; font-size:var(--fs-footnote); }
+.mp-nav a{ color:var(--link); display:inline-flex; align-items:center; gap:5px;
+  min-height:32px; transition:color var(--motion-fast) var(--ease-out); }
 .mp-nav a:hover{ color:var(--link-hover); }
-.mp-head{ padding:var(--space-12) 0 var(--space-8); }
+.mp-head{ padding:var(--space-10) 0 var(--space-6); }
 .mp-head h1{ margin-bottom:var(--space-3); }
 .mp-head .sub{ color:var(--fg-2); font-size:var(--fs-callout); line-height:var(--lh-callout); max-width:64ch; }
-.mp-sec{ background:var(--surface-alt); border-radius:var(--panel-radius); padding:var(--feature-pad); margin-bottom:var(--space-6); }
-@media (prefers-color-scheme:dark){ .mp-sec{ background:var(--panel-bg); } }
+/* 吸顶胶囊导航（Apple localnav 毛玻璃质感，双端可用） */
+.mp-toc{ position:sticky; top:var(--nav-h); z-index:var(--z-sticky);
+  display:flex; gap:var(--space-2); overflow-x:auto; -webkit-overflow-scrolling:touch;
+  scrollbar-width:none; padding:var(--space-2) 0; margin-bottom:var(--space-6);
+  background:var(--nav-bg); -webkit-backdrop-filter:var(--nav-blur); backdrop-filter:var(--nav-blur);
+  border-bottom:1px solid var(--border-soft); }
+.mp-toc::-webkit-scrollbar{ display:none; }
+.mp-pill{ flex:0 0 auto; display:inline-flex; align-items:center; min-height:34px;
+  font-size:var(--fs-caption1); font-weight:var(--fw-medium); color:var(--fg-2);
+  background:var(--surface-alt); border:1px solid var(--border-soft);
+  border-radius:var(--radius-pill); padding:5px 14px; white-space:nowrap;
+  corner-shape:var(--corner-shape,squircle);
+  transition:color var(--motion-fast) var(--ease-out),
+    background var(--motion-fast) var(--ease-out),
+    border-color var(--motion-fast) var(--ease-out); }
+.mp-pill:hover{ color:var(--fg-on-accent); background:var(--accent-hover); border-color:var(--accent-hover); }
+.mp-sec{ background:var(--surface-alt); border:1px solid var(--border-soft);
+  border-radius:var(--panel-radius); padding:var(--space-6) var(--space-8);
+  margin-bottom:var(--space-6); scroll-margin-top:calc(var(--nav-h) + 64px);
+  corner-shape:var(--corner-shape,squircle); }
+@media (prefers-color-scheme:dark){ .mp-sec{ background:var(--panel-bg); border-color:var(--ap-dark-sep); } }
 /* 分区标题：靠字号建层级，不用彩色左边框（SPEC §11.2 禁令） */
 .mp-sec > h2{ font-family:var(--font-display); font-size:var(--fs-title3); line-height:var(--lh-title3);
-  letter-spacing:var(--tracking-title3); font-weight:var(--fw-semibold); color:var(--fg); margin-bottom:var(--space-4); }
+  letter-spacing:var(--tracking-title3); font-weight:var(--fw-semibold); color:var(--fg);
+  margin-bottom:var(--space-4); display:flex; align-items:center; gap:var(--space-3); flex-wrap:wrap; }
+.mp-sec > h2 .mp-no{ font-family:var(--font-mono); font-variant-numeric:var(--numeric);
+  font-size:var(--fs-footnote); color:var(--accent); letter-spacing:var(--tracking-caption); }
 .mp-sec h3{ font-family:var(--font-display); font-size:var(--fs-headline); line-height:var(--lh-headline);
-  letter-spacing:var(--tracking-headline); font-weight:var(--fw-semibold); color:var(--fg); margin:var(--space-5) 0 var(--space-2); }
+  letter-spacing:var(--tracking-headline); font-weight:var(--fw-semibold); color:var(--fg);
+  margin:var(--space-5) 0 var(--space-2); }
 .mp-sec p{ font-size:var(--fs-body); line-height:var(--lh-body); color:var(--fg-2); margin:var(--space-2) 0; }
 .mp-sec ol,.mp-sec ul{ margin:var(--space-2) 0 0 22px; list-style:revert; }
 .mp-sec li{ font-size:var(--fs-callout); line-height:var(--lh-callout); color:var(--fg-2); margin:var(--space-2) 0; }
 .mp-sec li b{ color:var(--fg); font-weight:var(--fw-semibold); }
-.mp-flow{ display:flex; flex-wrap:wrap; gap:var(--space-2); margin:var(--space-3) 0 var(--space-4); }
+/* 七步流水线：桌面 7 列连贯网格， tablet 4 列，手机 2 列 */
+.mp-flow{ display:grid; grid-template-columns:repeat(7,1fr); gap:var(--space-2);
+  margin:var(--space-4) 0 var(--space-5); }
 .mp-step{ background:var(--bg); border:1px solid var(--border-soft); border-radius:var(--radius-sm);
-  padding:9px 13px; font-size:var(--fs-footnote); color:var(--fg-2); font-weight:var(--fw-medium);
-  corner-shape:var(--corner-shape,squircle); }
+  padding:var(--space-3) var(--space-2); text-align:center; min-width:0;
+  font-size:var(--fs-footnote); line-height:var(--lh-footnote); color:var(--fg-2);
+  font-weight:var(--fw-medium); corner-shape:var(--corner-shape,squircle); }
+.mp-step b{ display:block; color:var(--accent); font-family:var(--font-mono);
+  font-variant-numeric:var(--numeric); margin-bottom:3px; }
 @media (prefers-color-scheme:dark){ .mp-step{ background:var(--ap-dark-2); border-color:var(--ap-dark-sep); } }
-.mp-step b{ color:var(--accent); font-family:var(--font-mono); margin-right:5px; }
-.mp-note{ border:1px solid var(--border); border-left:0; border-radius:var(--radius-sm);
-  padding:var(--space-3) var(--space-4); font-size:var(--fs-subhead); line-height:var(--lh-subhead);
-  color:var(--fg-2); background:var(--bg); margin:var(--space-4) 0; }
-@media (prefers-color-scheme:dark){ .mp-note{ background:var(--ap-dark-2); border-color:var(--ap-dark-sep); } }
-.mp-note b{ color:var(--fg); font-weight:var(--fw-semibold); }
+/* 双列对比卡片：护栏 / 容灾的左右并排，手机折单列 */
+.mp-dual{ display:grid; grid-template-columns:1fr 1fr; gap:var(--space-4); margin:var(--space-4) 0; }
+.mp-card{ background:var(--bg); border:1px solid var(--border-soft); border-radius:var(--radius-md);
+  padding:var(--space-5); min-width:0; corner-shape:var(--corner-shape,squircle); }
+@media (prefers-color-scheme:dark){ .mp-card{ background:var(--ap-dark-2); border-color:var(--ap-dark-sep); } }
+.mp-card-h{ display:flex; align-items:center; gap:var(--space-2); flex-wrap:wrap;
+  margin:0 0 var(--space-3); font-family:var(--font-display); font-size:var(--fs-headline);
+  line-height:var(--lh-headline); font-weight:var(--fw-semibold); color:var(--fg); }
+.mp-card-h .ic{ color:var(--accent); }
+.mp-card-h .mp-tag{ font-size:var(--fs-caption1); font-weight:var(--fw-regular);
+  letter-spacing:var(--tracking-caption); color:var(--fg-3); }
+.mp-card ul{ margin:0; padding-left:18px; list-style:revert; }
+.mp-card li{ font-size:var(--fs-subhead); line-height:var(--lh-subhead); color:var(--fg-2); margin:var(--space-2) 0; }
+.mp-card li b{ color:var(--fg); font-weight:var(--fw-semibold); }
+/* 规则高亮块：公式 / 硬核纪律 */
+.mp-callout{ display:flex; gap:var(--space-3); background:var(--bg);
+  border:1px solid var(--border-soft); border-radius:var(--radius-sm);
+  padding:var(--space-4) var(--space-5); margin:var(--space-4) 0;
+  font-size:var(--fs-subhead); line-height:var(--lh-subhead); color:var(--fg-2);
+  corner-shape:var(--corner-shape,squircle); }
+.mp-callout .ic{ color:var(--accent); margin-top:2px; }
+.mp-callout b{ color:var(--fg); font-weight:var(--fw-semibold); }
+@media (prefers-color-scheme:dark){ .mp-callout{ background:var(--ap-dark-2); border-color:var(--ap-dark-sep); } }
+.mp-formula{ font-family:var(--font-mono); font-variant-numeric:var(--numeric);
+  font-size:var(--fs-footnote); line-height:var(--lh-footnote); color:var(--fg);
+  background:var(--bg); border:1px solid var(--border-soft); border-radius:var(--radius-sm);
+  padding:var(--space-3) var(--space-4); margin:var(--space-3) 0; overflow-x:auto; }
+@media (prefers-color-scheme:dark){ .mp-formula{ background:var(--ap-dark-2); border-color:var(--ap-dark-sep); } }
 .mp-muted{ color:var(--fg-3); font-size:var(--fs-footnote); }
 .mp-foot{ margin-top:var(--space-16); border-top:1px solid var(--border); padding-top:var(--space-5);
   font-size:var(--fs-footnote); line-height:var(--lh-footnote); color:var(--fg-3); }
 .mp-foot p + p{ margin-top:var(--space-2); }
 .mp-foot b{ color:var(--fg-2); font-weight:var(--fw-semibold); }
+@media (max-width:900px){ .mp-flow{ grid-template-columns:repeat(4,1fr); } }
 @media (max-width:640px){
   .mp-shell{ padding:0 var(--gutter-phone); }
-  .mp-sec{ padding:var(--space-6) var(--space-5); }
+  .mp-sec{ padding:var(--space-5) var(--space-4); }
+  .mp-flow{ grid-template-columns:repeat(2,1fr); }
+  .mp-dual{ grid-template-columns:1fr; }
+  .mp-head{ padding:var(--space-8) 0 var(--space-5); }
+  /* 胶囊栏左右探出安全 gutter，横滑到边缘不裁切 */
+  .mp-toc{ margin-left:calc(-1 * var(--gutter-phone)); margin-right:calc(-1 * var(--gutter-phone));
+    padding-left:var(--gutter-phone); padding-right:var(--gutter-phone); }
+  .mp-card{ padding:var(--space-4); }
 }
+@media (prefers-reduced-motion:reduce){ .mp-pill{ transition:none; } }
 </style>
 <style data-origin="strategies">
 .strat-group + .strat-group{ margin-top:var(--space-6); }
@@ -1328,6 +1391,15 @@ details[open] > summary .accordion-chevron{ transform:rotate(180deg); }
 <symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
 <symbol id="i-line-chart" viewBox="0 0 24 24"><line x1="3" y1="3" x2="3" y2="21"/><line x1="3" y1="21" x2="21" y2="21"/><polyline points="7 16 11 10 15 13 20 6"/></symbol>
 <symbol id="i-rss" viewBox="0 0 24 24"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></symbol>
+<symbol id="i-timer" viewBox="0 0 24 24"><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" y1="14" x2="15" y2="11"/><circle cx="12" cy="14" r="8"/></symbol>
+<symbol id="i-activity" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></symbol>
+<symbol id="i-radio" viewBox="0 0 24 24"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2a6 6 0 0 1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8a6 6 0 0 1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"/></symbol>
+<symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></symbol>
+<symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="m6.08 9.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83L17.9 9.5"/><path d="m6.08 14.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83l-3.5-1.59"/></symbol>
+<symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></symbol>
+<symbol id="i-alert-triangle" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
 </defs></svg>
 
 <a class="skip-link" href="#main">跳到主要内容</a>
@@ -1356,20 +1428,32 @@ details[open] > summary .accordion-chevron{ transform:rotate(180deg); }
 
   <header class="mp-head">
     <h1 class="t-title1">研判方法论</h1>
-    <p class="sub">每日市场脉搏的全部结论由 daily-decision-engine 决策引擎按确定性流程产出：数据硬校验 → 代码化信号评分 → 专家圆桌对抗辩论 → Σ 评级。<br>
-    All conclusions are produced by a deterministic pipeline: validated data → code-computed signals → adversarial expert roundtable → Sigma rating.</p>
+    <p class="sub">每一条结论的生产轨迹都写在这里：数据硬校验 → 代码化信号评分 → 双重金融护栏 → 专家圆桌对抗辩论 → Σ 评级。<br>
+    Every conclusion follows one deterministic pipeline — same data in, same verdict out.</p>
   </header>
 
+  <nav class="mp-toc" aria-label="方法论章节快速导航">
+    <a class="mp-pill" href="#mp-pipeline">流水线</a>
+    <a class="mp-pill" href="#mp-signals">信号量化</a>
+    <a class="mp-pill" href="#mp-tiers">五档评级</a>
+    <a class="mp-pill" href="#mp-indicators">技术指标</a>
+    <a class="mp-pill" href="#mp-guardrails">决策护栏</a>
+    <a class="mp-pill" href="#mp-strategy">策略体系</a>
+    <a class="mp-pill" href="#mp-fallback">多源容灾</a>
+    <a class="mp-pill" href="#mp-fund">基金穿透</a>
+    <a class="mp-pill" href="#mp-antiabuse">反滥用</a>
+  </nav>
+
   <section class="mp-sec" aria-labelledby="mp-pipeline">
-    <h2 id="mp-pipeline">决策引擎七步流水线 / Seven-Step Pipeline</h2>
+    <h2 id="mp-pipeline"><span class="mp-no">01</span>决策引擎七步流水线 / Seven-Step Pipeline</h2>
     <div class="mp-flow">
-      <span class="mp-step"><b>01</b>交易日判定</span>
-      <span class="mp-step"><b>02</b>数据采集（MCP）</span>
-      <span class="mp-step"><b>03</b>信号评分（代码）</span>
-      <span class="mp-step"><b>04</b>持仓解析</span>
-      <span class="mp-step"><b>05</b>硬校验</span>
-      <span class="mp-step"><b>06</b>专家研判 + 对抗辩论</span>
-      <span class="mp-step"><b>07</b>决策卡 + 台账落档</span>
+      <div class="mp-step"><b>01</b>交易日判定</div>
+      <div class="mp-step"><b>02</b>数据采集</div>
+      <div class="mp-step"><b>03</b>信号评分</div>
+      <div class="mp-step"><b>04</b>持仓解析</div>
+      <div class="mp-step"><b>05</b>硬校验</div>
+      <div class="mp-step"><b>06</b>专家辩论</div>
+      <div class="mp-step"><b>07</b>决策落档</div>
     </div>
     <ol>
       <li><b>交易日判定</b>：经交易日历确认目标日为 A 股交易日；非交易日静默结束，不产出。</li>
@@ -1380,10 +1464,11 @@ details[open] > summary .accordion-chevron{ transform:rotate(180deg); }
       <li><b>专家研判</b>：六位虚拟专家（产业/信号/估值/逆向/财报/短线维度）多空对抗辩论，观点须引用当日数据。</li>
       <li><b>决策卡落档</b>：结构化决策卡与观点台账归档，供后续准确率结算与连续错误熔断。</li>
     </ol>
+    <p class="mp-callout"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span><b>顺序即契约</b>：先信号评分、后硬校验——校验器强制要求 verdict 存在，顺序颠倒会直接零产出；同一条链路每日重复执行，输出可复现、可回归。</span></p>
   </section>
 
   <section class="mp-sec" aria-labelledby="mp-signals">
-    <h2 id="mp-signals">S1-S6 确定性信号评分 / Signal Scoring</h2>
+    <h2 id="mp-signals"><span class="mp-no">02</span>S1-S6 确定性信号评分 / Signal Scoring</h2>
     <p>六信号全部由代码计算，缺失信号自动从归一化权重中剔除；Σ 为加权求和，范围 [-1, +1]。</p>
     <div class="tbl-wrap">
     <table class="tbl">
@@ -1396,17 +1481,19 @@ details[open] > summary .accordion-chevron{ transform:rotate(180deg); }
         <tr><th scope="row" class="rowkey">S1</th><td>量能 Volume</td><td class="num">0.20</td><td>沪指量比（相对过去 5 日同时段归一化）</td><td class="num">clamp((量比-1.0)/0.8)</td></tr>
         <tr><th scope="row" class="rowkey">S2</th><td>宽度 Breadth</td><td class="num">0.20</td><td>上涨占比、涨停/跌停家数</td><td class="num">宽度项 0.7 + 涨跌停项 0.3</td></tr>
         <tr><th scope="row" class="rowkey">S3</th><td>动量 Momentum</td><td class="num">0.15</td><td>上证 vs MA5/MA20 + 20 日涨跌幅</td><td class="num">均线偏离 0.5+0.5 与 20 日涨幅平均</td></tr>
-        <tr><th scope="row" class="rowkey">S4</th><td>分化 Dispersion</td><td class="num">0.15</td><td>创业板指 + 科创50 均值 vs 沪深300</td><td class="num">clamp(价差/2.0)</td></tr>
+        <tr><th scope="row" class="rowkey">S4</th><td>复合动量 Momentum+</td><td class="num">0.15</td><td>创业板指 + 科创50 均值 vs 沪深300；增强项为个股 RSI 与 BIAS 均值</td><td class="num">clamp(0.6×价差/2.0 + 0.4×动量)</td></tr>
         <tr><th scope="row" class="rowkey">S5</th><td>资金 Flows</td><td class="num">0.15</td><td>板块主力净流入 TOP1 − 净流出 TOP1</td><td class="num">clamp(净差/50亿)</td></tr>
         <tr><th scope="row" class="rowkey">S6</th><td>估值 Valuation</td><td class="num">0.15</td><td>沪深300 PE + 60 日涨跌幅（超跌代理）</td><td class="num">clamp((15−PE)/3 + 超跌项 0.5)</td></tr>
       </tbody>
     </table>
     </div>
-    <p class="mp-note"><b>有效权重封顶规则（v1.2）</b>：有效权重 &lt; 0.50（过半信号缺失）时，评级强制封顶为「信号矛盾」并标记数据不足 —— 单一信号不得主导方向性结论。</p>
+    <div class="mp-formula">S4 = clamp(0.6 × 分化项 + 0.4 × 动量项)　　分化项 = (创业板指 + 科创50 均值 − 沪深300) / 2.0　　动量项 = mean(RSI(6/12/24), BIAS)</div>
+    <p class="mp-callout"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-target"/></svg><span><b>S4 复合动量（opt-in）</b>：动量项以 Wilder RSI 与 BIAS 均值度量个股弹性，缺失时 S4 自动回退为纯成长/蓝筹分化口径，行为与基线一致，不改变有效权重封顶规则。</span></p>
+    <p class="mp-callout"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg><span><b>有效权重封顶规则（v1.2）</b>：有效权重 &lt; 0.50（过半信号缺失）时，评级强制封顶为「信号矛盾」并标记数据不足 —— 单一信号不得主导方向性结论。</span></p>
   </section>
 
   <section class="mp-sec" aria-labelledby="mp-tiers">
-    <h2 id="mp-tiers">Σ 评级五档 / Sigma Rating Tiers</h2>
+    <h2 id="mp-tiers"><span class="mp-no">03</span>Σ 评级五档 / Sigma Rating Tiers</h2>
     <div class="tbl-wrap">
     <table class="tbl">
       <caption>颜色 + SVG 图标 + 箭头 + 文字四重编码，色觉障碍与灰度打印下均可辨</caption>
@@ -1443,11 +1530,47 @@ details[open] > summary .accordion-chevron{ transform:rotate(180deg); }
     </table>
     </div>
     <p class="mp-muted">评级徽章采用颜色 + 图标 + 箭头 + 文字四重编码（色盲友好）。箭头只表方向强度，颜色仅区分档位，不与涨跌语义混淆。</p>
-    <p class="mp-note"><b>行情颜色惯例</b>：本站行情数字遵循中国市场惯例 <span style="color:var(--quote-up);font-weight:var(--fw-semibold)">红涨</span> / <span style="color:var(--quote-down);font-weight:var(--fw-semibold)">绿跌</span>，仅用于行情数值呈现；评级档位不用红绿表方向。</p>
+    <p class="mp-callout"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-scale"/></svg><span><b>行情颜色惯例</b>：本站行情数字遵循中国市场惯例 <b>红涨</b> / <b>绿跌</b>（仅用于行情数值呈现）；评级档位不用红绿表方向，两类色系互不串用。</span></p>
+  </section>
+
+  <section class="mp-sec" aria-labelledby="mp-indicators">
+    <h2 id="mp-indicators"><span class="mp-no">04</span>技术指标与动态补偿 / Technical Indicators</h2>
+    <p>指标计算为纯确定性算法（纯标准库实现、零第三方依赖），结果可复现、可回归，不随模型推理变化。</p>
+    <ul>
+      <li><b>均线系统（MA）</b>：MA5 / MA10 / MA20 / MA60 滑动平均，用于趋势状态判定与动态支撑阻力识别。</li>
+      <li><b>乖离率与强势补偿（BIAS）</b>：BIAS = 现价 / MA − 1。基础阈值 5%（严进纪律，抑制追高）。<b>强势趋势补偿机制</b>：当标的处于确认的强势趋势（STRONG_BULL）时，有效阈值自动放宽 1.5 倍至 7.5%，允许在主升浪中顺势追踪、避免机械踏空；但乖离率超过放宽后阈值仍一律判定追高风险，纪律底线不让步。</li>
+      <li><b>平滑相对强弱（RSI）</b>：采用 Wilder 平滑口径（SMMA）计算 6 / 12 / 24 日三档，规避简单平均导致的数值跳变；超买超卖与背离用于动量确认。</li>
+      <li><b>指数平滑异同（MACD）</b>：DIF = EMA(12) − EMA(26)，DEA = EMA(DIF, 9)，BAR = (DIF − DEA) × 2；金叉死叉与零轴位置、顶底背离共同参与结构判定。</li>
+      <li><b>与 Σ 的分工</b>：指标不替代六信号 Σ，而是在 S4 动量项中作为可选增强项介入（缺失时 S4 回退为纯成长/蓝筹分化口径，行为与基线一致）。</li>
+    </ul>
+    <p class="mp-callout"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-trending-up"/></svg><span><b>动态 BIAS 1.5×</b>：强趋势下阈值 5% → 7.5% 是顺势追踪的补偿，不是纪律放松——越过放宽后的阈值，追高风险判定照常触发。</span></p>
+  </section>
+
+  <section class="mp-sec" aria-labelledby="mp-guardrails">
+    <h2 id="mp-guardrails"><span class="mp-no">05</span>双重金融级决策护栏 / Dual Guardrails</h2>
+    <p>两道护栏在决策卡产出前强制通过：一道管<b>时点</b>，一道管<b>环境与数据状态</b>。任一不通过，对应动作一律撤下，违规即阻断发布。</p>
+    <div class="mp-dual">
+      <div class="mp-card">
+        <h3 class="mp-card-h"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>时相感知护栏 <span class="mp-tag">Phase Guardrail</span></h3>
+        <ul>
+          <li><b>盘前（09:28 竞价快照）</b>：只输出观察结论与条件单预案，禁止即时挂单指令。</li>
+          <li><b>盘中 / 盘后互不串用</b>：每个时点的结论只对当时点有效，禁止把收盘结论当初盘指令执行。</li>
+          <li><b>跨时点不可比</b>：Σ 旁显式标注数据时点与宽度口径（含/不含北交所），不同口径的 Σ 不直接对比。</li>
+        </ul>
+      </div>
+      <div class="mp-card">
+        <h3 class="mp-card-h"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-shield"/></svg>环境与降级态护栏 <span class="mp-tag">Context &amp; L-4 Guardrail</span></h3>
+        <ul>
+          <li><b>退潮期软化</b>：防守/回避档下买入动作转为持有观察，只挂更低吸买单，不追不抢。</li>
+          <li><b>L-4 降级门禁</b>：数据源降级或字段缺口期，绝对禁止输出具体个股挂单与买卖指令；降级态只陈述状态，标准动作暂不执行。</li>
+          <li><b>代码映射动作</b>：五档标准动作由评级档位经代码映射，LLM 不得自行宽松或加码。</li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   <section class="mp-sec" aria-labelledby="mp-strategy">
-    <h2 id="mp-strategy">持仓级策略体系 / Position Strategy System</h2>
+    <h2 id="mp-strategy"><span class="mp-no">06</span>持仓级策略体系 / Position Strategy System</h2>
     <p>六信号 Σ 回答「市场处于什么状态」，策略体系回答「这个状态下具体怎么做」。全部策略以声明式 YAML 固化于引擎配置层（framework/config/strategies/），可复用、可审计、不随单次生成漂移。以下卡片由策略 YAML 自动生成，与引擎实际执行的口径同源；策略调整后本页内容随之更新，不手工改写。</p>
 <!--__STRATEGIES__-->
 <div class="strat">
@@ -1515,22 +1638,33 @@ details[open] > summary .accordion-chevron{ transform:rotate(180deg); }
 </div>
 </div>
 <!--/__STRATEGIES__-->
+    <p class="mp-callout"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-file-text"/></svg><span><b>无代码扩展</b>：新战法以一份 YAML 声明即可入列（名称、类别、原则、执行规则、映射标的），渲染层与引擎同读一份配置——改策略不改代码，页面与执行口径永不漂移。</span></p>
   </section>
 
-  <section class="mp-sec" aria-labelledby="mp-indicators">
-    <h2 id="mp-indicators">个股技术指标体系 / Technical Indicator System</h2>
-    <p>指标计算为纯确定性算法（纯标准库实现、零第三方依赖），结果可复现、可回归，不随模型推理变化。</p>
-    <ul>
-      <li><b>均线系统（MA）</b>：MA5 / MA10 / MA20 / MA60 滑动平均，用于趋势状态判定与动态支撑阻力识别。</li>
-      <li><b>乖离率与强势补偿（BIAS）</b>：BIAS = 现价 / MA − 1。基础阈值 5%（严进纪律，抑制追高）。<b>强势趋势补偿机制</b>：当标的处于确认的强势趋势（STRONG_BULL）时，有效阈值自动放宽 1.5 倍至 7.5%，允许在主升浪中顺势追踪、避免机械踏空；但乖离率超过放宽后阈值仍一律判定追高风险，纪律底线不让步。</li>
-      <li><b>平滑相对强弱（RSI）</b>：采用 Wilder 平滑口径（SMMA）计算 6 / 12 / 24 日三档，规避简单平均导致的数值跳变；超买超卖与背离用于动量确认。</li>
-      <li><b>指数平滑异同（MACD）</b>：DIF = EMA(12) − EMA(26)，DEA = EMA(DIF, 9)，BAR = (DIF − DEA) × 2；金叉死叉与零轴位置、顶底背离共同参与结构判定。</li>
-      <li><b>与 Σ 的分工</b>：指标不替代六信号 Σ，而是在 S4 动量项中作为可选增强项介入（缺失时 S4 回退为纯成长/蓝筹分化口径，行为与基线一致）。</li>
-    </ul>
+  <section class="mp-sec" aria-labelledby="mp-fallback">
+    <h2 id="mp-fallback"><span class="mp-no">07</span>多源容灾与断路器 / Multi-Source Failover</h2>
+    <p>行情采集采用「主源 + 备用源」双链：主源健康时全量字段，主源故障时自动转移，任何一层都不虚构数据。</p>
+    <div class="mp-dual">
+      <div class="mp-card">
+        <h3 class="mp-card-h"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-radio"/></svg>主源采集 <span class="mp-tag">Primary · westock-mcp</span></h3>
+        <ul>
+          <li>腾讯自选股 MCP 实时提供行情、板块资金、涨跌分布与估值等全量字段。</li>
+          <li>健康探测驱动链路状态；单次故障不切链，避免抖动式误转移。</li>
+        </ul>
+      </div>
+      <div class="mp-card">
+        <h3 class="mp-card-h"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-repeat"/></svg>备用容灾链 <span class="mp-tag">Fallback · 腾讯财经 / 新浪财经</span></h3>
+        <ul>
+          <li>主源不可用时自动故障转移，单请求批量抓取全部持仓行情。</li>
+          <li>备用源只提供指数与个股基础行情（现价、涨跌幅、成交额、成交量）；<b>不虚构</b>板块资金流与估值字段。</li>
+        </ul>
+      </div>
+    </div>
+    <p class="mp-callout"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-activity"/></svg><span><b>断路器纪律</b>：连续 3 次失败熔断 300 秒，期间拒绝再试防打爆；主源优先、脏值丢弃、缺口声明<b>绝不填 0</b>、 degraded 结果绝不冒充主源——数据来源状态在报告头部显式标注。</span></p>
   </section>
 
   <section class="mp-sec" aria-labelledby="mp-fund">
-    <h2 id="mp-fund">基金分析方法论 / Fund Analysis Methodology</h2>
+    <h2 id="mp-fund"><span class="mp-no">08</span>基金持仓穿透 / Fund Look-Through</h2>
     <p>基金侧不复用个股技术指标，而采用「持仓穿透 + 加权归因 + 缺口披露」三段式口径，与股票侧的 Σ 体系相互独立、互不串用。</p>
     <ul>
       <li><b>持仓穿透（look-through）</b>：把基金净值拆解到十大重仓个股权重，再逐只采集实时行情，得到穿透后的实时行业暴露与集中度，而非仅看基金自身净值曲线。</li>
@@ -1542,24 +1676,17 @@ details[open] > summary .accordion-chevron{ transform:rotate(180deg); }
   </section>
 
   <section class="mp-sec" aria-labelledby="mp-antiabuse">
-    <h2 id="mp-antiabuse">反滥用设计 / Anti-Abuse Design</h2>
+    <h2 id="mp-antiabuse"><span class="mp-no">09</span>反滥用 · 合规 · 隐私 / Anti-Abuse &amp; Privacy</h2>
     <ul>
       <li><b>代码计算 Σ</b>：Σ 由代码写入数据文件的 verdict 字段，报告引用必须原样呈现，禁止四舍五入或改述。</li>
       <li><b>LLM 禁调分</b>：语言模型不得修改任何信号分值，研判文本只解释代码结论。</li>
       <li><b>零编造</b>：数据缺失明确标注「数据缺口」并降级，禁止用代理指标伪装真实值。</li>
       <li><b>信息隔离</b>：持仓数据不参与信号评分输入，避免禀赋效应污染方向判断。</li>
       <li><b>观点台账</b>：全部历史观点归档结算，连续错误触发熔断降级。</li>
+      <li><b>数据时点标注</b>：每期报告头部标注（竞价 / 盘中 / 收盘），不同时点的结论不可直接对比；缺少宽度口径标注时，Σ 值旁会显式提示不可跨时点比较。</li>
+      <li><b>隐私边界</b>：公开版本报告仅包含市场数据、信号评分与方法论；个人持仓金额、成本、盈亏与账户信息在发布前经自动化脱敏流水线移除，并经红线门禁校验（零命中方可发布）。</li>
     </ul>
-  </section>
-
-  <section class="mp-sec" aria-labelledby="mp-privacy">
-    <h2 id="mp-privacy">数据来源与隐私 / Data &amp; Privacy</h2>
-    <ul>
-      <li>数据来源：主源为腾讯自选股 MCP（westock-mcp）实时采集行情、板块资金、涨跌分布与估值数据；主源不可用时按多源容灾链路降级至公开行情接口（腾讯财经、新浪财经）进行只读兜底，并在报告中显式标注数据来源状态与缺口清单。</li>
-      <li>容灾纪律：备用源仅提供指数与个股基础行情（现价、涨跌幅、成交额、成交量），不虚构板块资金流与估值字段；任一字段缺失一律标注数据缺口，不以估算值填充。</li>
-      <li>数据时点：每期报告头部标注（竞价 / 盘中 / 收盘），不同时点的结论不可直接对比；缺少宽度口径标注时，Σ 值旁会显式提示不可跨时点比较。</li>
-      <li>隐私边界：公开版本报告仅包含市场数据、信号评分与方法论；个人持仓金额、成本、盈亏与账户信息在发布前经自动化脱敏流水线移除，并经红线门禁校验（零命中方可发布）。</li>
-    </ul>
+    <p class="mp-callout"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-ban"/></svg><span><b>降级即禁言</b>：数据源降级或缺口期，摘要层撤下标准动作与关键事实，只保留状态陈述——读者不会照着非实时数据算出的档位去下单。</span></p>
   </section>
 
   <footer class="mp-foot">
