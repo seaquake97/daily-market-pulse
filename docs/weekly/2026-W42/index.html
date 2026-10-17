@@ -834,48 +834,67 @@ a:focus-visible{ outline-offset:3px; }
  * ========================================================================== */
 
 /* ============================== 时间线 ==================================== */
-/* Apple 做法：零卡片、零投影，靠 92px 刚性左槽 + hairline + 留白 */
-.issue{ margin-bottom:var(--space-16); }
-.issue:last-of-type{ margin-bottom:0; }
-.issue-head{
-  display:flex; align-items:baseline; gap:var(--space-3); flex-wrap:wrap;
-  padding-bottom:var(--space-3); margin-bottom:var(--space-2);
-  border-bottom:1px solid var(--border);
+/* 日期手风琴（Level 1）：最新期默认展开，历史期折叠收拢 */
+details.issue{ margin-bottom:var(--space-8); border-radius:var(--panel-radius); border:1px solid var(--border-soft); background:var(--surface); }
+details.issue:last-of-type{ margin-bottom:0; }
+@media (prefers-color-scheme:dark){ details.issue{ background:var(--surface-alt); border-color:var(--ap-dark-sep); } }
+.issue-head.day-summary{
+  display:flex; align-items:center; justify-content:space-between; gap:var(--space-3);
+  padding:var(--space-4) var(--space-5); margin-bottom:0;
+  border-bottom:1px solid transparent; cursor:pointer; user-select:none; list-style:none;
 }
+.issue-head.day-summary::-webkit-details-marker{ display:none; }
+details.issue[open] > .issue-head.day-summary{ border-bottom:1px solid var(--border-soft); }
+@media (prefers-color-scheme:dark){ details.issue[open] > .issue-head.day-summary{ border-bottom-color:var(--ap-dark-sep); } }
+.issue-date-group{ display:inline-flex; align-items:baseline; gap:var(--space-3); flex-wrap:wrap; }
 .issue-date{ font-size:var(--fs-title4); font-weight:var(--fw-semibold); color:var(--fg); }
 .issue-dow{ font-size:var(--fs-subhead); color:var(--fg-3); }
 .issue-head .spacer{ flex:1 1 auto; }
 .issue-summary{ display:inline-flex; align-items:center; gap:var(--space-2); flex-wrap:wrap; }
-
-.tl{ margin-top:var(--space-2); }
-.tl-item{
-  display:grid; grid-template-columns:var(--tl-gutter) 1fr auto; gap:var(--space-5);
-  padding:var(--tl-row-pad-y) 0; border-bottom:1px solid var(--tl-separator); align-items:start;
-}
-.tl-item:last-child{ border-bottom:none; }
-@media (max-width:900px){
-  .tl-item{ grid-template-columns:76px 1fr; gap:var(--space-4); }
-  .tl-meta{ grid-column:2; justify-self:start; }
-}
+.day-content{ padding:0 var(--space-5) var(--space-3); }
 @media (max-width:640px){
-  .tl-item{
-    display:grid; grid-template-columns:auto 1fr;
-    grid-template-areas:"time meta" "body body";
-    gap:var(--space-2) var(--space-3); padding:var(--space-3) 0;
-  }
-  .tl-time{ grid-area:time; flex-direction:row; align-items:center; padding-top:0; }
-  .tl-time::after{ display:none; }
-  .tl-run{ display:none; }
-  .tl-meta{ grid-area:meta; flex-direction:row; justify-content:flex-end; align-items:center; gap:var(--space-2); padding-top:0; }
-  .tl-body{ grid-area:body; min-width:0; }
-  .tl-kicker{ display:none; }
-  .tl-title{ font-size:var(--fs-subhead); line-height:var(--lh-subhead); margin-bottom:var(--space-1); }
-  .tl-sum .concl-fact{ display:none; }
+  .issue-head.day-summary{ padding:var(--space-3) var(--space-4); }
+  .day-content{ padding:0 var(--space-3) var(--space-2); }
+}
+
+/* 时点手风琴（Level 2）：二级折叠与展开 */
+.tl{ margin-top:var(--space-2); }
+.tl-item{ border-bottom:1px solid var(--tl-separator); padding:0; display:block; }
+.tl-item:last-child{ border-bottom:none; }
+details.slot-accordion{ width:100%; }
+.slot-head{
+  display:flex; align-items:center; justify-content:space-between; gap:var(--space-2);
+  min-height:48px; padding:var(--space-2) 0; cursor:pointer; user-select:none; list-style:none;
+}
+.slot-head::-webkit-details-marker{ display:none; }
+.slot-head-left{ display:inline-flex; align-items:center; gap:var(--space-2); min-width:0; flex:1 1 auto; }
+.slot-head-right{ display:inline-flex; align-items:center; gap:var(--space-2); flex:0 0 auto; }
+.slot-time{ font-family:var(--font-mono); font-size:var(--fs-subhead); font-weight:var(--fw-semibold); color:var(--tl-time-fg); display:inline-flex; align-items:center; gap:6px; white-space:nowrap; }
+.slot-time .dot{ width:6px; height:6px; border-radius:var(--radius-pill); background:var(--tl-dot); flex-shrink:0; }
+.slot-name{ font-size:var(--fs-subhead); font-weight:var(--fw-medium); color:var(--fg); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.slot-body{ padding:0 0 var(--space-3) var(--space-3); margin-left:3px; border-left:2px solid var(--border-soft); }
+@media (prefers-color-scheme:dark){ .slot-body{ border-left-color:var(--ap-dark-sep); } }
+.slot-foot{ display:flex; align-items:center; gap:var(--space-3); margin-top:var(--space-3); font-size:var(--fs-caption1); color:var(--fg-3); flex-wrap:wrap; }
+
+/* 展开指示箭头旋转 */
+.accordion-chevron{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:16px; height:16px; color:var(--fg-3);
+  transition:transform var(--motion-fast) var(--ease-out); flex-shrink:0;
+}
+details[open] > summary .accordion-chevron{ transform:rotate(180deg); }
+
+/* 单一降级状态药丸 */
+.tag-degraded{ color:var(--warn); border-color:var(--warn); background:var(--rating-balanced-wash); font-weight:var(--fw-semibold); }
+
+@media (max-width:640px){
+  .slot-name{ max-width:140px; }
+  .slot-head{ min-height:44px; }
+  .chip .chip-en{ display:none; }
   .rating{ font-size:var(--fs-caption2); padding:2px 8px; }
   .rating .ic{ width:12px; height:12px; }
   .chip{ font-size:var(--fs-caption2); padding:2px 7px; }
   .chip .ic{ width:11px; height:11px; }
-  .chip .chip-en{ display:none; }
 }
 
 .tl-time{ display:flex; flex-direction:column; gap:5px; padding-top:3px; }
@@ -1175,7 +1194,7 @@ a:focus-visible{ outline-offset:3px; }
   .frame{ padding-top:var(--space-10); }
 }
 @media (max-width:640px){
-  .shell{ padding:0 var(--gutter-phone); }
+  .shell{ padding:0 var(--gutter-phone) max(var(--space-16), calc(env(safe-area-inset-bottom, 24px) + var(--space-8))); }
   .frame{ padding-top:var(--space-6); }
   .page-head{ padding:var(--space-6) 0 var(--space-4); }
   .page-head h1 .sub{ font-size:var(--fs-title4); }
@@ -1254,386 +1273,514 @@ a:focus-visible{ outline-offset:3px; }
   </section>
   <section aria-labelledby="sec-tl" style="margin-top:var(--space-16)">
     <div class="sec-head"><h2 class="t-title3" id="sec-tl">逐日判断轨迹</h2></div>
-  <article class="issue dp-card" data-date="2026-10-16" data-rating="均衡" data-sigma="+0.180">
-    <div class="issue-head">
-      <time class="issue-date" datetime="2026-10-16">2026-10-16</time>
-      <span class="issue-dow">周五 · Fri</span>
+  <details class="issue dp-card" data-date="2026-10-16" data-rating="均衡" data-sigma="+0.180" open>
+    <summary class="issue-head day-summary">
+      <span class="issue-date-group">
+        <time class="issue-date" datetime="2026-10-16">2026-10-16</time>
+        <span class="issue-dow">周五 · Fri</span>
+      </span>
       <span class="spacer"></span>
-      <span class="issue-summary"><span class="rating rating-lg rating-balanced"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg><span class="arrow">▲</span>均衡</span><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>+0.180</span></span>
-    </div>
-    <ul class="tl">
+      <span class="issue-summary">
+        <span class="rating rating-lg rating-balanced"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg><span class="arrow">▲</span>均衡</span>
+        <span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>+0.180</span>
+        <span class="accordion-chevron day-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+      </span>
+    </summary>
+    <div class="day-content">
+      <ul class="tl">
     <li class="tl-item" data-time="09:28" data-slug="stock-assistant">
-      <div class="tl-time">
-        <span class="tl-sched"><span class="dot"></span>09:28</span>
-        
-      </div>
-      <div class="tl-body">
-        <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-bar-chart"/></svg>股票助手</p>
-        <h3 class="tl-title"><a href="../../daily/2026-10-16/stock-assistant.html">股票助手 · 2026-10-16（周五）早盘竞价<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据源降级 · 本轮结论不适用</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">取数非实时（详见正文数据源说明），标准动作暂不执行</span></span></p>
-      </div>
-      <div class="tl-meta">
-        <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>竞价时点<span class="chip-en"> / Pre-open</span></span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg>数据源降级</span>
-        <span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg>数据不可信·Σ 不作参考</span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>评级未标注</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
-      </div>
+      <details class="slot-accordion" open>
+        <summary class="slot-head">
+          <div class="slot-head-left">
+            <span class="slot-time"><span class="dot"></span>09:28</span>
+            <span class="slot-name">股票助手 · 早盘竞价</span>
+          </div>
+          <div class="slot-head-right">
+            <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>竞价时点<span class="chip-en"> / Pre-open</span></span><span class="tag tag-degraded"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg>数据降级</span>
+            <span class="accordion-chevron slot-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+          </div>
+        </summary>
+        <div class="slot-body">
+          <h3 class="tl-title"><a href="../../daily/2026-10-16/stock-assistant.html">股票助手 · 早盘竞价<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+          <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据源降级 · 本轮结论不适用</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">取数非实时（详见正文数据源说明），标准动作暂不执行</span></span></p>
+          
+        </div>
+      </details>
     </li>
     <li class="tl-item" data-time="11:00" data-slug="fund-market">
-      <div class="tl-time">
-        <span class="tl-sched"><span class="dot"></span>11:00</span>
-        <span class="tl-run"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>生成 11:14</span>
-      </div>
-      <div class="tl-body">
-        <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-database"/></svg>基金盘面</p>
-        <h3 class="tl-title"><a href="../../daily/2026-10-16/fund-market.html">基金盘面分析 · 2026-10-16（周五）午盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum"><span class="conclusion"><span class="concl-head">进攻 · Σ+0.514</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">定投额度上浮 ≤<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>20%</span>，网格卖单档位可上移，单日新增买入 ≤ 总仓位 <span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>5%</span></span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：3,747.19 点（<span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+1.07%</span>）</span></span></p>
-      </div>
-      <div class="tl-meta">
-        <span class="rating rating-offensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-trending-up"/></svg><span class="arrow">▲▲</span>进攻</span><span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点<span class="chip-en"> / Intraday</span></span>
-        <span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>+0.514</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
-      </div>
+      <details class="slot-accordion" open>
+        <summary class="slot-head">
+          <div class="slot-head-left">
+            <span class="slot-time"><span class="dot"></span>11:00</span>
+            <span class="slot-name">基金盘面分析 · 午盘</span>
+          </div>
+          <div class="slot-head-right">
+            <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点<span class="chip-en"> / Intraday</span></span><span class="rating rating-offensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-trending-up"/></svg><span class="arrow">▲▲</span>进攻</span>
+            <span class="accordion-chevron slot-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+          </div>
+        </summary>
+        <div class="slot-body">
+          <h3 class="tl-title"><a href="../../daily/2026-10-16/fund-market.html">基金盘面分析 · 午盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+          <p class="tl-sum"><span class="conclusion"><span class="concl-head">进攻 · Σ+0.514</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">定投额度上浮 ≤<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>20%</span>，网格卖单档位可上移，单日新增买入 ≤ 总仓位 <span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>5%</span></span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：3,747.19 点（<span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+1.07%</span>）</span></span></p>
+          <div class="slot-foot"><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>+0.514</span><span class="tl-run"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>生成 11:14</span></div>
+        </div>
+      </details>
     </li>
     <li class="tl-item" data-time="14:30" data-slug="fund-guide">
-      <div class="tl-time">
-        <span class="tl-sched"><span class="dot"></span>14:30</span>
-        
-      </div>
-      <div class="tl-body">
-        <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-target"/></svg>基金操作指引</p>
-        <h3 class="tl-title"><a href="../../daily/2026-10-16/fund-guide.html">基金操作指引 · 2026-10-16（周五）尾盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum"><span class="conclusion"><span class="concl-head">信号矛盾 · Σ-0.011</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">暂停一切主动买入，可挂低于现价 ≥<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>2%</span> 的吸买单；只列多空证据，禁表述为均衡</span></span></p>
-      </div>
-      <div class="tl-meta">
-        <span class="rating rating-conflict"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-shuffle"/></svg><span class="arrow">↔</span>信号矛盾</span><span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点<span class="chip-en"> / Intraday</span></span>
-        <span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.011</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
-      </div>
+      <details class="slot-accordion" open>
+        <summary class="slot-head">
+          <div class="slot-head-left">
+            <span class="slot-time"><span class="dot"></span>14:30</span>
+            <span class="slot-name">基金操作指引 · 尾盘</span>
+          </div>
+          <div class="slot-head-right">
+            <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点<span class="chip-en"> / Intraday</span></span><span class="rating rating-conflict"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-shuffle"/></svg><span class="arrow">↔</span>信号矛盾</span>
+            <span class="accordion-chevron slot-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+          </div>
+        </summary>
+        <div class="slot-body">
+          <h3 class="tl-title"><a href="../../daily/2026-10-16/fund-guide.html">基金操作指引 · 尾盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+          <p class="tl-sum"><span class="conclusion"><span class="concl-head">信号矛盾 · Σ-0.011</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">暂停一切主动买入，可挂低于现价 ≥<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>2%</span> 的吸买单；只列多空证据，禁表述为均衡</span></span></p>
+          <div class="slot-foot"><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.011</span></div>
+        </div>
+      </details>
     </li>
     <li class="tl-item" data-time="15:05" data-slug="stock-review">
-      <div class="tl-time">
-        <span class="tl-sched"><span class="dot"></span>15:05</span>
-        
-      </div>
-      <div class="tl-body">
-        <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-line-chart"/></svg>股票复盘</p>
-        <h3 class="tl-title"><a href="../../daily/2026-10-16/stock-review.html">股票复盘 · 2026-10-16（周五）收盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum"><span class="conclusion"><span class="concl-head">均衡 · Σ+0.180</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">定投按基准额度执行，网格按原参数运行，不主动加减仓</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：3716.28（<span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+0.24%</span>，探底 3678.96 点后长下影企稳回升，收复…</span></span></p>
-      </div>
-      <div class="tl-meta">
-        <span class="rating rating-balanced"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg><span class="arrow">▲</span>均衡</span><span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点<span class="chip-en"> / Close</span></span>
-        <span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>+0.180</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
-      </div>
+      <details class="slot-accordion" open>
+        <summary class="slot-head">
+          <div class="slot-head-left">
+            <span class="slot-time"><span class="dot"></span>15:05</span>
+            <span class="slot-name">股票复盘 · 收盘</span>
+          </div>
+          <div class="slot-head-right">
+            <span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点<span class="chip-en"> / Close</span></span><span class="rating rating-balanced"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg><span class="arrow">▲</span>均衡</span>
+            <span class="accordion-chevron slot-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+          </div>
+        </summary>
+        <div class="slot-body">
+          <h3 class="tl-title"><a href="../../daily/2026-10-16/stock-review.html">股票复盘 · 收盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+          <p class="tl-sum"><span class="conclusion"><span class="concl-head">均衡 · Σ+0.180</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">定投按基准额度执行，网格按原参数运行，不主动加减仓</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：3716.28（<span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+0.24%</span>，探底 3678.96 点后长下影企稳回升，收复…</span></span></p>
+          <div class="slot-foot"><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>+0.180</span></div>
+        </div>
+      </details>
     </li>
     <li class="tl-item" data-time="15:30" data-slug="daily-review">
-      <div class="tl-time">
-        <span class="tl-sched"><span class="dot"></span>15:30</span>
-        
-      </div>
-      <div class="tl-body">
-        <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-inbox"/></svg>每日总复盘</p>
-        <h3 class="tl-title"><a href="../../daily/2026-10-16/daily-review.html">每日总复盘 · 2026-10-16（周五）收盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum"><span class="conclusion"><span class="concl-head">均衡 · Σ+0.180</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">定投按基准额度执行，网格按原参数运行，不主动加减仓</span></span></p>
-      </div>
-      <div class="tl-meta">
-        <span class="rating rating-balanced"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg><span class="arrow">▲</span>均衡</span><span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点<span class="chip-en"> / Close</span></span>
-        <span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>+0.180</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
-      </div>
+      <details class="slot-accordion" open>
+        <summary class="slot-head">
+          <div class="slot-head-left">
+            <span class="slot-time"><span class="dot"></span>15:30</span>
+            <span class="slot-name">每日总复盘 · 收盘</span>
+          </div>
+          <div class="slot-head-right">
+            <span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点<span class="chip-en"> / Close</span></span><span class="rating rating-balanced"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg><span class="arrow">▲</span>均衡</span>
+            <span class="accordion-chevron slot-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+          </div>
+        </summary>
+        <div class="slot-body">
+          <h3 class="tl-title"><a href="../../daily/2026-10-16/daily-review.html">每日总复盘 · 收盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+          <p class="tl-sum"><span class="conclusion"><span class="concl-head">均衡 · Σ+0.180</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">定投按基准额度执行，网格按原参数运行，不主动加减仓</span></span></p>
+          <div class="slot-foot"><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>+0.180</span></div>
+        </div>
+      </details>
     </li>
-    </ul>
-  </article>
-  <article class="issue dp-card" data-date="2026-10-15" data-rating="防守" data-sigma="-0.290">
-    <div class="issue-head">
-      <time class="issue-date" datetime="2026-10-15">2026-10-15</time>
-      <span class="issue-dow">周四 · Thu</span>
-      <span class="spacer"></span>
-      <span class="issue-summary"><span class="rating rating-lg rating-defensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg><span class="arrow">▼</span>防守</span><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.290</span></span>
+      </ul>
     </div>
-    <ul class="tl">
+  </details>
+  <details class="issue dp-card" data-date="2026-10-15" data-rating="防守" data-sigma="-0.290">
+    <summary class="issue-head day-summary">
+      <span class="issue-date-group">
+        <time class="issue-date" datetime="2026-10-15">2026-10-15</time>
+        <span class="issue-dow">周四 · Thu</span>
+      </span>
+      <span class="spacer"></span>
+      <span class="issue-summary">
+        <span class="rating rating-lg rating-defensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg><span class="arrow">▼</span>防守</span>
+        <span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.290</span>
+        <span class="accordion-chevron day-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+      </span>
+    </summary>
+    <div class="day-content">
+      <ul class="tl">
     <li class="tl-item" data-time="09:28" data-slug="stock-assistant">
-      <div class="tl-time">
-        <span class="tl-sched"><span class="dot"></span>09:28</span>
-        
-      </div>
-      <div class="tl-body">
-        <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-bar-chart"/></svg>股票助手</p>
-        <h3 class="tl-title"><a href="../../daily/2026-10-15/stock-assistant.html">股票助手 · 2026-10-15（周四）早盘竞价<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据源降级 · 本轮结论不适用</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">取数非实时（详见正文数据源说明），标准动作暂不执行</span></span></p>
-      </div>
-      <div class="tl-meta">
-        <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>竞价时点<span class="chip-en"> / Pre-open</span></span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg>数据源降级</span>
-        <span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg>数据不可信·Σ 不作参考</span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>评级未标注</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
-      </div>
+      <details class="slot-accordion" open>
+        <summary class="slot-head">
+          <div class="slot-head-left">
+            <span class="slot-time"><span class="dot"></span>09:28</span>
+            <span class="slot-name">股票助手 · 早盘竞价</span>
+          </div>
+          <div class="slot-head-right">
+            <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>竞价时点<span class="chip-en"> / Pre-open</span></span><span class="tag tag-degraded"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg>数据降级</span>
+            <span class="accordion-chevron slot-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+          </div>
+        </summary>
+        <div class="slot-body">
+          <h3 class="tl-title"><a href="../../daily/2026-10-15/stock-assistant.html">股票助手 · 早盘竞价<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+          <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据源降级 · 本轮结论不适用</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">取数非实时（详见正文数据源说明），标准动作暂不执行</span></span></p>
+          
+        </div>
+      </details>
     </li>
     <li class="tl-item" data-time="11:00" data-slug="fund-market">
-      <div class="tl-time">
-        <span class="tl-sched"><span class="dot"></span>11:00</span>
-        <span class="tl-run"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>生成 11:07</span>
-      </div>
-      <div class="tl-body">
-        <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-database"/></svg>基金盘面</p>
-        <h3 class="tl-title"><a href="../../daily/2026-10-15/fund-market.html">基金盘面分析 · 2026-10-15（周四）午盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum"><span class="conclusion"><span class="concl-head">防守 · Σ-0.200</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">暂停主动买入（含手动追加），定投可降档 ≤<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>30%</span>，卖出仅在触发线执行</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：3,703.93 点（<span class="down"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>-1.68%</span>）</span></span></p>
-      </div>
-      <div class="tl-meta">
-        <span class="rating rating-defensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg><span class="arrow">▼</span>防守</span><span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点<span class="chip-en"> / Intraday</span></span>
-        <span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.200</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
-      </div>
+      <details class="slot-accordion" open>
+        <summary class="slot-head">
+          <div class="slot-head-left">
+            <span class="slot-time"><span class="dot"></span>11:00</span>
+            <span class="slot-name">基金盘面分析 · 午盘</span>
+          </div>
+          <div class="slot-head-right">
+            <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点<span class="chip-en"> / Intraday</span></span><span class="rating rating-defensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg><span class="arrow">▼</span>防守</span>
+            <span class="accordion-chevron slot-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+          </div>
+        </summary>
+        <div class="slot-body">
+          <h3 class="tl-title"><a href="../../daily/2026-10-15/fund-market.html">基金盘面分析 · 午盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+          <p class="tl-sum"><span class="conclusion"><span class="concl-head">防守 · Σ-0.200</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">暂停主动买入（含手动追加），定投可降档 ≤<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>30%</span>，卖出仅在触发线执行</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：3,703.93 点（<span class="down"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>-1.68%</span>）</span></span></p>
+          <div class="slot-foot"><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.200</span><span class="tl-run"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>生成 11:07</span></div>
+        </div>
+      </details>
     </li>
     <li class="tl-item" data-time="14:30" data-slug="fund-guide">
-      <div class="tl-time">
-        <span class="tl-sched"><span class="dot"></span>14:30</span>
-        
-      </div>
-      <div class="tl-body">
-        <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-target"/></svg>基金操作指引</p>
-        <h3 class="tl-title"><a href="../../daily/2026-10-15/fund-guide.html">基金操作指引 · 2026-10-15（周四）尾盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum"><span class="conclusion"><span class="concl-head">防守 · Σ-0.285</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">暂停主动买入（含手动追加），定投可降档 ≤<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>30%</span>，卖出仅在触发线执行</span></span></p>
-      </div>
-      <div class="tl-meta">
-        <span class="rating rating-defensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg><span class="arrow">▼</span>防守</span><span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点<span class="chip-en"> / Intraday</span></span>
-        <span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.285</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
-      </div>
+      <details class="slot-accordion" open>
+        <summary class="slot-head">
+          <div class="slot-head-left">
+            <span class="slot-time"><span class="dot"></span>14:30</span>
+            <span class="slot-name">基金操作指引 · 尾盘</span>
+          </div>
+          <div class="slot-head-right">
+            <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点<span class="chip-en"> / Intraday</span></span><span class="rating rating-defensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg><span class="arrow">▼</span>防守</span>
+            <span class="accordion-chevron slot-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+          </div>
+        </summary>
+        <div class="slot-body">
+          <h3 class="tl-title"><a href="../../daily/2026-10-15/fund-guide.html">基金操作指引 · 尾盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+          <p class="tl-sum"><span class="conclusion"><span class="concl-head">防守 · Σ-0.285</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">暂停主动买入（含手动追加），定投可降档 ≤<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>30%</span>，卖出仅在触发线执行</span></span></p>
+          <div class="slot-foot"><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.285</span></div>
+        </div>
+      </details>
     </li>
     <li class="tl-item" data-time="15:05" data-slug="stock-review">
-      <div class="tl-time">
-        <span class="tl-sched"><span class="dot"></span>15:05</span>
-        
-      </div>
-      <div class="tl-body">
-        <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-line-chart"/></svg>股票复盘</p>
-        <h3 class="tl-title"><a href="../../daily/2026-10-15/stock-review.html">股票复盘 · 2026-10-15（周四）收盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum"><span class="conclusion"><span class="concl-head">防守 · Σ-0.290</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">暂停主动买入（含手动追加），定投可降档 ≤<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>30%</span>，卖出仅在触发线执行</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：3707.48（<span class="down"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>-1.59%</span>，盘中探底 3674.82 点，失守 3740…</span></span></p>
-      </div>
-      <div class="tl-meta">
-        <span class="rating rating-defensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg><span class="arrow">▼</span>防守</span><span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点<span class="chip-en"> / Close</span></span>
-        <span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.290</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
-      </div>
+      <details class="slot-accordion" open>
+        <summary class="slot-head">
+          <div class="slot-head-left">
+            <span class="slot-time"><span class="dot"></span>15:05</span>
+            <span class="slot-name">股票复盘 · 收盘</span>
+          </div>
+          <div class="slot-head-right">
+            <span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点<span class="chip-en"> / Close</span></span><span class="rating rating-defensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg><span class="arrow">▼</span>防守</span>
+            <span class="accordion-chevron slot-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+          </div>
+        </summary>
+        <div class="slot-body">
+          <h3 class="tl-title"><a href="../../daily/2026-10-15/stock-review.html">股票复盘 · 收盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+          <p class="tl-sum"><span class="conclusion"><span class="concl-head">防守 · Σ-0.290</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">暂停主动买入（含手动追加），定投可降档 ≤<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>30%</span>，卖出仅在触发线执行</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：3707.48（<span class="down"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>-1.59%</span>，盘中探底 3674.82 点，失守 3740…</span></span></p>
+          <div class="slot-foot"><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.290</span></div>
+        </div>
+      </details>
     </li>
     <li class="tl-item" data-time="15:30" data-slug="daily-review">
-      <div class="tl-time">
-        <span class="tl-sched"><span class="dot"></span>15:30</span>
-        
-      </div>
-      <div class="tl-body">
-        <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-inbox"/></svg>每日总复盘</p>
-        <h3 class="tl-title"><a href="../../daily/2026-10-15/daily-review.html">每日总复盘 · 2026-10-15（周四）收盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum"><span class="conclusion"><span class="concl-head">防守 · Σ-0.290</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">暂停主动买入（含手动追加），定投可降档 ≤<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>30%</span>，卖出仅在触发线执行</span></span></p>
-      </div>
-      <div class="tl-meta">
-        <span class="rating rating-defensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg><span class="arrow">▼</span>防守</span><span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点<span class="chip-en"> / Close</span></span>
-        <span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.290</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
-      </div>
+      <details class="slot-accordion" open>
+        <summary class="slot-head">
+          <div class="slot-head-left">
+            <span class="slot-time"><span class="dot"></span>15:30</span>
+            <span class="slot-name">每日总复盘 · 收盘</span>
+          </div>
+          <div class="slot-head-right">
+            <span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点<span class="chip-en"> / Close</span></span><span class="rating rating-defensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg><span class="arrow">▼</span>防守</span>
+            <span class="accordion-chevron slot-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+          </div>
+        </summary>
+        <div class="slot-body">
+          <h3 class="tl-title"><a href="../../daily/2026-10-15/daily-review.html">每日总复盘 · 收盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+          <p class="tl-sum"><span class="conclusion"><span class="concl-head">防守 · Σ-0.290</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">暂停主动买入（含手动追加），定投可降档 ≤<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>30%</span>，卖出仅在触发线执行</span></span></p>
+          <div class="slot-foot"><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.290</span></div>
+        </div>
+      </details>
     </li>
-    </ul>
-  </article>
-  <article class="issue dp-card" data-date="2026-10-14" data-rating="防守" data-sigma="-0.339">
-    <div class="issue-head">
-      <time class="issue-date" datetime="2026-10-14">2026-10-14</time>
-      <span class="issue-dow">周三 · Wed</span>
-      <span class="spacer"></span>
-      <span class="issue-summary"><span class="rating rating-lg rating-defensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg><span class="arrow">▼</span>防守</span><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.339</span></span>
+      </ul>
     </div>
-    <ul class="tl">
+  </details>
+  <details class="issue dp-card" data-date="2026-10-14" data-rating="防守" data-sigma="-0.339">
+    <summary class="issue-head day-summary">
+      <span class="issue-date-group">
+        <time class="issue-date" datetime="2026-10-14">2026-10-14</time>
+        <span class="issue-dow">周三 · Wed</span>
+      </span>
+      <span class="spacer"></span>
+      <span class="issue-summary">
+        <span class="rating rating-lg rating-defensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg><span class="arrow">▼</span>防守</span>
+        <span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.339</span>
+        <span class="accordion-chevron day-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+      </span>
+    </summary>
+    <div class="day-content">
+      <ul class="tl">
     <li class="tl-item" data-time="09:28" data-slug="stock-assistant">
-      <div class="tl-time">
-        <span class="tl-sched"><span class="dot"></span>09:28</span>
-        <span class="tl-run"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>生成 12:39</span>
-      </div>
-      <div class="tl-body">
-        <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-bar-chart"/></svg>股票助手</p>
-        <h3 class="tl-title"><a href="../../daily/2026-10-14/stock-assistant.html">股票助手 · 2026-10-14（周三）早盘竞价<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据源降级 · 本轮结论不适用</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">取数非实时（详见正文数据源说明），标准动作暂不执行</span></span></p>
-      </div>
-      <div class="tl-meta">
-        <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>竞价时点<span class="chip-en"> / Pre-open</span></span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg>数据源降级</span>
-        <span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg>数据不可信·Σ 不作参考</span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>评级未标注</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
-      </div>
+      <details class="slot-accordion" open>
+        <summary class="slot-head">
+          <div class="slot-head-left">
+            <span class="slot-time"><span class="dot"></span>09:28</span>
+            <span class="slot-name">股票助手 · 早盘竞价</span>
+          </div>
+          <div class="slot-head-right">
+            <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>竞价时点<span class="chip-en"> / Pre-open</span></span><span class="tag tag-degraded"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"/></svg>数据降级</span>
+            <span class="accordion-chevron slot-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+          </div>
+        </summary>
+        <div class="slot-body">
+          <h3 class="tl-title"><a href="../../daily/2026-10-14/stock-assistant.html">股票助手 · 早盘竞价<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+          <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据源降级 · 本轮结论不适用</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">取数非实时（详见正文数据源说明），标准动作暂不执行</span></span></p>
+          <div class="slot-foot"><span class="tl-run"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>生成 12:39</span></div>
+        </div>
+      </details>
     </li>
     <li class="tl-item" data-time="11:00" data-slug="fund-market">
-      <div class="tl-time">
-        <span class="tl-sched"><span class="dot"></span>11:00</span>
-        <span class="tl-run"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>生成 11:16</span>
-      </div>
-      <div class="tl-body">
-        <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-database"/></svg>基金盘面</p>
-        <h3 class="tl-title"><a href="../../daily/2026-10-14/fund-market.html">基金盘面分析 · 2026-10-14（周三）午盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据缺口 · 未评级</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">本任务无可用评级，详见正文说明</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：3,807.50 点（<span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+0.17%</span>）</span></span></p>
-      </div>
-      <div class="tl-meta">
-        <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点<span class="chip-en"> / Intraday</span></span>
-        <span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>Σ 数据缺口</span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>评级未标注</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
-      </div>
+      <details class="slot-accordion" open>
+        <summary class="slot-head">
+          <div class="slot-head-left">
+            <span class="slot-time"><span class="dot"></span>11:00</span>
+            <span class="slot-name">基金盘面分析 · 午盘</span>
+          </div>
+          <div class="slot-head-right">
+            <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点<span class="chip-en"> / Intraday</span></span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>未标注</span>
+            <span class="accordion-chevron slot-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+          </div>
+        </summary>
+        <div class="slot-body">
+          <h3 class="tl-title"><a href="../../daily/2026-10-14/fund-market.html">基金盘面分析 · 午盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+          <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据缺口 · 未评级</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">本任务无可用评级，详见正文说明</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：3,807.50 点（<span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+0.17%</span>）</span></span></p>
+          <div class="slot-foot"><span class="tl-run"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>生成 11:16</span></div>
+        </div>
+      </details>
     </li>
     <li class="tl-item" data-time="14:30" data-slug="fund-guide">
-      <div class="tl-time">
-        <span class="tl-sched"><span class="dot"></span>14:30</span>
-        
-      </div>
-      <div class="tl-body">
-        <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-target"/></svg>基金操作指引</p>
-        <h3 class="tl-title"><a href="../../daily/2026-10-14/fund-guide.html">基金操作指引 · 2026-10-14（周三）尾盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum"><span class="conclusion"><span class="concl-head">防守 · Σ-0.263</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">暂停主动买入（含手动追加），定投可降档 ≤<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>30%</span>，卖出仅在触发线执行</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">纯基金组合预估日收益：<span class="down"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>-0.14%</span>（跑赢沪深300大盘约 +1.16 pct）</span></span></p>
-      </div>
-      <div class="tl-meta">
-        <span class="rating rating-defensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg><span class="arrow">▼</span>防守</span><span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点<span class="chip-en"> / Intraday</span></span>
-        <span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.263</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
-      </div>
+      <details class="slot-accordion" open>
+        <summary class="slot-head">
+          <div class="slot-head-left">
+            <span class="slot-time"><span class="dot"></span>14:30</span>
+            <span class="slot-name">基金操作指引 · 尾盘</span>
+          </div>
+          <div class="slot-head-right">
+            <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点<span class="chip-en"> / Intraday</span></span><span class="rating rating-defensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg><span class="arrow">▼</span>防守</span>
+            <span class="accordion-chevron slot-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+          </div>
+        </summary>
+        <div class="slot-body">
+          <h3 class="tl-title"><a href="../../daily/2026-10-14/fund-guide.html">基金操作指引 · 尾盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+          <p class="tl-sum"><span class="conclusion"><span class="concl-head">防守 · Σ-0.263</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">暂停主动买入（含手动追加），定投可降档 ≤<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>30%</span>，卖出仅在触发线执行</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">纯基金组合预估日收益：<span class="down"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>-0.14%</span>（跑赢沪深300大盘约 +1.16 pct）</span></span></p>
+          <div class="slot-foot"><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.263</span></div>
+        </div>
+      </details>
     </li>
     <li class="tl-item" data-time="15:05" data-slug="stock-review">
-      <div class="tl-time">
-        <span class="tl-sched"><span class="dot"></span>15:05</span>
-        
-      </div>
-      <div class="tl-body">
-        <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-line-chart"/></svg>股票复盘</p>
-        <h3 class="tl-title"><a href="../../daily/2026-10-14/stock-review.html">股票复盘 · 2026-10-14（周三）收盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据缺口 · 未评级</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">本任务无可用评级，详见正文说明</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：3767.23（<span class="down"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>-0.88%</span>，跌破3800关口）</span></span></p>
-      </div>
-      <div class="tl-meta">
-        <span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点<span class="chip-en"> / Close</span></span>
-        <span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>Σ 数据缺口</span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>评级未标注</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
-      </div>
+      <details class="slot-accordion" open>
+        <summary class="slot-head">
+          <div class="slot-head-left">
+            <span class="slot-time"><span class="dot"></span>15:05</span>
+            <span class="slot-name">股票复盘 · 收盘</span>
+          </div>
+          <div class="slot-head-right">
+            <span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点<span class="chip-en"> / Close</span></span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>未标注</span>
+            <span class="accordion-chevron slot-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+          </div>
+        </summary>
+        <div class="slot-body">
+          <h3 class="tl-title"><a href="../../daily/2026-10-14/stock-review.html">股票复盘 · 收盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+          <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据缺口 · 未评级</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">本任务无可用评级，详见正文说明</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：3767.23（<span class="down"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>-0.88%</span>，跌破3800关口）</span></span></p>
+          
+        </div>
+      </details>
     </li>
     <li class="tl-item" data-time="15:30" data-slug="daily-review">
-      <div class="tl-time">
-        <span class="tl-sched"><span class="dot"></span>15:30</span>
-        
-      </div>
-      <div class="tl-body">
-        <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-inbox"/></svg>每日总复盘</p>
-        <h3 class="tl-title"><a href="../../daily/2026-10-14/daily-review.html">每日总复盘 · 2026-10-14（周三）收盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum"><span class="conclusion"><span class="concl-head">防守 · Σ-0.339</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">暂停主动买入（含手动追加），定投可降档 ≤<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>30%</span>，卖出仅在触发线执行</span></span></p>
-      </div>
-      <div class="tl-meta">
-        <span class="rating rating-defensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg><span class="arrow">▼</span>防守</span><span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点<span class="chip-en"> / Close</span></span>
-        <span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.339</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
-      </div>
+      <details class="slot-accordion" open>
+        <summary class="slot-head">
+          <div class="slot-head-left">
+            <span class="slot-time"><span class="dot"></span>15:30</span>
+            <span class="slot-name">每日总复盘 · 收盘</span>
+          </div>
+          <div class="slot-head-right">
+            <span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点<span class="chip-en"> / Close</span></span><span class="rating rating-defensive"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg><span class="arrow">▼</span>防守</span>
+            <span class="accordion-chevron slot-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+          </div>
+        </summary>
+        <div class="slot-body">
+          <h3 class="tl-title"><a href="../../daily/2026-10-14/daily-review.html">每日总复盘 · 收盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+          <p class="tl-sum"><span class="conclusion"><span class="concl-head">防守 · Σ-0.339</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">暂停主动买入（含手动追加），定投可降档 ≤<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>30%</span>，卖出仅在触发线执行</span></span></p>
+          <div class="slot-foot"><span class="tl-sigma"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sigma"/></svg>-0.339</span></div>
+        </div>
+      </details>
     </li>
-    </ul>
-  </article>
-  <article class="issue dp-card" data-date="2026-10-13" data-rating="" data-sigma="">
-    <div class="issue-head">
-      <time class="issue-date" datetime="2026-10-13">2026-10-13</time>
-      <span class="issue-dow">周二 · Tue</span>
-      <span class="spacer"></span>
-      <span class="issue-summary"><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>Σ 数据缺口</span></span>
+      </ul>
     </div>
-    <ul class="tl">
+  </details>
+  <details class="issue dp-card" data-date="2026-10-13" data-rating="" data-sigma="">
+    <summary class="issue-head day-summary">
+      <span class="issue-date-group">
+        <time class="issue-date" datetime="2026-10-13">2026-10-13</time>
+        <span class="issue-dow">周二 · Tue</span>
+      </span>
+      <span class="spacer"></span>
+      <span class="issue-summary">
+        
+        <span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>Σ 数据缺口</span>
+        <span class="accordion-chevron day-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+      </span>
+    </summary>
+    <div class="day-content">
+      <ul class="tl">
     <li class="tl-item" data-time="09:28" data-slug="stock-assistant">
-      <div class="tl-time">
-        <span class="tl-sched"><span class="dot"></span>09:28</span>
-        <span class="tl-run"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>生成 13:20</span>
-      </div>
-      <div class="tl-body">
-        <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-bar-chart"/></svg>股票助手</p>
-        <h3 class="tl-title"><a href="../../daily/2026-10-13/stock-assistant.html">股票助手 · 2026-10-13（周二）早盘竞价<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据缺口 · 未评级</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">本任务无可用评级，详见正文说明</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数 (sh000001)：3807.15 点 (<span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+0.26%</span>) | 竞价大幅低开…</span></span></p>
-      </div>
-      <div class="tl-meta">
-        <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>竞价时点<span class="chip-en"> / Pre-open</span></span>
-        <span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>Σ 数据缺口</span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>评级未标注</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
-      </div>
+      <details class="slot-accordion" open>
+        <summary class="slot-head">
+          <div class="slot-head-left">
+            <span class="slot-time"><span class="dot"></span>09:28</span>
+            <span class="slot-name">股票助手 · 早盘竞价</span>
+          </div>
+          <div class="slot-head-right">
+            <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>竞价时点<span class="chip-en"> / Pre-open</span></span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>未标注</span>
+            <span class="accordion-chevron slot-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+          </div>
+        </summary>
+        <div class="slot-body">
+          <h3 class="tl-title"><a href="../../daily/2026-10-13/stock-assistant.html">股票助手 · 早盘竞价<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+          <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据缺口 · 未评级</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">本任务无可用评级，详见正文说明</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数 (sh000001)：3807.15 点 (<span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+0.26%</span>) | 竞价大幅低开…</span></span></p>
+          <div class="slot-foot"><span class="tl-run"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>生成 13:20</span></div>
+        </div>
+      </details>
     </li>
     <li class="tl-item" data-time="11:00" data-slug="fund-market">
-      <div class="tl-time">
-        <span class="tl-sched"><span class="dot"></span>11:00</span>
-        <span class="tl-run"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>生成 13:14</span>
-      </div>
-      <div class="tl-body">
-        <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-database"/></svg>基金盘面</p>
-        <h3 class="tl-title"><a href="../../daily/2026-10-13/fund-market.html">基金盘面分析 · 2026-10-13（周二）午盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据缺口 · 未评级</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">本任务无可用评级，详见正文说明</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：3,807.93 点（<span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+0.28%</span>）</span></span></p>
-      </div>
-      <div class="tl-meta">
-        <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点<span class="chip-en"> / Intraday</span></span>
-        <span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>Σ 数据缺口</span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>评级未标注</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
-      </div>
+      <details class="slot-accordion" open>
+        <summary class="slot-head">
+          <div class="slot-head-left">
+            <span class="slot-time"><span class="dot"></span>11:00</span>
+            <span class="slot-name">基金盘面分析 · 午盘</span>
+          </div>
+          <div class="slot-head-right">
+            <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点<span class="chip-en"> / Intraday</span></span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>未标注</span>
+            <span class="accordion-chevron slot-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+          </div>
+        </summary>
+        <div class="slot-body">
+          <h3 class="tl-title"><a href="../../daily/2026-10-13/fund-market.html">基金盘面分析 · 午盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+          <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据缺口 · 未评级</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">本任务无可用评级，详见正文说明</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：3,807.93 点（<span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+0.28%</span>）</span></span></p>
+          <div class="slot-foot"><span class="tl-run"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>生成 13:14</span></div>
+        </div>
+      </details>
     </li>
     <li class="tl-item" data-time="14:30" data-slug="fund-guide">
-      <div class="tl-time">
-        <span class="tl-sched"><span class="dot"></span>14:30</span>
-        <span class="tl-run"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>生成 14:34</span>
-      </div>
-      <div class="tl-body">
-        <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-target"/></svg>基金操作指引</p>
-        <h3 class="tl-title"><a href="../../daily/2026-10-13/fund-guide.html">基金操作指引 · 2026-10-13（周二）尾盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据缺口 · 未评级</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">本任务无可用评级，详见正文说明</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">涨停板数：72 家 （主板≥<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>10%</span>、创业/科创≥<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>20%</span>、北交所≥<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>30%</span>）</span></span></p>
-      </div>
-      <div class="tl-meta">
-        <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点<span class="chip-en"> / Intraday</span></span>
-        <span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>Σ 数据缺口</span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>评级未标注</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
-      </div>
+      <details class="slot-accordion" open>
+        <summary class="slot-head">
+          <div class="slot-head-left">
+            <span class="slot-time"><span class="dot"></span>14:30</span>
+            <span class="slot-name">基金操作指引 · 尾盘</span>
+          </div>
+          <div class="slot-head-right">
+            <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点<span class="chip-en"> / Intraday</span></span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>未标注</span>
+            <span class="accordion-chevron slot-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+          </div>
+        </summary>
+        <div class="slot-body">
+          <h3 class="tl-title"><a href="../../daily/2026-10-13/fund-guide.html">基金操作指引 · 尾盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+          <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据缺口 · 未评级</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">本任务无可用评级，详见正文说明</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">涨停板数：72 家 （主板≥<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>10%</span>、创业/科创≥<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>20%</span>、北交所≥<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>30%</span>）</span></span></p>
+          <div class="slot-foot"><span class="tl-run"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>生成 14:34</span></div>
+        </div>
+      </details>
     </li>
     <li class="tl-item" data-time="15:05" data-slug="stock-review">
-      <div class="tl-time">
-        <span class="tl-sched"><span class="dot"></span>15:05</span>
-        
-      </div>
-      <div class="tl-body">
-        <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-line-chart"/></svg>股票复盘</p>
-        <h3 class="tl-title"><a href="../../daily/2026-10-13/stock-review.html">股票复盘 · 2026-10-13（周二）收盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据缺口 · 未评级</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">本任务无可用评级，详见正文说明</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：3800.86  <span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+0.10%</span> (+3.62点，探底3741点回升…</span></span></p>
-      </div>
-      <div class="tl-meta">
-        <span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点<span class="chip-en"> / Close</span></span>
-        <span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>Σ 数据缺口</span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>评级未标注</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
-      </div>
+      <details class="slot-accordion" open>
+        <summary class="slot-head">
+          <div class="slot-head-left">
+            <span class="slot-time"><span class="dot"></span>15:05</span>
+            <span class="slot-name">股票复盘 · 收盘</span>
+          </div>
+          <div class="slot-head-right">
+            <span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点<span class="chip-en"> / Close</span></span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>未标注</span>
+            <span class="accordion-chevron slot-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+          </div>
+        </summary>
+        <div class="slot-body">
+          <h3 class="tl-title"><a href="../../daily/2026-10-13/stock-review.html">股票复盘 · 收盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+          <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据缺口 · 未评级</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">本任务无可用评级，详见正文说明</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：3800.86  <span class="up"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>+0.10%</span> (+3.62点，探底3741点回升…</span></span></p>
+          
+        </div>
+      </details>
     </li>
     <li class="tl-item" data-time="15:30" data-slug="daily-review">
-      <div class="tl-time">
-        <span class="tl-sched"><span class="dot"></span>15:30</span>
-        
-      </div>
-      <div class="tl-body">
-        <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-inbox"/></svg>每日总复盘</p>
-        <h3 class="tl-title"><a href="../../daily/2026-10-13/daily-review.html">每日总复盘 · 2026-10-13（周二）收盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据缺口 · 未评级</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">本任务无可用评级，详见正文说明</span></span></p>
-      </div>
-      <div class="tl-meta">
-        <span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点<span class="chip-en"> / Close</span></span>
-        <span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>Σ 数据缺口</span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>评级未标注</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
-      </div>
+      <details class="slot-accordion" open>
+        <summary class="slot-head">
+          <div class="slot-head-left">
+            <span class="slot-time"><span class="dot"></span>15:30</span>
+            <span class="slot-name">每日总复盘 · 收盘</span>
+          </div>
+          <div class="slot-head-right">
+            <span class="chip chip-close"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg>收盘时点<span class="chip-en"> / Close</span></span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>未标注</span>
+            <span class="accordion-chevron slot-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+          </div>
+        </summary>
+        <div class="slot-body">
+          <h3 class="tl-title"><a href="../../daily/2026-10-13/daily-review.html">每日总复盘 · 收盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+          <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据缺口 · 未评级</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">本任务无可用评级，详见正文说明</span></span></p>
+          
+        </div>
+      </details>
     </li>
-    </ul>
-  </article>
-  <article class="issue dp-card" data-date="2026-10-12" data-rating="" data-sigma="">
-    <div class="issue-head">
-      <time class="issue-date" datetime="2026-10-12">2026-10-12</time>
-      <span class="issue-dow">周一 · Mon</span>
-      <span class="spacer"></span>
-      <span class="issue-summary"><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>Σ 数据缺口</span></span>
+      </ul>
     </div>
-    <ul class="tl">
+  </details>
+  <details class="issue dp-card" data-date="2026-10-12" data-rating="" data-sigma="">
+    <summary class="issue-head day-summary">
+      <span class="issue-date-group">
+        <time class="issue-date" datetime="2026-10-12">2026-10-12</time>
+        <span class="issue-dow">周一 · Mon</span>
+      </span>
+      <span class="spacer"></span>
+      <span class="issue-summary">
+        
+        <span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>Σ 数据缺口</span>
+        <span class="accordion-chevron day-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+      </span>
+    </summary>
+    <div class="day-content">
+      <ul class="tl">
     <li class="tl-item" data-time="11:00" data-slug="fund-market">
-      <div class="tl-time">
-        <span class="tl-sched"><span class="dot"></span>11:00</span>
-        <span class="tl-run"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>生成 11:06</span>
-      </div>
-      <div class="tl-body">
-        <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-database"/></svg>基金盘面</p>
-        <h3 class="tl-title"><a href="../../daily/2026-10-12/fund-market.html">基金盘面分析 · 2026-10-12（周一）午盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据缺口 · 未评级</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">本任务无可用评级，详见正文说明</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：3,808.04 点（<span class="down"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>-0.15%</span>）</span></span></p>
-      </div>
-      <div class="tl-meta">
-        <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点<span class="chip-en"> / Intraday</span></span>
-        <span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>Σ 数据缺口</span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>评级未标注</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
-      </div>
+      <details class="slot-accordion" open>
+        <summary class="slot-head">
+          <div class="slot-head-left">
+            <span class="slot-time"><span class="dot"></span>11:00</span>
+            <span class="slot-name">基金盘面分析 · 午盘</span>
+          </div>
+          <div class="slot-head-right">
+            <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点<span class="chip-en"> / Intraday</span></span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>未标注</span>
+            <span class="accordion-chevron slot-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+          </div>
+        </summary>
+        <div class="slot-body">
+          <h3 class="tl-title"><a href="../../daily/2026-10-12/fund-market.html">基金盘面分析 · 午盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+          <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据缺口 · 未评级</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">本任务无可用评级，详见正文说明</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">上证指数：3,808.04 点（<span class="down"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>-0.15%</span>）</span></span></p>
+          <div class="slot-foot"><span class="tl-run"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>生成 11:06</span></div>
+        </div>
+      </details>
     </li>
     <li class="tl-item" data-time="14:30" data-slug="fund-guide">
-      <div class="tl-time">
-        <span class="tl-sched"><span class="dot"></span>14:30</span>
-        <span class="tl-run"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>生成 14:32</span>
-      </div>
-      <div class="tl-body">
-        <p class="tl-kicker"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-target"/></svg>基金操作指引</p>
-        <h3 class="tl-title"><a href="../../daily/2026-10-12/fund-guide.html">基金操作指引 · 2026-10-12（周一）尾盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
-        <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据缺口 · 未评级</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">本任务无可用评级，详见正文说明</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">涨停板数：50 家 （主板≥<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>10%</span>、创业/科创≥<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>20%</span>、北交所≥<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>30%</span>）</span></span></p>
-      </div>
-      <div class="tl-meta">
-        <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点<span class="chip-en"> / Intraday</span></span>
-        <span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>Σ 数据缺口</span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>评级未标注</span><span class="tag tag-warn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>统计口径不同 · 数值仅供参考</span>
-      </div>
+      <details class="slot-accordion" open>
+        <summary class="slot-head">
+          <div class="slot-head-left">
+            <span class="slot-time"><span class="dot"></span>14:30</span>
+            <span class="slot-name">基金操作指引 · 尾盘</span>
+          </div>
+          <div class="slot-head-right">
+            <span class="chip chip-intraday"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>盘中时点<span class="chip-en"> / Intraday</span></span><span class="tag gap"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>未标注</span>
+            <span class="accordion-chevron slot-chevron"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></span>
+          </div>
+        </summary>
+        <div class="slot-body">
+          <h3 class="tl-title"><a href="../../daily/2026-10-12/fund-guide.html">基金操作指引 · 尾盘<span class="go"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span></a></h3>
+          <p class="tl-sum"><span class="conclusion"><span class="concl-head">数据缺口 · 未评级</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-action">本任务无可用评级，详见正文说明</span><span class="concl-sep" aria-hidden="true"></span><span class="concl-fact">涨停板数：50 家 （主板≥<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>10%</span>、创业/科创≥<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>20%</span>、北交所≥<span class="flat"><svg class="ic vt" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>30%</span>）</span></span></p>
+          <div class="slot-foot"><span class="tl-run"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-timer"/></svg>生成 14:32</span></div>
+        </div>
+      </details>
     </li>
-    </ul>
-  </article>
+      </ul>
+    </div>
+  </details>
   </section>
   </div>
 </main>
